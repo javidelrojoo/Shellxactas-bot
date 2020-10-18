@@ -21,4 +21,4 @@ async def on_message(message):
 async def shutdown(ctx):
     await ctx.bot.logout()
 
-client.run('NzY3NDQwNzExOTUxMDU2OTM2.X4x83A.Yr4cM0K1C2WlhWcN3Mlqy7N421c')
+client.run(token)
