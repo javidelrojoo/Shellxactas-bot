@@ -5,6 +5,7 @@ import time
 import asyncio
 import random
 import subprocess
+import requests
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
@@ -63,6 +64,10 @@ async def campus(ctx):
 		await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
 	if ping>0:
 		await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+
+@client.command()
+async def campus3(ctx):
+	await ctx.send(requests.get('https://campus.exactas.uba.ar/'))
 
 @client.command()
 async def steam(ctx):
@@ -145,7 +150,9 @@ async def on_message(message):
 	
 	if random.choice(list(range(100)))==0:
 		await message.add_reaction(random.choice(message.guild.emojis))
-
+	
+	if len(message.content)>500:
+		await message.add_reaction('<:mucho_texto:743541235637026818>')
 
 	if 'medialuna' in message.content.lower():
 		pedido.append('🥐')
