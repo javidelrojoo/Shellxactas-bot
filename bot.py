@@ -76,15 +76,16 @@ async def si(ctx):
     await ctx.send(file=discord.File('.\\gifs\\yescat.gif'))
 
 @client.command()
-async def gif(ctx,arg=''):
-	if arg=='':
-		await ctx.send('Si no me decis que gif queres no te puedo ayudar. Pelotudo')
-		return
-	
-	try:
-		await ctx.send(file=discord.File(f'.\\gifs\\{arg}.gif'))
-	except FileNotFoundError:
-		await ctx.send('Decime un gif que esté en el server. Pelotudo')
+async def emoji(ctx,arg=None):
+	if arg==None:
+		await ctx.send('Me tenes que decir que emoji querés.')
+	for emoji in ctx.message.guild.emojis:
+		name=str(emoji.name)
+		if str(arg)==name:
+			await ctx.send(emoji)
+			return
+		else:
+			await ctx.send('No encontré ese emoji en el server.')
 
 @client.command()
 async def rdm(ctx):
