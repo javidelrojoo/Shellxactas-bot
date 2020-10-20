@@ -1,4 +1,2 @@
 discord.py
 requests
-bs4
-re
