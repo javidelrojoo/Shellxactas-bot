@@ -79,6 +79,7 @@ async def gif(ctx,arg=''):
 	if arg=='':
 		await ctx.send('Si no me decis que gif queres no te puedo ayudar. Pelotudo')
 		return
+	
 	try:
 		await ctx.send(file=discord.File(f'.\\gifs\\{arg}.gif'))
 	except FileNotFoundError:
@@ -89,11 +90,9 @@ async def dolar(ctx):
 	await ctx.send('2$')
 
 @client.command()
-async def rdm(ctx,arg=''):
-	if arg=='':
-		await ctx.send('No')
-		return
-	await ctx.send(random.choice(range(float(arg))))
+async def rdm(ctx):
+	for emoji in message.guild.emojis.name:
+		await ctx.send(emoji)
 
 @client.command(aliases = ["sensuky", "sensooky"])
 async def sensu(ctx):
@@ -102,6 +101,7 @@ async def sensu(ctx):
 @client.command(aliases = ["marcos", "MDG"])
 async def markz(ctx):
 	await ctx.send('<@710666266972651531> https://es.pornhub.com/gayporn')
+
 
 @client.event
 async def on_message(message):
