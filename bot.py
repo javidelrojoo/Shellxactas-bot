@@ -31,16 +31,16 @@ async def plan(ctx):
 	await ctx.send('Para que queres saber? Salu2 <:picardia:735101971001770055>')
 
 @client.command()
-async def remindme(ctx,arg=''):
+async def remindme(ctx,arg=None,*,recordatorio=''):
 	"""Te manda un mensaje cuando pase el tiempo que le pidas (en segundos)"""
 	try:
-		if arg=='':
+		if arg==None:
 			await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
 			return
 		else:
 			await ctx.send(f'Ahora te hago acordar en {round(float(arg))} segundos.')
 			await asyncio.sleep(float(arg))
-			await ctx.send(f'{ctx.author.mention} ya pasó el tiempo.')
+			await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio}')
 	except:
 		await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
 
