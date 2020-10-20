@@ -84,8 +84,7 @@ async def emoji(ctx,arg=None):
 		if str(arg)==name:
 			await ctx.send(emoji)
 			return
-		else:
-			await ctx.send('No encontré ese emoji en el server.')
+	await ctx.send('No encontré ese emoji en el server.')
 
 @client.command()
 async def rdm(ctx):
