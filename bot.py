@@ -88,10 +88,6 @@ async def gif(ctx,arg=''):
 		await ctx.send('Decime un gif que esté en el server. Pelotudo')
 
 @client.command()
-async def dolar(ctx):
-	await ctx.send('2$')
-
-@client.command()
 async def rdm(ctx):
 	for emoji in ctx.guild.emojis.name:
 		await ctx.send(emoji)
