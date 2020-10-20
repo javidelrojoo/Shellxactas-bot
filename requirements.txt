@@ -1,5 +1,4 @@
 discord.py
 requests
-random
 bs4
 re
