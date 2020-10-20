@@ -45,28 +45,7 @@ async def remindme(ctx,arg=''):
 		await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
 
 @client.command()
-async def campus2(ctx):
-	"""Te dice si el campus está caido o no"""
-	res = subprocess.call(['ping','campus.exactas.uba.ar'])
-	if res == 0:
-		await ctx.send('Responde')
-	elif res == 2:
-		await ctx.send('No responde')
-	else:
-		await ctx.send('Ocurrió un error')
-
-@client.command()
 async def campus(ctx):
-	"""Te dice si el campus está caido o no"""
-	men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-	ping=os.system('ping campus.exactas.uba.ar')
-	if ping==0:
-		await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-	if ping>0:
-		await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
-
-@client.command()
-async def campus3(ctx):
 	men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
 	r=requests.get('https://campus.exactas.uba.ar/')
 	try:
@@ -75,14 +54,15 @@ async def campus3(ctx):
 	except:
 		await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
 
+
 @client.command()
 async def steam(ctx):
-	"""Te dice si el campus está caido o no"""
 	men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-	ping=os.system('ping store.steampowered.com')
-	if ping==0:
+	r=requests.get('https://store.steampowered.com/')
+	try:
+		r.raise_for_status()
 		await men.edit(content='Steam parece estar funcionando.<a:tick:767588474840154173>')
-	if ping>0:
+	except:
 		await men.edit(content='Steam está caido.<a:cross:767588477231038475>')
 
 
