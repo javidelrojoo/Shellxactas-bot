@@ -106,14 +106,14 @@ async def dolar(ctx):
 
 	json = requests.get(URL).json()
 
-	ctx.send(' 💵 | compra | venta')
-	ctx.send('----|--------|-------')
+	await ctx.send(' 💵 | compra | venta')
+	await ctx.send('----|--------|-------')
 
 	for index, emoji in enumerate(('🟢', '🔵')):
 		compra = json[index]['casa']['compra'][:-1]
 		venta = json[index]['casa']['venta'][:-1]
 
-		ctx.send(f" {emoji} |  {compra} | {venta}")
+		await ctx.send(f" {emoji} |  {compra} | {venta}")
 
 
 @client.event
