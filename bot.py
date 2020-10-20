@@ -6,8 +6,6 @@ import asyncio
 import random
 import subprocess
 import requests
-#import dolar
-#import valor_dolar
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
@@ -42,7 +40,7 @@ async def remindme(ctx,arg=''):
 		else:
 			await ctx.send(f'Ahora te hago acordar en {round(float(arg))} segundos.')
 			await asyncio.sleep(float(arg))
-			await ctx.send(f'<@{ctx.author.id}> ya pasó el tiempo.')
+			await ctx.send(f'{ctx.author.mention} ya pasó el tiempo.')
 	except:
 		await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
 
