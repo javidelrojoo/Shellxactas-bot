@@ -100,7 +100,7 @@ async def gif(ctx,arg=''):
 
 @client.command()
 async def dolar(ctx):
-	await ctx.send('1$')
+	await ctx.send('2$')
 
 @client.command()
 async def rdm(ctx,arg=''):
