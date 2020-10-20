@@ -67,7 +67,13 @@ async def campus(ctx):
 
 @client.command()
 async def campus3(ctx):
-	await ctx.send(requests.get('https://campus.exactas.uba.ar/'))
+	men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
+	r=requests.get('https://campus.exactas.uba.ar/')
+	try:
+		r.raise_for_status()
+		await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
+	except:
+		await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
 
 @client.command()
 async def steam(ctx):
