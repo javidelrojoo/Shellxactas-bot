@@ -6,9 +6,7 @@ import asyncio
 import random
 import subprocess
 import requests
-from boto.s3.connection import S3Connection
 
-TOKEN = S3Connection(os.environ['TOKEN'])
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
