@@ -105,13 +105,16 @@ async def dolar(ctx):
 	URL = 'https://www.dolarsi.com/api/api.php?type=valoresprincipales'
 
 	json = requests.get(URL).json()
+	
+	msg=[' 💵 | compra | venta \n ----|--------|-------']
 
 	for index, emoji in enumerate(('🟢', '🔵')):
 		compra = json[index]['casa']['compra'][:-1]
 		venta = json[index]['casa']['venta'][:-1]
 
-		await ctx.send(f" 💵 | compra | venta \n ----|--------|------- \n {emoji} |  {compra} | {venta}")
-
+		msg.append(f"\n {emoji} |  {compra} | {venta}")
+	
+	await ctx.send("".join(msg))
 
 @client.event
 async def on_message(message):
