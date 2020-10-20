@@ -33,7 +33,7 @@ async def plan(ctx):
 @client.command()
 async def remindme(ctx,arg=None,*,recordatorio=''):
 	"""Te manda un mensaje cuando pase el tiempo que le pidas (en segundos)"""
-	link=f'https://discord.com/channels/{client.guild.id}/{ctx.channel.id}/{ctx.message.id}'
+	link=f'https://discord.com/channels/{discord.guild.id}/{ctx.channel.id}/{ctx.message.id}'
 	try:
 		if arg==None:
 			await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
