@@ -163,4 +163,4 @@ async def on_message(message):
 		await message.channel.send("".join(pedido))
 
 
-client.run('NzY3NDQwNzExOTUxMDU2OTM2.X4x83A.8fRi9B6ExpsmkLOhIUlvzUmR4iA')
+client.run(TOKEN)
