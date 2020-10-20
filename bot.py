@@ -6,7 +6,8 @@ import asyncio
 import random
 import subprocess
 import requests
-
+#import dolar
+#import valor_dolar
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
@@ -102,6 +103,21 @@ async def sensu(ctx):
 @client.command(aliases = ["marcos", "MDG"])
 async def markz(ctx):
 	await ctx.send('<@710666266972651531> https://es.pornhub.com/gayporn')
+
+@client.command()
+async def dolar(ctx):
+	URL = 'https://www.dolarsi.com/api/api.php?type=valoresprincipales'
+
+	json = requests.get(URL).json()
+
+	ctx.send(' 💵 | compra | venta')
+	ctx.send('----|--------|-------')
+
+	for index, emoji in enumerate(('🟢', '🔵')):
+		compra = json[index]['casa']['compra'][:-1]
+		venta = json[index]['casa']['venta'][:-1]
+
+		ctx.send(f" {emoji} |  {compra} | {venta}")
 
 
 @client.event
