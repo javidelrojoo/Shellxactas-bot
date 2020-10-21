@@ -144,8 +144,20 @@ async def token(ctx):
 
 @client.command()
 async def emojimaker(ctx,name):
+    if ctx.message.guild==None:
+        await ctx.send('Este comando solo funciona en un server.')
+        return
+    if name==None:
+        await ctx.send('Tenes que decirme el nombre que queres.')
+        return
+    if ctx.message.attachments==[]:
+        await ctx.send('Adjunta el archivo que queres como emoji.')
+        return
     for file in ctx.message.attachments:
         ext=file.filename.split('.')[-1]
+        if ext!=('gif' and 'jpg' and 'png'):
+            await ctx.send('Formato inválido, tiene que ser GIF, JPG o PNG.')
+            return
         await file.save(f'temp.{ext}')
     with open(f"temp.{ext}", "rb") as img:
         img_byte = img.read()
