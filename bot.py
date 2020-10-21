@@ -102,7 +102,7 @@ async def markz(ctx):
 
 @client.command()
 async def dolar(ctx):
-    if dolar.valor_dolar_blue()==-1:
+    if dlr.valor_dolar_blue()==-1:
         await ctx.send('Ocurrió un error.')
         return
     compra,venta=dlr.valor_dolar_blue()
