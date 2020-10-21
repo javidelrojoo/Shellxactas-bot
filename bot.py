@@ -155,7 +155,7 @@ async def emojimaker(ctx,name=None):
         return
     for file in ctx.message.attachments:
         ext=file.filename.split('.')[-1]
-        if ext!=('gif' and 'jpg' and 'png'):
+        if ext.lower()!=('gif' and 'jpg' and 'png'):
             await ctx.send('Formato inválido, tiene que ser GIF, JPG o PNG.')
             return
         await file.save(f'temp.{ext}')
