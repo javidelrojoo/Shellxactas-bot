@@ -22,4 +22,3 @@ def valor_dolar_blue():
 
 	else:
 		return -1
-print(valor_dolar_blue())
