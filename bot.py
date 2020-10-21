@@ -132,7 +132,7 @@ async def on_message(message):
 		return
 
 	if message.content.lower()=='f':
-		await message.add_reaction('🇫')
+		await message.add_reaction('<:f_:768439683020488724>')
 
 	if message.content.lower()=='si':
 		await message.add_reaction('<a:si:767567093896839179>')
