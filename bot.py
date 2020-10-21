@@ -143,7 +143,7 @@ async def token(ctx):
 	await ctx.send(s3)
 
 @client.command()
-async def emojimaker(ctx,name):
+async def emojimaker(ctx,name=None):
     if ctx.message.guild==None:
         await ctx.send('Este comando solo funciona en un server.')
         return
