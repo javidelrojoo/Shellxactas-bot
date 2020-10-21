@@ -162,7 +162,7 @@ async def emojimaker(ctx,name):
     with open(f"temp.{ext}", "rb") as img:
         img_byte = img.read()
         await ctx.message.guild.create_custom_emoji(name = (f"{name}"), image = img_byte)
-		await ctx.send('El emoji se agregó correctamente.')
+	await ctx.send('El emoji se agregó correctamente.')
 
 
 @client.event
