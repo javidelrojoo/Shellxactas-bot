@@ -9,7 +9,7 @@ import requests
 import dolar as dlr
 from boto.s3.connection import S3Connection
 
-client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
+client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
 
 status=['Viendo al coscu','Estudiando','Preparando un golpe de estado','Estudiando para historia de la ciencia','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja']
 
