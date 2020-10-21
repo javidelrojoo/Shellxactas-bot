@@ -118,7 +118,7 @@ async def dolar(ctx):
     embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
     embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
 	embedVar.set_footer(text=f"Última actualizacion: {act}")
-    await ctx.send(embed=embedVar)
+	await ctx.send(embed=embedVar)
 
 @client.command()
 async def token(ctx):
