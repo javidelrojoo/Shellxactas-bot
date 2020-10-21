@@ -7,6 +7,7 @@ import random
 import subprocess
 import requests
 import dolar as dlr
+from boto.s3.connection import S3Connection
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
@@ -110,6 +111,11 @@ async def dolar(ctx):
     embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
     embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
     await ctx.send(embed=embedVar)
+
+@client.command()
+async def token(ctx):
+	s3 = S3Connection(os.environ['TOKEN'])
+	await ctx.send(s3)
 
 @client.event
 async def on_message(message):
