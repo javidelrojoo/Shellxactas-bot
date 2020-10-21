@@ -93,11 +93,11 @@ async def rdm(ctx):
 
 @client.command(aliases = ["sensuky", "sensooky"])
 async def sensu(ctx):
-	await ctx.send('<@219301336544444416> https://www.twitch.tv/sensuky')
+	await ctx.send('<@219301336544444416> <https://www.twitch.tv/sensuky>')
 
 @client.command(aliases = ["marcos", "MDG"])
 async def markz(ctx):
-	await ctx.send('<@710666266972651531> https://es.pornhub.com/gayporn')
+	await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
 
 @client.command()
 async def dolar(ctx):
