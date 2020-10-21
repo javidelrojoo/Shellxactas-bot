@@ -23,7 +23,7 @@ def tiempo(tiempo):
         wait=float(tiempo[:-1])*60
         frmt='minuto/s'
     elif tiempo.endswith('s'):
-        wait=float(tiempo)
+        wait=float(tiempo[:-1])
         frmt='segundo/s'
     elif tiempo[-1].isdigit():
         show=tiempo
