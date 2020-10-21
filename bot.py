@@ -161,7 +161,11 @@ async def emojimaker(ctx,name=None):
         await file.save(f'temp.{ext}')
     with open(f"temp.{ext}", "rb") as img:
         img_byte = img.read()
-        await ctx.message.guild.create_custom_emoji(name = (f"{name}"), image = img_byte)
+        try:
+            await ctx.message.guild.create_custom_emoji(name = (f"{name}"), image = img_byte)
+        except:
+            await ctx.send('El archivo no puede pesar mas de 256 kb.')
+            return
     for emoji in ctx.message.guild.emojis:
         if emoji.name==name:
             await ctx.send('El emoji se agregó correctamente')
