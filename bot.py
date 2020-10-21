@@ -73,19 +73,11 @@ async def steam(ctx):
 	except:
 		await men.edit(content='Steam está caido.<a:cross:767588477231038475>')
 
-
-@client.command()
-async def no(ctx):
-    await ctx.send(file=discord.File('.\\gifs\\nocat.gif'))
-
-@client.command()
-async def si(ctx):
-    await ctx.send(file=discord.File('.\\gifs\\yescat.gif'))
-
 @client.command()
 async def emoji(ctx,arg=None):
 	if arg==None:
 		await ctx.send('Me tenes que decir que emoji querés.')
+		return
 	for emoji in ctx.message.guild.emojis:
 		name=str(emoji.name)
 		if str(arg)==name:
