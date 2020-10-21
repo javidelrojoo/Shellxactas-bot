@@ -110,15 +110,16 @@ async def markz(ctx):
 
 @client.command()
 async def dolar(ctx):
-    if dlr.valor_dolar_blue()==-1:
-        await ctx.send('Ocurrió un error.')
-        return
-    compra,venta,act=dlr.valor_dolar_blue()
-    embedVar = discord.Embed(title="Precio Dolar",url="https://www.dolarhoy.com/cotizaciondolarblue",color=0x0400ff)
-    embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
-    embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
+	if dlr.valor_dolar_blue()==-1:
+		await ctx.send('Ocurrió un error.')
+		return
+	compra,venta,act=dlr.valor_dolar_blue()
+	embedVar = discord.Embed(title="Precio Dolar",url="https://www.dolarhoy.com/cotizaciondolarblue",color=0x0400ff)
+	embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
+	embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
 	embedVar.set_footer(text=f"Última actualizacion: {act}")
 	await ctx.send(embed=embedVar)
+
 
 @client.command()
 async def token(ctx):
