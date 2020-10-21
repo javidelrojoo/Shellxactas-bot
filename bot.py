@@ -86,6 +86,28 @@ async def emoji(ctx,arg=None):
 	await ctx.send('No encontré ese emoji en el server.')
 
 @client.command()
+async def emoji2(ctx,arg=None):
+    if arg==None:
+        await ctx.send('Me tenes que decir que emoji querés.')
+        return
+    if arg=='lista':
+        await ctx.message.add_reaction('<a:tick:767588474840154173>')
+        lista=[]
+        for emoji in ctx.message.guild.emojis:
+            lista.append(f'**{emoji.name}**:{emoji}\n')
+            if len(''.join(lista))>1900:
+                await ctx.author.send(''.join(lista))
+                lista=[]
+        await ctx.author.send(''.join(lista))
+        return
+    for emoji in ctx.message.guild.emojis:
+        name=str(emoji.name)
+        if str(arg)==name:
+            await ctx.send(emoji)
+            return
+    await ctx.send('No encontré ese emoji en el server. Poné .emoji lista para ver la lista')
+
+@client.command()
 async def rdm(ctx):
 	await ctx.send(random.choice(ctx.message.guild.emojis))
 
