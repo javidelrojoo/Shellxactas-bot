@@ -90,7 +90,7 @@ async def emoji(ctx,arg=None):
 
 @client.command()
 async def rdm(ctx):
-	for emoji in ctx.guild.emojis.name:
+	for emoji in ctx.message.guild.emojis.name:
 		await ctx.send(emoji)
 
 @client.command(aliases = ["sensuky", "sensooky"])
