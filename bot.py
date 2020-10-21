@@ -10,7 +10,7 @@ import dolar as dlr
 from itertools import cycle
 from boto.s3.connection import S3Connection
 
-client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
+client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
 status=cycle(['Viendo al coscu','Estudiando','Preparando un golpe de estado','Estudiando para historia de la ciencia','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja'])
 
@@ -21,7 +21,7 @@ async def on_ready():
 
 @tasks.loop(minutes=20)
 async def change_status():
-	await client.change_presence(activity=discord.Game(next(status)))
+	await client.change_presence(status=discord.Status.dnd,activity=discord.Game(next(status)))
 
 @client.command()
 async def ping(ctx):
