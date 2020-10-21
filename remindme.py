@@ -10,25 +10,25 @@ def tiempo(tiempo):
     if len(tiempo)==1:
         show=tiempo
         wait=float(tiempo)
-        frmt='segundos'
+        frmt='segundo/s'
         return show,wait,frmt
     show=tiempo[:-1]
     if tiempo.endswith('d'):
         wait=float(tiempo[:-1])*86400
-        frmt='dias'
+        frmt='dia/s'
     elif tiempo.endswith('h'):
         wait=float(tiempo[:-1])*3600
-        frmt='horas'
+        frmt='hora/s'
     elif tiempo.endswith('m'):
         wait=float(tiempo[:-1])*60
-        frmt='minutos'
+        frmt='minuto/s'
     elif tiempo.endswith('s'):
         wait=float(tiempo)
-        frmt='segundos'
+        frmt='segundo/s'
     elif tiempo[-1].isdigit():
         show=tiempo
         wait=float(tiempo)
-        frmt='segundos'
+        frmt='segundo/s'
     else:
         return
     return show,wait,frmt
