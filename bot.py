@@ -18,7 +18,7 @@ status=cycle(['Preparando un golpe de estado','Estudiando para historia de la ci
 async def on_ready():
 	print('Estoy Listo')
 
-@tasks.loop(seconds=10)
+@client.command()
 async def change_status():
 	await client.change_presence(activity=discord.Game(next(status)))
 

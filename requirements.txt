@@ -2,4 +2,3 @@ discord.py
 requests
 bs4
 boto
-itertools
