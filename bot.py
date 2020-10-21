@@ -12,14 +12,14 @@ from boto.s3.connection import S3Connection
 
 client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
 
-status=cycle(['Preparando un golpe de estado','Estudiando para historia de la ciencia','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja'])
+status=cycle(['Viendo al coscu','Estudiando','Preparando un golpe de estado','Estudiando para historia de la ciencia','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja'])
 
 @client.event
 async def on_ready():
 	change_status.start()
 	print('Estoy Listo')
 
-@tasks.loop(seconds=10)
+@tasks.loop(minutes=20)
 async def change_status():
 	await client.change_presence(activity=discord.Game(next(status)))
 
