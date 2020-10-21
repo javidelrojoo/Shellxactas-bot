@@ -101,25 +101,15 @@ async def markz(ctx):
 	await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
 
 @client.command()
-async def dolar2(ctx):
-	await ctx.send(dlr.valor_dolar_blue())
-
-
-@client.command()
 async def dolar(ctx):
-	URL = 'https://www.dolarsi.com/api/api.php?type=valoresprincipales'
-
-	json = requests.get(URL).json()
-	
-	msg=[' 💵 | compra | venta \n ----|--------|-------']
-
-	for index, emoji in enumerate(('🟢', '🔵')):
-		compra = json[index]['casa']['compra'][:-1]
-		venta = json[index]['casa']['venta'][:-1]
-
-		msg.append(f"\n {emoji} |  {compra} | {venta}")
-	
-	await ctx.send("".join(msg))
+    if dolar.valor_dolar_blue()==-1:
+        await ctx.send('Ocurrió un error.')
+        return
+    compra,venta=dlr.valor_dolar_blue()
+    embedVar = discord.Embed(title="Precio Dolar",url="https://www.dolarhoy.com/cotizaciondolarblue",color=0x0400ff)
+    embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
+    embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
+    await ctx.send(embed=embedVar)
 
 @client.event
 async def on_message(message):
