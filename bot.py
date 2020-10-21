@@ -124,6 +124,18 @@ async def dolar(ctx):
 	embedVar.set_footer(text=f"Última actualizacion: {act}")
 	await ctx.send(embed=embedVar)
 
+@client.command()
+async def dolarapeso(ctx,dolares=None):
+    try:
+        dolares=float(dolares)
+    except ValueError:
+        await ctx.send('Ingresá un numero.')
+        return
+    except TypeError:
+        await ctx.send('¿Cuantos dolares queres convertir a pesos?')
+        return
+    venta=dlr.valor_dolar_blue()[1]
+    await ctx.send(f'${round(venta*dolares)}')
 
 @client.command()
 async def token(ctx):
