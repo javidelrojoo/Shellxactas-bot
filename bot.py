@@ -150,6 +150,10 @@ async def emojimaker(ctx,name=None):
     if name==None:
         await ctx.send('Tenes que decirme el nombre que queres.')
         return
+    for emoji in ctx.message.guild.emojis:
+        if emoji.name==name:
+            await ctx.send('Ya hay un emoji con ese nombre.')
+            return
     if ctx.message.attachments==[]:
         await ctx.send('Adjunta el archivo que queres como emoji.')
         return
