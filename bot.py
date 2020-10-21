@@ -142,6 +142,16 @@ async def token(ctx):
 	s3 = S3Connection(os.environ['TOKEN'])
 	await ctx.send(s3)
 
+@client.command()
+async def emojimaker(ctx,name):
+    for file in ctx.message.attachments:
+        ext=file.filename.split('.')[-1]
+        await file.save(f'temp.{ext}')
+    with open(f"temp.{ext}", "rb") as img:
+        img_byte = img.read()
+        await ctx.message.guild.create_custom_emoji(name = (f"{name}"), image = img_byte)
+
+
 @client.event
 async def on_message(message):
 	await client.process_commands(message)
