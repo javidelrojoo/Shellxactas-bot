@@ -7,6 +7,7 @@ import random
 import subprocess
 import requests
 import dolar as dlr
+import remindme as rmdm
 from boto.s3.connection import S3Connection
 
 client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
@@ -39,18 +40,21 @@ async def plan(ctx):
 
 @client.command()
 async def remindme(ctx,arg=None,*,recordatorio=''):
-	"""Te manda un mensaje cuando pase el tiempo que le pidas (en segundos)"""
-	link=f'https://discord.com/channels/{ctx.message.guild.id}/{ctx.channel.id}/{ctx.message.id}'
-	try:
-		if arg==None:
-			await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
-			return
-		else:
-			await ctx.send(f'Ahora te hago acordar en {round(float(arg))} segundos.')
-			await asyncio.sleep(float(arg))
-			await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
-	except:
-		await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
+    """Te manda un mensaje cuando pase el tiempo que le pidas (en segundos)"""
+    if arg==None:
+        await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
+        return
+    if ctx.message.guild==None:
+        link=f'https://discord.com/channels/@me/{ctx.channel.id}/{ctx.message.id}'
+    else:
+        link=f'https://discord.com/channels/{ctx.message.guild.id}/{ctx.channel.id}/{ctx.message.id}'
+    if rmdm.tiempo(arg)==None:
+        await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
+    else:
+        show,wait,frmt=rmdm.tiempo(arg)
+        await ctx.send(f'Ahora te hago acordar en {show} {frmt}.')
+        await asyncio.sleep(wait)
+        await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
 
 @client.command()
 async def campus(ctx):
