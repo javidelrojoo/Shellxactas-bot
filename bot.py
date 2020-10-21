@@ -19,7 +19,7 @@ async def on_ready():
 	print('Estoy Listo')
 
 @client.command()
-async def change_status():
+async def change_status(ctx):
 	await client.change_presence(activity=discord.Game(next(status)))
 
 @client.command()
