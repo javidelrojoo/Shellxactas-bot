@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands,tasks
 import os
 import time
 import asyncio
@@ -7,15 +7,20 @@ import random
 import subprocess
 import requests
 import dolar as dlr
+from itertools import cycle
 from boto.s3.connection import S3Connection
 
-client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
+client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
+
+status=cycle(['Preparando un golpe de estado','Estudiando para historia de la ciencia','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja'])
 
 @client.event
 async def on_ready():
 	print('Estoy Listo')
-	await client.change_presence(activity=discord.Game('Preparando un golpe de estado'))
 
+@tasks.loop(seconds=10)
+def change_status():
+	await client.change_presence(activity=discord.Game(next(status)))
 
 @client.command()
 async def ping(ctx):
@@ -90,8 +95,7 @@ async def emoji(ctx,arg=None):
 
 @client.command()
 async def rdm(ctx):
-	for emoji in ctx.message.guild.emojis.name:
-		await ctx.send(emoji)
+	await ctx.send(random.choice(ctx.message.guild.emojis))
 
 @client.command(aliases = ["sensuky", "sensooky"])
 async def sensu(ctx):
