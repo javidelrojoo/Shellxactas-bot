@@ -6,6 +6,7 @@ import asyncio
 import random
 import subprocess
 import requests
+import dolar
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
@@ -98,6 +99,11 @@ async def sensu(ctx):
 @client.command(aliases = ["marcos", "MDG"])
 async def markz(ctx):
 	await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
+
+@client.command()
+async def dolar2(ctx):
+	await ctx.send(dolar.valor_dolar_blue())
+
 
 @client.command()
 async def dolar(ctx):
