@@ -6,7 +6,7 @@ import asyncio
 import random
 import subprocess
 import requests
-import dolar
+import dolar as dlr
 
 client = commands.Bot(command_prefix='.',case_insensitive=True,description='El bot de Shellxactas')
 
@@ -102,7 +102,7 @@ async def markz(ctx):
 
 @client.command()
 async def dolar2(ctx):
-	await ctx.send(dolar.valor_dolar_blue())
+	await ctx.send(dlr.valor_dolar_blue())
 
 
 @client.command()
