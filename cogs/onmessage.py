@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import random
 
 class Mensajes(commands.Cog):
 
@@ -43,7 +44,8 @@ class Mensajes(commands.Cog):
         
         if 'uwu' in message.content.lower() and message.content.lower()!='<:uwu:768614592699957278>':
             await message.add_reaction('<:uwu:768614592699957278>')
-
+        
+        pedido=[]
         if 'medialuna' in message.content.lower():
             pedido.append('🥐')
 
