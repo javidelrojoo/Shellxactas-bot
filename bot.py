@@ -28,7 +28,7 @@ async def change_status():
 @tasks.loop(hours=6)
 async def shame_loop():
     channel=client.get_channel(734919493343641611)
-    file=file=discord.File('img\\shame.gif')
+    file=discord.File('img\\shame.gif')
     await channel.send('<@&768612674304606279> Shame!',file=file)
 
 @client.command()
