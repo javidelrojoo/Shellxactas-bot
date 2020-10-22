@@ -35,11 +35,6 @@ async def change_status():
     await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
 
 
-@tasks.loop(hours=6)
-async def shame_loop():
-    general=client.get_channel(734919493343641611)
-    await general.send('<@&768612674304606279> Shame!',file=discord.File('img\\shame.gif'))
-
 @client.command()
 async def ping(ctx):
     """Tira el ping del bot"""
@@ -156,7 +151,7 @@ async def dolarapeso(ctx,dolares=None):
 
 @client.command()
 async def token(ctx):
-    s3 = S3Connection(os.environ['TOKEN'])
+    s3 = os.environ['heroku config:get TOKEN']
     await ctx.send(s3)
 
 @client.command()
