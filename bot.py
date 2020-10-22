@@ -21,7 +21,7 @@ async def on_ready():
 
 @tasks.loop(minutes=20)
 async def change_status():
-	await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
+    await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
     channel=client.get_channel('734919493343641611')
     await channel.send('<@&768612674304606279>')
     await channel.send(file=discord.File('img\shame.mp4'))
