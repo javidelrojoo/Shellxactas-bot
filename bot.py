@@ -17,6 +17,7 @@ status=['Viendo al coscu','Estudiando','Preparando un golpe de estado','Estudian
 @client.event
 async def on_ready():
 	change_status.start()
+    shame_loop.start()
 	print('Estoy Listo')
 
 @tasks.loop(minutes=20)
