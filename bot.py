@@ -38,8 +38,7 @@ async def change_status():
 @tasks.loop(hours=6)
 async def shame_loop():
     general=client.get_channel(734919493343641611)
-    shame=discord.File('img\\shame.gif')
-    await general.send('<@&768612674304606279> Shame!',file=shame)
+    await general.send('<@&768612674304606279> Shame!',file=discord.File('img\\shame.gif'))
 
 @client.command()
 async def ping(ctx):
