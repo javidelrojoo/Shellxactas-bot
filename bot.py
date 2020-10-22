@@ -8,7 +8,6 @@ import subprocess
 import requests
 import dolar as dlr
 import remindme as rmdm
-from boto.s3.connection import S3Connection
 
 client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
 
@@ -148,7 +147,9 @@ async def dolarapeso(ctx,dolares=None):
     venta=dlr.valor_dolar_blue()[1]
     await ctx.send(f'${round(venta*dolares)}')
 
-
+@client.command()
+async def github(ctx):
+    await ctx.send('https://github.com/javidelrojoo/Shellxactas-bot')
 
 
 @client.command()
