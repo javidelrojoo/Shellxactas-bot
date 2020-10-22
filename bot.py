@@ -16,8 +16,8 @@ status=['Viendo al coscu','Estudiando','Preparando un golpe de estado','Leyendo 
 
 if __name__ == '__main__':
     for filename in os.listdir('cogs'):
-	    if filename.endswith('.py'):
-		    client.load_extension(f'cogs.{filename[:-3]}')
+        if filename.endswith('.py'):
+            client.load_extension(f'cogs.{filename[:-3]}')
 
 
 @client.event
@@ -43,18 +43,18 @@ async def shame_loop():
 
 @client.command()
 async def ping(ctx):
-	"""Tira el ping del bot"""
-	await ctx.send(f'Pong! {round(client.latency*1000,2)} ms')
+    """Tira el ping del bot"""
+    await ctx.send(f'Pong! {round(client.latency*1000,2)} ms')
 
 @client.command()
 async def pasalo(ctx):
-	"""Te lo pasa"""
-	await ctx.send('https://cdn.discordapp.com/attachments/767479713953742938/767502683854340096/20201018_184055.jpg')
+    """Te lo pasa"""
+    await ctx.send('https://cdn.discordapp.com/attachments/767479713953742938/767502683854340096/20201018_184055.jpg')
 
 @client.command()
 async def plan(ctx):
-	"""Te dice el plan de la carrera que quieras"""
-	await ctx.send('Para que queres saber? Salu2 <:picardia:735101971001770055>')
+    """Te dice el plan de la carrera que quieras"""
+    await ctx.send('Para que queres saber? Salu2 <:picardia:735101971001770055>')
 
 @client.command()
 async def remindme(ctx,arg=None,*,recordatorio=''):
@@ -76,24 +76,24 @@ async def remindme(ctx,arg=None,*,recordatorio=''):
 
 @client.command()
 async def campus(ctx):
-	men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-	r=requests.get('https://campus.exactas.uba.ar/')
-	try:
-		r.raise_for_status()
-		await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-	except:
-		await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+    men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
+    r=requests.get('https://campus.exactas.uba.ar/')
+    try:
+        r.raise_for_status()
+        await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
+    except:
+        await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
 
 
 @client.command()
 async def steam(ctx):
-	men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-	r=requests.get('https://store.steampowered.com/')
-	try:
-		r.raise_for_status()
-		await men.edit(content='Steam parece estar funcionando.<a:tick:767588474840154173>')
-	except:
-		await men.edit(content='Steam está caido.<a:cross:767588477231038475>')
+    men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
+    r=requests.get('https://store.steampowered.com/')
+    try:
+        r.raise_for_status()
+        await men.edit(content='Steam parece estar funcionando.<a:tick:767588474840154173>')
+    except:
+        await men.edit(content='Steam está caido.<a:cross:767588477231038475>')
 
 
 @client.command()
@@ -120,27 +120,27 @@ async def emoji(ctx,arg=None):
 
 @client.command()
 async def rdm(ctx):
-	await ctx.send(random.choice(ctx.message.guild.emojis))
+    await ctx.send(random.choice(ctx.message.guild.emojis))
 
 @client.command(aliases = ["sensuky", "sensooky"])
 async def sensu(ctx):
-	await ctx.send('<@219301336544444416> <https://www.twitch.tv/sensuky>')
+    await ctx.send('<@219301336544444416> <https://www.twitch.tv/sensuky>')
 
 @client.command(aliases = ["marcos", "MDG"])
 async def markz(ctx):
-	await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
+    await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
 
 @client.command()
 async def dolar(ctx):
-	if dlr.valor_dolar_blue()==-1:
-		await ctx.send('Ocurrió un error.')
-		return
-	compra,venta,act=dlr.valor_dolar_blue()
-	embedVar = discord.Embed(title="Precio Dolar",url="https://www.dolarhoy.com/cotizaciondolarblue",color=0x0400ff)
-	embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
-	embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
-	embedVar.set_footer(text=f"Última actualizacion: {act}")
-	await ctx.send(embed=embedVar)
+    if dlr.valor_dolar_blue()==-1:
+        await ctx.send('Ocurrió un error.')
+        return
+    compra,venta,act=dlr.valor_dolar_blue()
+    embedVar = discord.Embed(title="Precio Dolar",url="https://www.dolarhoy.com/cotizaciondolarblue",color=0x0400ff)
+    embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
+    embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
+    embedVar.set_footer(text=f"Última actualizacion: {act}")
+    await ctx.send(embed=embedVar)
 
 @client.command()
 async def dolarapeso(ctx,dolares=None):
@@ -157,8 +157,8 @@ async def dolarapeso(ctx,dolares=None):
 
 @client.command()
 async def token(ctx):
-	s3 = S3Connection(os.environ['TOKEN'])
-	await ctx.send(s3)
+    s3 = S3Connection(os.environ['TOKEN'])
+    await ctx.send(s3)
 
 @client.command()
 async def emojimaker(ctx,name=None):
@@ -196,51 +196,51 @@ async def emojimaker(ctx,name=None):
 """
 @client.event
 async def on_message(message):
-	await client.process_commands(message)
-	pedido=[]
-	if message.author == client.user or message.author.bot:
-		return
+    await client.process_commands(message)
+    pedido=[]
+    if message.author == client.user or message.author.bot:
+        return
 
-	if message.content.lower()=='f':
-		await message.add_reaction('<:f_:768439683020488724>')
+    if message.content.lower()=='f':
+        await message.add_reaction('<:f_:768439683020488724>')
 
-	if message.content.lower()=='si':
-		await message.add_reaction('<a:si:767567093896839179>')
+    if message.content.lower()=='si':
+        await message.add_reaction('<a:si:767567093896839179>')
 
-	if message.content.lower()=='no':
-		await message.add_reaction('<a:no:767567093482520586>')
+    if message.content.lower()=='no':
+        await message.add_reaction('<a:no:767567093482520586>')
 
-	if 'q onda' in message.content.lower():
-		await message.add_reaction('<:degenerado:751791150364491966>')
+    if 'q onda' in message.content.lower():
+        await message.add_reaction('<:degenerado:751791150364491966>')
 
-	if 'cringe' in message.content.lower():
-		await message.add_reaction('<:cringe:735225671969669221>')
+    if 'cringe' in message.content.lower():
+        await message.add_reaction('<:cringe:735225671969669221>')
 
-	if '<:picardia:735101971001770055>' in message.content:
-	    await message.add_reaction('<:picardia:735101971001770055>')
+    if '<:picardia:735101971001770055>' in message.content:
+        await message.add_reaction('<:picardia:735101971001770055>')
 
-	if '<:picardiant:748344255906447432>' in message.content:
-		await message.add_reaction('<:picardiant:748344255906447432>')
+    if '<:picardiant:748344255906447432>' in message.content:
+        await message.add_reaction('<:picardiant:748344255906447432>')
 
-	if 'gracias' in message.content.lower() or 'garcias' in message.content.lower():
-		await message.add_reaction('<:garcias:764579105542373387>')
-	
-	if random.choice(list(range(1000)))==0:
-		await message.add_reaction(random.choice(message.guild.emojis))
-	
-	if len(message.content)>500:
-		await message.add_reaction('<:mucho_texto:743541235637026818>')
-	
-	if 'uwu' in message.content.lower() and message.content.lower()!='<:uwu:768614592699957278>':
-		await message.add_reaction('<:uwu:768614592699957278>')
+    if 'gracias' in message.content.lower() or 'garcias' in message.content.lower():
+        await message.add_reaction('<:garcias:764579105542373387>')
+    
+    if random.choice(list(range(1000)))==0:
+        await message.add_reaction(random.choice(message.guild.emojis))
+    
+    if len(message.content)>500:
+        await message.add_reaction('<:mucho_texto:743541235637026818>')
+    
+    if 'uwu' in message.content.lower() and message.content.lower()!='<:uwu:768614592699957278>':
+        await message.add_reaction('<:uwu:768614592699957278>')
 
-	if 'medialuna' in message.content.lower():
-		pedido.append('🥐')
+    if 'medialuna' in message.content.lower():
+        pedido.append('🥐')
 
-	if 'cafe' in message.content.lower():
-		pedido.append(':coffee:')
-	if len(pedido)!=0:
-		await message.channel.send("".join(pedido))
+    if 'cafe' in message.content.lower():
+        pedido.append(':coffee:')
+    if len(pedido)!=0:
+        await message.channel.send("".join(pedido))
 """
 
 client.run('NzY3NDQwNzExOTUxMDU2OTM2.X4x83A.8fRi9B6ExpsmkLOhIUlvzUmR4iA')
