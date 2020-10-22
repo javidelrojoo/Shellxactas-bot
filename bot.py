@@ -150,8 +150,8 @@ async def dolarapeso(ctx,dolares=None):
 
 @client.command()
 async def token(ctx):
-    s3 = os.system('heroku config:get TOKEN -a shellxactas')
-    await ctx.send(s3)
+    token=os.getenv('TOKEN')
+    await ctx.send(token)
 
 @client.command()
 async def emojimaker(ctx,name=None):
