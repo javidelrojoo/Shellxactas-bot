@@ -193,7 +193,7 @@ async def emojimaker(ctx,name=None):
             await ctx.send('El emoji se agregó correctamente')
             return
     ctx.send('Algo falló')
-
+"""
 @client.event
 async def on_message(message):
 	await client.process_commands(message)
@@ -241,6 +241,6 @@ async def on_message(message):
 		pedido.append(':coffee:')
 	if len(pedido)!=0:
 		await message.channel.send("".join(pedido))
-
+"""
 
 client.run('NzY3NDQwNzExOTUxMDU2OTM2.X4x83A.8fRi9B6ExpsmkLOhIUlvzUmR4iA')
