@@ -213,7 +213,7 @@ async def on_message(message):
 	if len(message.content)>500:
 		await message.add_reaction('<:mucho_texto:743541235637026818>')
 	
-	if 'uwu' in message.content.lower():
+	if 'uwu' in message.content.lower() and message.content.lower()!='<:uwu:768614592699957278>':
 		await message.add_reaction('<:uwu:768614592699957278>')
 
 	if 'medialuna' in message.content.lower():
