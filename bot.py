@@ -151,7 +151,7 @@ async def dolarapeso(ctx,dolares=None):
 
 @client.command()
 async def token(ctx):
-    s3 = os.environ['heroku config:get TOKEN']
+    s3 = os.system('heroku config:get TOKEN')
     await ctx.send(s3)
 
 @client.command()
