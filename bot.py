@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensit
 status=['Viendo al coscu','Estudiando','Preparando un golpe de estado','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja']
 
 if __name__ == '__main__':
-    for filename in os.listdir('.\cogs'):
+    for filename in os.listdir('cogs'):
 	    if filename.endswith('.py'):
 		    client.load_extension(f'cogs.{filename[:-3]}')
 
