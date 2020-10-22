@@ -9,7 +9,7 @@ class Mensajes(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self,message):
-        if message.author==(message.author.bot or self.client.user):
+        if message.author.bot:
             return
 
         if message.content.lower()=='f':
