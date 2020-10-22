@@ -24,12 +24,11 @@ async def change_status():
     await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
 
 
-@client.command()
+@tasks.loop(hours=24)
 async def shame_loop():
     channel=client.get_channel(734919493343641611)
-    await channel.send('<@&768612674304606279>')
-    await channel.send(file=discord.File('img\\shame.mp4'))
-
+    file=file=discord.File('img\\shame.gif')
+    await channel.send('<@&768612674304606279> Shame!',file=file)
 
 @client.command()
 async def ping(ctx):
