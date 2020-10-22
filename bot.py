@@ -148,10 +148,8 @@ async def dolarapeso(ctx,dolares=None):
     venta=dlr.valor_dolar_blue()[1]
     await ctx.send(f'${round(venta*dolares)}')
 
-@client.command()
-async def token(ctx):
-    token=os.getenv('TOKEN')
-    await ctx.send(token)
+
+
 
 @client.command()
 async def emojimaker(ctx,name=None):
@@ -187,4 +185,7 @@ async def emojimaker(ctx,name=None):
             return
     ctx.send('Algo falló')
 
-client.run('NzY3NDQwNzExOTUxMDU2OTM2.X4x83A.8fRi9B6ExpsmkLOhIUlvzUmR4iA')
+
+token=os.getenv('TOKEN')
+
+client.run(token)
