@@ -7,7 +7,7 @@ class Cotizacion(commands.Cog):
     def __init__(self,client):
         self.client=client
 
-    @commands.command(brief='Cotización dolar',help='Este comando te brinda informacion actualizada sobre el valor del dolar.')
+    @commands.command(brief='Cotización dolar',help='Este comando te brinda informacion actualizada sobre el valor del dolar. No requiere de ningún argumento.')
     async def dolar(self,ctx):
         if dlr.valor_dolar_blue()==-1:
             await ctx.send('Ocurrió un error.')
