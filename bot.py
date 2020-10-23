@@ -33,7 +33,7 @@ async def change_status():
     await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
 
 
-@client.command(brief='Tira el ping del bot',help='Usando este comando poder averiguar el ping del bot.')
+@client.command(brief='Tira el ping del bot',help='Usando este comando podes averiguar el ping del bot.')
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency*1000,2)} ms')
 

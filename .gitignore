@@ -1,10 +1,13 @@
 
 valor_dolar.py
 counting.py
-cogs/__pycache__/prueba.cpython-38.pyc
 cogs/prueba.py
 dolar2.py
 temp.gif
 temp.pdf
 temp.jpg
 temp.png
+__pycache__
+.vscode
+cogs\__pycache__
+Procfile
