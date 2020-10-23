@@ -19,15 +19,12 @@ class Cotizacion(commands.Cog):
         embedVar.set_footer(text=f"Última actualizacion: {act}")
         await ctx.send(embed=embedVar)
 
-    @commands.command()
+    @commands.command(brief='Convierte dolares a pesos',help='Convierte dolares a pesos, toma como argumento un numero. Por ejemplo: .dolarapeso 100')
     async def dolarapeso(self,ctx,dolares=None):
         try:
             dolares=float(dolares)
-        except ValueError:
-            await ctx.send('Ingresá un numero.')
-            return
-        except TypeError:
-            await ctx.send('¿Cuantos dolares queres convertir a pesos?')
+        except:
+            await ctx.send('Tenés que darme un número como argumento, por ejemplo: .dolarapeso 100')
             return
         venta=dlr.valor_dolar_blue()[1]
         await ctx.send(f'${round(venta*dolares)}')
