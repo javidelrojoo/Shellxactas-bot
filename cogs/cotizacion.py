@@ -8,7 +8,7 @@ class Cotizacion(commands.Cog):
         self.client=client
 
     @commands.command(brief='Cotización dolar',help='Este comando te brinda informacion actualizada sobre el valor del dolar.')
-    async def dolar(ctx):
+    async def dolar(self,ctx):
         if dlr.valor_dolar_blue()==-1:
             await ctx.send('Ocurrió un error.')
             return
@@ -20,7 +20,7 @@ class Cotizacion(commands.Cog):
         await ctx.send(embed=embedVar)
 
     @commands.command()
-    async def dolarapeso(ctx,dolares=None):
+    async def dolarapeso(self,ctx,dolares=None):
         try:
             dolares=float(dolares)
         except ValueError:
