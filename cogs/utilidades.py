@@ -33,7 +33,7 @@ class Utilidades(commands.Cog):
     @commands.command(brief='Fijate el estado del campus',help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self,ctx):
         men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        r=requests.get('https://campus.exactas.uba.ar/')
+        r=requests.get('https://campus.exactas.uba.ar/',timeout=5)
         try:
             r.raise_for_status()
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
@@ -43,7 +43,7 @@ class Utilidades(commands.Cog):
     @commands.command(brief='Fijate el estado de steam',help='Este comando sirve para fijarse si steam está activo o caido')
     async def steam(self,ctx):
         men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        r=requests.get('https://store.steampowered.com/')
+        r=requests.get('https://store.steampowered.com/',timeout=5)
         try:
             r.raise_for_status()
             await men.edit(content='Steam parece estar funcionando.<a:tick:767588474840154173>')

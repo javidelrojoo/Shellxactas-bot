@@ -30,25 +30,6 @@ async def on_ready():
 async def change_status():
     await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
 
-#Va para boludeces
-@client.command()
-async def plan(ctx):
-    """Te dice el plan de la carrera que quieras"""
-    await ctx.send('Para que queres saber? Salu2 <:picardia:735101971001770055>')
-
-@client.command()
-async def rdm(ctx):
-    await ctx.send(random.choice(ctx.message.guild.emojis))
-
-@client.command(aliases = ["sensuky", "sensooky"])
-async def sensu(ctx):
-    await ctx.send('<@219301336544444416> <https://www.twitch.tv/sensuky>')
-
-@client.command(aliases = ["marcos", "MDG"])
-async def markz(ctx):
-    await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
-
-
 token=os.getenv('TOKEN')
 
 client.run(token)
