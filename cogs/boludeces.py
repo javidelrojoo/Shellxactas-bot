@@ -29,7 +29,15 @@ class Boludeces(commands.Cog):
         for i in range(15):
             await ctx.send('<:picardia:735101971001770055>')
             await asyncio.sleep(1)
-
+    
+    @commands.command(brief='Una piramide',help='Picardias')
+    async def piramide(self,ctx):
+        for i in range(1,19):
+            await ctx.send('<:picardia:735101971001770055>'*i)
+            await asyncio.sleep(1)
+        for i in range(1,19,-1):
+            await ctx.send('<:picardia:735101971001770055>'*i)
+            await asyncio.sleep(1)
 
 def setup(client):
     client.add_cog(Boludeces(client))
