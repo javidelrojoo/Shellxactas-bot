@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+import asyncio
 
 class Boludeces(commands.Cog):
 
@@ -27,6 +28,8 @@ class Boludeces(commands.Cog):
     async def picardy(self,ctx):
         for i in range(15):
             await ctx.send('<:picardia:735101971001770055>')
+            await asyncio.sleep(0.5)
+
 
 def setup(client):
     client.add_cog(Boludeces(client))
