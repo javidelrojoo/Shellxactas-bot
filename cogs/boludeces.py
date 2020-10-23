@@ -32,10 +32,10 @@ class Boludeces(commands.Cog):
     
     @commands.command(brief='Una piramide',help='Picardias')
     async def piramide(self,ctx):
-        for i in range(1,11):
+        for i in range(1,6):
             await ctx.send('<:picardia:735101971001770055>'*i)
             await asyncio.sleep(1)
-        for i in list(range(1,10))[::-1]:
+        for i in list(range(1,5))[::-1]:
             await ctx.send('<:picardia:735101971001770055>'*i)
             await asyncio.sleep(1)
 
