@@ -30,7 +30,7 @@ class Utilidades(commands.Cog):
             await asyncio.sleep(wait)
             await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
 
-    @commands.command(brief='Fijate si el estado del campus',help='Este comando sirve para fijarse si el campus está activo o caido')
+    @commands.command(brief='Fijate el estado del campus',help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self,ctx):
         men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
         r=requests.get('https://campus.exactas.uba.ar/')
@@ -40,7 +40,7 @@ class Utilidades(commands.Cog):
         except:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
 
-    @commands.command(brief='Fijate si el estado de steam',help='Este comando sirve para fijarse si steam está activo o caido')
+    @commands.command(brief='Fijate el estado de steam',help='Este comando sirve para fijarse si steam está activo o caido')
     async def steam(self,ctx):
         men= await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
         r=requests.get('https://store.steampowered.com/')
