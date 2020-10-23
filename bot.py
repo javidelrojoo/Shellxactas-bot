@@ -6,7 +6,6 @@ import asyncio
 import random
 import subprocess
 import requests
-import dolar as dlr
 import remindme as rmdm
 
 client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
@@ -36,11 +35,6 @@ async def change_status():
 @client.command(brief='Tira el ping del bot',help='Usando este comando podes averiguar el ping del bot.')
 async def ping(ctx):
     await ctx.send(f'Pong! {round(client.latency*1000,2)} ms')
-
-@client.command()
-async def pasalo(ctx):
-    """Te lo pasa"""
-    await ctx.send('https://cdn.discordapp.com/attachments/767479713953742938/767502683854340096/20201018_184055.jpg')
 
 @client.command()
 async def plan(ctx):
@@ -121,30 +115,6 @@ async def sensu(ctx):
 async def markz(ctx):
     await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
 
-@client.command()
-async def dolar(ctx):
-    if dlr.valor_dolar_blue()==-1:
-        await ctx.send('Ocurrió un error.')
-        return
-    compra,venta,act=dlr.valor_dolar_blue()
-    embedVar = discord.Embed(title="Precio Dolar",url="https://www.dolarhoy.com/cotizaciondolarblue",color=0x0400ff)
-    embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
-    embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
-    embedVar.set_footer(text=f"Última actualizacion: {act}")
-    await ctx.send(embed=embedVar)
-
-@client.command()
-async def dolarapeso(ctx,dolares=None):
-    try:
-        dolares=float(dolares)
-    except ValueError:
-        await ctx.send('Ingresá un numero.')
-        return
-    except TypeError:
-        await ctx.send('¿Cuantos dolares queres convertir a pesos?')
-        return
-    venta=dlr.valor_dolar_blue()[1]
-    await ctx.send(f'${round(venta*dolares)}')
 
 @client.command()
 async def github(ctx):
