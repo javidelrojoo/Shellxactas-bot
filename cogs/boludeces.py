@@ -28,7 +28,7 @@ class Boludeces(commands.Cog):
     async def picardy(self,ctx):
         for i in range(15):
             await ctx.send('<:picardia:735101971001770055>')
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.75)
 
 
 def setup(client):
