@@ -8,11 +8,11 @@ class Utilidades(commands.Cog):
     def __init__(self,client):
         self.client=client
     
-    @client.command(brief='Te dice el ping del bot',help='Usando este comando podes averiguar el ping del bot.')
+    @commands.command(brief='Te dice el ping del bot',help='Usando este comando podes averiguar el ping del bot.')
     async def ping(self,ctx):
         await ctx.send(f'Pong! {round(self.client.latency*1000,2)} ms')
 
-    @client.command(brief='Te hace acordar de lo que sea',help='Con este comando podés hacer que el bot te haga acordar sobre lo que le pidas. Como primer argumento (obligatorio) tenes que poner en cuanto tiempo queres que te recuerde (despues del numero pones si queres que sean dias (d), horas (h), minutos (m) o segundos (s), si no pones nada lo toma como segundos). Como segundo argumento (opcional) podes poner el texto que queres que el bot te recuerde. Una vez que pasó el tiempo el bot te taggea, pone el recordatorio que ingresaste y tambien el link del mensaje original. Un ejemplo de uso: .remindme 10m Comprar verduras')
+    @commands.command(brief='Te hace acordar de lo que sea',help='Con este comando podés hacer que el bot te haga acordar sobre lo que le pidas. Como primer argumento (obligatorio) tenes que poner en cuanto tiempo queres que te recuerde (despues del numero pones si queres que sean dias (d), horas (h), minutos (m) o segundos (s), si no pones nada lo toma como segundos). Como segundo argumento (opcional) podes poner el texto que queres que el bot te recuerde. Una vez que pasó el tiempo el bot te taggea, pone el recordatorio que ingresaste y tambien el link del mensaje original. Un ejemplo de uso: .remindme 10m Comprar verduras')
     async def remindme(self,ctx,arg=None,*,recordatorio=''):
         if arg==None:
             await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
