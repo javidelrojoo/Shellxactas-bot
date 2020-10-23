@@ -6,7 +6,6 @@ import asyncio
 import random
 import subprocess
 import requests
-import remindme as rmdm
 
 client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
 
@@ -31,33 +30,10 @@ async def on_ready():
 async def change_status():
     await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
 
-
-@client.command(brief='Tira el ping del bot',help='Usando este comando podes averiguar el ping del bot.')
-async def ping(ctx):
-    await ctx.send(f'Pong! {round(client.latency*1000,2)} ms')
-
 @client.command()
 async def plan(ctx):
     """Te dice el plan de la carrera que quieras"""
     await ctx.send('Para que queres saber? Salu2 <:picardia:735101971001770055>')
-
-@client.command()
-async def remindme(ctx,arg=None,*,recordatorio=''):
-    """Te manda un mensaje cuando pase el tiempo que le pidas (en segundos)"""
-    if arg==None:
-        await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
-        return
-    if ctx.message.guild==None:
-        link=f'https://discord.com/channels/@me/{ctx.channel.id}/{ctx.message.id}'
-    else:
-        link=f'https://discord.com/channels/{ctx.message.guild.id}/{ctx.channel.id}/{ctx.message.id}'
-    if rmdm.tiempo(arg)==None:
-        await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
-    else:
-        show,wait,frmt=rmdm.tiempo(arg)
-        await ctx.send(f'Ahora te hago acordar en {show} {frmt}.')
-        await asyncio.sleep(wait)
-        await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
 
 @client.command()
 async def campus(ctx):
