@@ -35,7 +35,7 @@ class Boludeces(commands.Cog):
         for i in range(1,20):
             await ctx.send('<:picardia:735101971001770055>'*i)
             await asyncio.sleep(1)
-        for i in list(range(1,20))[::-1]:
+        for i in list(range(1,19))[::-1]:
             await ctx.send('<:picardia:735101971001770055>'*i)
             await asyncio.sleep(1)
 
