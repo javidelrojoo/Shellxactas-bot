@@ -22,7 +22,11 @@ class Boludeces(commands.Cog):
     @commands.command(brief='Lo que le gusta a markz',help='Es un link a pornhub gay',aliases = ["marcos", "MDG"])
     async def markz(self,ctx):
         await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
-
+    
+    @commands.command(brief='Que picardia',help='Picardias')
+    async def picardy(self,ctx):
+        for i in range(15):
+            await ctx.send('<:picardia:735101971001770055>')
 
 def setup(client):
     client.add_cog(Boludeces(client))
