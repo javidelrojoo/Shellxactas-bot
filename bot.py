@@ -6,6 +6,8 @@ import asyncio
 import random
 import subprocess
 import requests
+from datetime import datetime
+from datetime import timedelta
 
 client = commands.Bot(command_prefix='.', status=discord.Status.dnd, case_insensitive=True,
                       description='El bot de Shellxactas')
