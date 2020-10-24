@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands,tasks
+from discord.ext import commands, tasks
 import os
 import time
 import asyncio
@@ -7,9 +7,11 @@ import random
 import subprocess
 import requests
 
-client = commands.Bot(command_prefix='.',status=discord.Status.dnd,case_insensitive=True,description='El bot de Shellxactas')
+client = commands.Bot(command_prefix='.', status=discord.Status.dnd, case_insensitive=True,
+                      description='El bot de Shellxactas')
 
-status=['Viendo al coscu','Estudiando','Preparando un golpe de estado','Leyendo el Don Quijote','Haciendome una paja','Analizando el mercado','Comiendome a tu vieja']
+status = ['Viendo al coscu', 'Estudiando', 'Preparando un golpe de estado', 'Leyendo el Don Quijote',
+          'Haciendome una paja', 'Analizando el mercado', 'Comiendome a tu vieja']
 
 if __name__ == '__main__':
     for filename in os.listdir('cogs'):
@@ -28,8 +30,14 @@ async def on_ready():
 
 @tasks.loop(minutes=20)
 async def change_status():
-    await client.change_presence(status=discord.Status.dnd,activity=discord.Game(random.choice(status)))
+    await client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
-token=os.getenv('TOKEN')
+
+@client.command()
+async def ahora(ctx):
+    await ctx.send(datetime.now())
+
+
+token = os.getenv('TOKEN')
 
 client.run(token)
