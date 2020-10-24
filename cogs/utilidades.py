@@ -18,10 +18,7 @@ class Utilidades(commands.Cog):
         if tiempo==None:
             await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
             return
-        if ctx.message.guild==None:
-            link=f'https://discord.com/channels/@me/{ctx.channel.id}/{ctx.message.id}'
-        else:
-            link=f'https://discord.com/channels/{ctx.message.guild.id}/{ctx.channel.id}/{ctx.message.id}'
+        link=ctx.message.jump_url
         if rmdm.tiempo(tiempo)==None:
             await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
         else:

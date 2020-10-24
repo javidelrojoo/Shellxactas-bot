@@ -1,13 +1,13 @@
 
-valor_dolar.py
-counting.py
+mongotest.py
+__pycache__/dolar.cpython-38.pyc
+__pycache__/remindme.cpython-38.pyc
+.vscode/settings.json
+cogs/__pycache__/boludeces.cpython-38.pyc
+cogs/__pycache__/utilidades.cpython-38.pyc
+cogs/__pycache__/prueba.cpython-38.pyc
+cogs/__pycache__/onmessage.cpython-38.pyc
+cogs/__pycache__/cotizacion.cpython-38.pyc
 cogs/prueba.py
+counting.py
 dolar2.py
-temp.gif
-temp.pdf
-temp.jpg
-temp.png
-__pycache__
-.vscode
-cogs\__pycache__
-Procfile
