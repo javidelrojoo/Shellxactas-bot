@@ -7,8 +7,7 @@ import random
 import subprocess
 import requests
 import pymongo
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta, time
 
 intents = discord.Intents.default()
 intents.members = True
@@ -61,7 +60,7 @@ async def upremindme():
         canal = client.get_channel(canalid)
         record = x['recordatorio']
         url = x['url']
-        dbwait = datetime.fromisoformat(x['wait'])
+        dbwait = time.fromisoformat(x['wait'])
         if dbwait > nowtime:
             wait = dbwait-nowtime
             await asyncio.sleep(wait.total_seconds())
