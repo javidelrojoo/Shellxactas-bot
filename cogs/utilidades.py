@@ -5,6 +5,8 @@ import asyncio
 import requests
 import pymongo
 import os
+from datetime import datetime
+from datetime import timedelta
 
 mongo_url = os.getenv('MONGO_URL')
 
