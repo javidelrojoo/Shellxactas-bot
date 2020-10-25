@@ -11,7 +11,7 @@ mongo_url = os.getenv('MONGO_URL')
 
 mongoclient = pymongo.MongoClient(mongo_url)
 
-mongoprueba = mongoclient['Prueba']
+mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 
 class Utilidades(commands.Cog):
@@ -41,17 +41,20 @@ class Utilidades(commands.Cog):
             return
         else:
             show, wait, frmt = rmdm.tiempo(tiempo)
+            
+            authorid = ctx.message.author.id
+            channel = ctx.channel.id
+            date = ctx.message.created_at
+            waitdb = date + timedelta(seconds=wait)
+            recor = recordatorio
+            datos = {'authorid': f'{authorid}', 'channelid': f'{channel}', 'wait': f'{waitdb}',
+                     'recordatorio': f'{recor}', 'url': f'{link}'}
+            mongoremindme.insert_one(datos)
+            print('El recordatorio se guardó en la base de datos')
+
             await ctx.send(f'Ahora te hago acordar en {show} {frmt}.')
             await asyncio.sleep(wait)
             await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
-        authorid = ctx.message.author.id
-        channel = ctx.channel.id
-        date = ctx.message.created_at
-        waitdb = date + timedelta(seconds=wait)
-        recor = recordatorio
-        datos = {'authorid': f'{authorid}', 'channelid': f'{channel}', 'wait': f'{waitdb}',
-                 'recordatorio': f'{recor}', 'url': f'{link}'}
-        mongoremindme.insert_one(datos)
 
 
     @commands.command(brief='Fijate el estado del campus',

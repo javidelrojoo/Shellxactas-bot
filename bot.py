@@ -27,7 +27,7 @@ mongo_url = os.getenv('MONGO_URL')
 
 mongoclient = pymongo.MongoClient(mongo_url)
 
-mongoprueba = mongoclient['Prueba']
+mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 
 
