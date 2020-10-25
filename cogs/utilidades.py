@@ -32,26 +32,26 @@ class Utilidades(commands.Cog):
                            'taggea, pone el recordatorio que ingresaste y tambien el link del mensaje original. \n\n '
                            'Un ejemplo de uso: .remindme 10m ella no te quiere')
     async def remindme(self, ctx, tiempo=None, *, recordatorio=''):
-        authorid = ctx.message.author.id
-        channel = ctx.channel.id
-        date = ctx.message.created_at
-        wait = date + timedelta(seconds=tiempo)
-        recor = recordatorio
-        url = ctx.message.jump_url
-        datos = {'authorid': f'{authorid}', 'channelid': f'{channel}', 'wait': f'{wait}',
-                 'recordatorio': f'{recor}', 'url': f'{url}'}
-        mongoremindme.insert_one(datos)
         if tiempo is None:
             await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
             return
         link = ctx.message.jump_url
         if rmdm.tiempo(tiempo) is None:
             await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
+            return
         else:
             show, wait, frmt = rmdm.tiempo(tiempo)
             await ctx.send(f'Ahora te hago acordar en {show} {frmt}.')
             await asyncio.sleep(wait)
-            await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recor} {url}')
+            await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
+        authorid = ctx.message.author.id
+        channel = ctx.channel.id
+        date = ctx.message.created_at
+        waitdb = date + timedelta(seconds=wait)
+        recor = recordatorio
+        datos = {'authorid': f'{authorid}', 'channelid': f'{channel}', 'wait': f'{waitdb}',
+                 'recordatorio': f'{recor}', 'url': f'{link}'}
+        mongoremindme.insert_one(datos)
 
 
     @commands.command(brief='Fijate el estado del campus',
