@@ -3,6 +3,7 @@ from discord.ext import commands
 import remindme as rmdm
 import asyncio
 import requests
+import pymongo
 import os
 
 mongo_url = os.getenv('MONGO_URL')
