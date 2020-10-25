@@ -3,9 +3,9 @@ from discord.ext import commands
 import remindme as rmdm
 import asyncio
 import requests
+from datetime import datetime, time, timedelta
 import pymongo
 import os
-from datetime import datetime, timedelta
 
 mongo_url = os.getenv('MONGO_URL')
 
@@ -13,7 +13,6 @@ mongoclient = pymongo.MongoClient(mongo_url)
 
 mongoprueba = mongoclient['Prueba']
 mongoremindme = mongoprueba["remindme"]
-
 
 class Utilidades(commands.Cog):
 
@@ -32,7 +31,7 @@ class Utilidades(commands.Cog):
                            'poner el texto que queres que el bot te recuerde. Una vez que pasó el tiempo el bot te '
                            'taggea, pone el recordatorio que ingresaste y tambien el link del mensaje original. \n\n '
                            'Un ejemplo de uso: .remindme 10m ella no te quiere')
-    async def remindme(self, ctx, tiempo: int, *, recordatorio=''):
+    async def remindme(self, ctx, tiempo=None, *, recordatorio=''):
         authorid = ctx.message.author.id
         channel = ctx.channel.id
         date = ctx.message.created_at
@@ -42,6 +41,10 @@ class Utilidades(commands.Cog):
         datos = {'authorid': f'{authorid}', 'channelid': f'{channel}', 'wait': f'{wait}',
                  'recordatorio': f'{recor}', 'url': f'{url}'}
         mongoremindme.insert_one(datos)
+        if tiempo is None:
+            await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
+            return
+        link = ctx.message.jump_url
         if rmdm.tiempo(tiempo) is None:
             await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
         else:
@@ -50,12 +53,6 @@ class Utilidades(commands.Cog):
             await asyncio.sleep(wait)
             await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recor} {url}')
 
-    @remindme.error
-    async def remindme_error(self, ctx, error):
-        if isinstance(error, commands.errors.BadArgument):
-            ctx.send('Poné un tiempo válido.')
-        else:
-            print((error))
 
     @commands.command(brief='Fijate el estado del campus',
                       help='Este comando sirve para fijarse si el campus está activo o caido')
