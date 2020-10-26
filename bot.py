@@ -77,7 +77,7 @@ async def before_checkbd():
 async def upremindme():
     print('Arrancó el upremindme')
     nowtime = datetime.utcnow()
-    for x in mongoremindme.find().sort('sort', pymongo.ASCENDING):
+    for x in mongoremindme.find().sort('wait', pymongo.ASCENDING):
         authorid = int(x['authorid'])
         author = client.get_user(authorid)
         canalid = int(x['channelid'])
@@ -89,6 +89,7 @@ async def upremindme():
             wait = dbwait-nowtime
             await asyncio.sleep(wait.total_seconds())
             await canal.send(f'{author.mention} ya pasó el tiempo. {record} {url}')
+            mongoremindme.delete_one(x)
         else:
             mongoremindme.delete_one(x)
 
