@@ -44,11 +44,13 @@ async def on_ready():
 
 @tasks.loop(minutes=20)
 async def change_status():
+    print('Arrancó el loop de change status')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
 
 @tasks.loop(hours=6)
 async def check_for_bd():
+    print('Arrancó el loop del bday')
     now = datetime.utcnow()-timedelta(hours=3)
     curmonth = now.month
     curday = now.day
@@ -71,16 +73,17 @@ async def before_checkbd():
 
 
 async def upremindme():
+    print('Arrancó el upremindme')
     await client.wait_until_ready()
     nowtime = datetime.utcnow()
-    for x in mongoremindme.find():
+    for x in mongoremindme.find().sort('sort', pymongo.ASCENDING):
         authorid = int(x['authorid'])
         author = client.get_user(authorid)
         canalid = int(x['channelid'])
         canal = client.get_channel(canalid)
         record = x['recordatorio']
         url = x['url']
-        dbwait = datetime.strptime(x['wait'], '%Y-%m-%d %H:%M:%S.%f')
+        dbwait = datetime(x['wait'])
         if dbwait > nowtime:
             wait = dbwait-nowtime
             await asyncio.sleep(wait.total_seconds())

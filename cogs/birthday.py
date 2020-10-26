@@ -54,7 +54,7 @@ class Birthday(commands.Cog):
                                                                                          'borrar tu cumpleaños')
     async def bd_delete(self, ctx):
         authorid = ctx.message.author.id
-        query = mongocumple.find_one({'_id': f'{authorid}'})
+        query = mongocumple.find_one({'_id': authorid})
         if query is None:
             await ctx.send('No tengo tu cumpleaños registrado')
             return
