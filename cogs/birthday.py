@@ -7,9 +7,7 @@ import os
 
 mongo_url = os.getenv('MONGO_URL')
 
-# mongoclient = pymongo.MongoClient(mongo_url)
-mongoclient = pymongo.MongoClient(
-    "mongodb+srv://javitau:EdvzXIZmOh21V4bt@cluster0.38tql.mongodb.net/shellxactas?retryWrites=true&w=majority")
+mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongocumple = mongoprueba["cumpleaños"]
 
