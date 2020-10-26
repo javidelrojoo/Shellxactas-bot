@@ -48,8 +48,8 @@ class Utilidades(commands.Cog):
             date = ctx.message.created_at
             waitdb = date + timedelta(seconds=wait)
             recor = recordatorio
-            datos = {'authorid': f'{authorid}', 'channelid': f'{channel}', 'wait': f'{waitdb}',
-                     'recordatorio': f'{recor}', 'url': f'{link}'}
+            datos = {'authorid': authorid, 'channelid': channel, 'wait': waitdb,
+                     'recordatorio': recor, 'url': link}
             mongoremindme.insert_one(datos)
             print('El recordatorio se guardó en la base de datos')
 

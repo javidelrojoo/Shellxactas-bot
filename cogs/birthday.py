@@ -8,7 +8,6 @@ import os
 mongo_url = os.getenv('MONGO_URL')
 
 mongoclient = pymongo.MongoClient(mongo_url)
-
 mongoprueba = mongoclient['Shellxactas']
 mongocumple = mongoprueba["cumpleaños"]
 
@@ -67,7 +66,7 @@ class Birthday(commands.Cog):
     @commands.command(aliases=['bd_lista'])
     async def bd_list(self, ctx):
         emb = discord.Embed(title='Lista de Cumpleaños', color=0xfc0303)
-        for bday in mongocumple.find().sort('mes'):
+        for bday in mongocumple.find().sort([('mes', pymongo.ASCENDING), ('dia', pymongo.ASCENDING)]):
             author = self.client.get_user(int(bday['_id']))
             dia = bday['dia']
             mes = bday['mes']
