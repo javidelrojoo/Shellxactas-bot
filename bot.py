@@ -29,6 +29,7 @@ mongoclient = pymongo.MongoClient(mongo_url)
 
 mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
+mongocumple = mongoprueba["cumpleaños"]
 
 
 @client.event
@@ -38,6 +39,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+    await check_for_bd.start()
 
 
 @tasks.loop(minutes=20)
@@ -45,9 +47,27 @@ async def change_status():
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
 
-@client.command()
-async def ahora(ctx):
-    await ctx.send(datetime.now())
+@tasks.loop(hours=6)
+async def check_for_bd():
+    now = datetime.utcnow()-timedelta(hours=3)
+    curmonth = now.month
+    curday = now.day
+    for bday in mongocumple.find():
+        author = client.get_user(int(bday['_id']))
+        channelid = int(bday['channelid'])
+        channel = client.get_channel(channelid)
+        dia = int(bday['dia'])
+        mes = int(bday['mes'])
+        if dia == curday and mes == curmonth:
+            if channel is None:
+                await author.send(f'Feliz Cumpleaños {author.mention}!!!')
+            else:
+                await channel.send(f'Feliz Cumpleaños {author.mention}!!!')
+
+
+@check_for_bd.before_loop
+async def before_checkbd():
+    await client.wait_until_ready()
 
 
 async def upremindme():
