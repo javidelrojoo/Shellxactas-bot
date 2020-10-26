@@ -76,7 +76,7 @@ async def upremindme():
     await client.wait_until_ready()
     print('Arrancó el upremindme')
     nowtime = datetime.utcnow()
-    for x in mongoremindme.find().sort('wait', pymongo.ASCENDING):
+    for x in mongoremindme.find().sort('wait', pymongo.DESCENDING):
         authorid = int(x['authorid'])
         author = client.get_user(authorid)
         canalid = int(x['channelid'])
