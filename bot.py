@@ -87,7 +87,10 @@ async def upremindme():
         if dbwait > nowtime:
             wait = dbwait-nowtime
             await asyncio.sleep(wait.total_seconds())
-            await canal.send(f'{author.mention} ya pasó el tiempo. {record} {url}')
+            if canal is None:
+                await author.send(f'{author.mention} ya pasó el tiempo. {record} {url}')
+            else:
+                await canal.send(f'{author.mention} ya pasó el tiempo. {record} {url}')
             mongoremindme.delete_one(x)
         else:
             mongoremindme.delete_one(x)
