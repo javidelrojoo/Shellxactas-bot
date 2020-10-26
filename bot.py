@@ -40,7 +40,6 @@ async def on_ready():
     print(client.user.id)
     print('------')
     await check_for_bd.start()
-    await upremindme.start()
 
 
 @tasks.loop(minutes=20.0)
@@ -73,8 +72,8 @@ async def before_checkbd():
     await client.wait_until_ready()
 
 
-@tasks.loop(hours=24.0)
 async def upremindme():
+    await client.wait_until_ready()
     print('Arrancó el upremindme')
     nowtime = datetime.utcnow()
     for x in mongoremindme.find().sort('wait', pymongo.ASCENDING):
@@ -93,11 +92,7 @@ async def upremindme():
         else:
             mongoremindme.delete_one(x)
 
-
-@upremindme.before_loop
-async def before_upremindme():
-    await client.wait_until_ready()
-
+client.loop.create_task(upremindme())
 
 token = os.getenv('TOKEN')
 
