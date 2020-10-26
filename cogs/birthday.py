@@ -8,6 +8,7 @@ import os
 mongo_url = os.getenv('MONGO_URL')
 
 mongoclient = pymongo.MongoClient(mongo_url)
+
 mongoprueba = mongoclient['Shellxactas']
 mongocumple = mongoprueba["cumpleaños"]
 
@@ -70,7 +71,7 @@ class Birthday(commands.Cog):
             author = self.client.get_user(int(bday['_id']))
             dia = bday['dia']
             mes = bday['mes']
-            emb.add_field(name=f'{author}', value=f'{dia}/{mes}', inline=False)
+            emb.add_field(name=f'{author}', value=f'{dia}/{mes}', inline=True)
         await ctx.send(embed=emb)
 
 
