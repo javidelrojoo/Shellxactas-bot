@@ -40,15 +40,16 @@ async def on_ready():
     print(client.user.id)
     print('------')
     await check_for_bd.start()
+    await upremindme.start()
 
 
-@tasks.loop(minutes=20)
+@tasks.loop(minutes=20.0)
 async def change_status():
     print('Arrancó el loop de change status')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
 
-@tasks.loop(hours=6)
+@tasks.loop(hours=6.0)
 async def check_for_bd():
     print('Arrancó el loop del bday')
     now = datetime.utcnow()-timedelta(hours=3)
@@ -72,9 +73,9 @@ async def before_checkbd():
     await client.wait_until_ready()
 
 
+@tasks.loop(hours=24.0)
 async def upremindme():
     print('Arrancó el upremindme')
-    await client.wait_until_ready()
     nowtime = datetime.utcnow()
     for x in mongoremindme.find().sort('sort', pymongo.ASCENDING):
         authorid = int(x['authorid'])
@@ -91,7 +92,11 @@ async def upremindme():
         else:
             mongoremindme.delete_one(x)
 
-client.loop.create_task(upremindme())
+
+@upremindme.before_loop
+async def before_upremindme():
+    await client.wait_until_ready()
+
 
 token = os.getenv('TOKEN')
 
