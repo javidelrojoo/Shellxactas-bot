@@ -7,9 +7,7 @@ import os
 
 mongo_url = os.getenv('MONGO_URL')
 
-# mongoclient = pymongo.MongoClient(mongo_url)
-mongoclient = pymongo.MongoClient(
-    "mongodb+srv://javitau:EdvzXIZmOh21V4bt@cluster0.38tql.mongodb.net/shellxactas?retryWrites=true&w=majority")
+mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongocumple = mongoprueba["cumpleaños"]
 
@@ -36,10 +34,16 @@ class Birthday(commands.Cog):
         except ValueError:
             await ctx.send('Formato Inválido, tiene que ser de la forma \'DD/MM\'')
             return
+        if dia > 31 or dia < 0:
+            await ctx.send('Día Inválido')
+            return
+        if mes > 12 or mes < 0:
+            await ctx.send('Mes Inválido')
+            return
         authorid = ctx.message.author.id
         channelid = ctx.channel.id
         try:
-            datos = {'_id': f'{authorid}', 'channelid': f'{channelid}', 'dia': f'{dia}', 'mes': f'{mes}'}
+            datos = {'_id': authorid, 'channelid': channelid, 'dia': dia, 'mes': mes}
             mongocumple.insert_one(datos)
         except pymongo.errors.DuplicateKeyError:
             await ctx.send('Ya tengo registrado tu cumpleaños, podes usar .bd_delete para borrar tu cumpleaños.')
@@ -62,7 +66,7 @@ class Birthday(commands.Cog):
     @commands.command(aliases=['bd_lista'])
     async def bd_list(self, ctx):
         emb = discord.Embed(title='Lista de Cumpleaños', color=0xfc0303)
-        for bday in mongocumple.find().sort('mes', 1):
+        for bday in mongocumple.find().sort('mes'):
             author = self.client.get_user(int(bday['_id']))
             dia = bday['dia']
             mes = bday['mes']
