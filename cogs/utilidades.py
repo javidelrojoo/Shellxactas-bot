@@ -56,6 +56,7 @@ class Utilidades(commands.Cog):
             await ctx.send(f'Ahora te hago acordar en {show} {frmt}.')
             await asyncio.sleep(wait)
             await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
+            mongoremindme.delete_one(datos)
 
 
     @commands.command(brief='Fijate el estado del campus',
