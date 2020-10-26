@@ -83,7 +83,7 @@ async def upremindme():
         canal = client.get_channel(canalid)
         record = x['recordatorio']
         url = x['url']
-        dbwait = datetime(x['wait'])
+        dbwait = x['wait']
         if dbwait > nowtime:
             wait = dbwait-nowtime
             await asyncio.sleep(wait.total_seconds())
