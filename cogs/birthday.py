@@ -7,8 +7,9 @@ import os
 
 mongo_url = os.getenv('MONGO_URL')
 
-mongoclient = pymongo.MongoClient(mongo_url)
-
+# mongoclient = pymongo.MongoClient(mongo_url)
+mongoclient = pymongo.MongoClient(
+    "mongodb+srv://javitau:EdvzXIZmOh21V4bt@cluster0.38tql.mongodb.net/shellxactas?retryWrites=true&w=majority")
 mongoprueba = mongoclient['Shellxactas']
 mongocumple = mongoprueba["cumpleaños"]
 
@@ -57,6 +58,16 @@ class Birthday(commands.Cog):
             mongocumple.delete_one(query)
             await ctx.send('Ya eliminé tu cumpleaños')
             return
+
+    @commands.command(aliases=['bd_lista'])
+    async def bd_list(self, ctx):
+        emb = discord.Embed(title='Lista de Cumpleaños', color=0xfc0303)
+        for bday in mongocumple.find().sort('mes', 1):
+            author = self.client.get_user(int(bday['_id']))
+            dia = bday['dia']
+            mes = bday['mes']
+            emb.add_field(name=f'{author}', value=f'{dia}/{mes}', inline=False)
+        await ctx.send(embed=emb)
 
 
 def setup(client):

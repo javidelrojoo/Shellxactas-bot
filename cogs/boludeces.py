@@ -25,6 +25,7 @@ class Boludeces(commands.Cog):
         await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
     
     @commands.command(brief='Que picardia',help='Picardias')
+    @commands.is_owner()
     async def picardy(self,ctx):
         for i in range(15):
             await ctx.send('<:picardia:735101971001770055>')
