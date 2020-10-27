@@ -32,10 +32,7 @@ class Utilidades(commands.Cog):
                            'poner el texto que queres que el bot te recuerde. Una vez que pasó el tiempo el bot te '
                            'taggea, pone el recordatorio que ingresaste y tambien el link del mensaje original. \n\n '
                            'Un ejemplo de uso: .remindme 10m ella no te quiere')
-    async def remindme(self, ctx, tiempo=None, *, recordatorio=''):
-        if tiempo is None:
-            await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
-            return
+    async def remindme(self, ctx, tiempo: str, *, recordatorio=''):
         link = ctx.message.jump_url
         if rmdm.tiempo(tiempo) is None:
             await ctx.send('¿Me estas tratando de pelotudo? Poné un tiempo y dejate de joder.')
@@ -57,6 +54,12 @@ class Utilidades(commands.Cog):
             await asyncio.sleep(wait)
             await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
             mongoremindme.delete_one(datos)
+
+    @remindme.error
+    async def remindme_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.MissingRequiredArgument):
+            await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
+            return
 
     @commands.command(brief='Fijate el estado del campus',
                       help='Este comando sirve para fijarse si el campus está activo o caido')
@@ -86,12 +89,9 @@ class Utilidades(commands.Cog):
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
                            'los animados. Tenés que poner el nombre exacto del emoji, podes usar .emoji lista para '
                            'ver la lista de emojis.')
-    async def emoji(self, ctx, nombre=None):
-        if nombre is None:
-            await ctx.send('Me tenes que decir que emoji querés.')
-            return
+    @commands.guild_only()
+    async def emoji(self, ctx, nombre: str):
         if nombre == 'lista':
-            await ctx.message.add_reaction('<a:tick:767588474840154173>')
             lista = []
             for emoji in ctx.message.guild.emojis:
                 lista.append(f'**{emoji.name}**:{emoji}\n')
@@ -99,13 +99,24 @@ class Utilidades(commands.Cog):
                     await ctx.author.send(''.join(lista))
                     lista = []
             await ctx.author.send(''.join(lista))
+            await ctx.message.add_reaction('<a:tick:767588474840154173>')
             return
         for emoji in ctx.message.guild.emojis:
-            name = str(emoji.name)
-            if str(nombre) == name:
+            name = emoji.name
+            if nombre == name:
                 await ctx.send(emoji)
                 return
         await ctx.send('No encontré ese emoji en el server. Poné .emoji lista para ver la lista')
+
+    @emoji.error
+    async def emoji_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.NoPrivateMessage):
+            await ctx.send('Este comando solo sirve en un server')
+            return
+        if isinstance(error, discord.ext.commands.MissingRequiredArgument):
+            await ctx.send('Me tenes que decir que emoji querés. Poné .emoji lista para ver la lista')
+            return
+        raise error
 
     @commands.command(brief='El github de este bot',
                       help='Con este comando el bot manda el link del github de este bot')
@@ -116,13 +127,8 @@ class Utilidades(commands.Cog):
                       help='Este comando sirve para agregar emojis al server. El archivo que quieras guardar como '
                            'emoji tiene que estar adjunto al mismo mensaje donde pusiste el comando y tiene que ser '
                            'un GIF, PNG o JPG. \n\n Tambien el archivo no puede pesar mas que 256 kb.')
-    async def emojimaker(self, ctx, nombre=None):
-        if ctx.message.guild is None:
-            await ctx.send('Este comando solo funciona en un server.')
-            return
-        if nombre is None:
-            await ctx.send('Tenes que decirme el nombre que queres.')
-            return
+    @commands.guild_only()
+    async def emojimaker(self, ctx, nombre: str):
         for emoji in ctx.message.guild.emojis:
             if emoji.name == nombre:
                 await ctx.send('Ya hay un emoji con ese nombre.')
@@ -148,7 +154,17 @@ class Utilidades(commands.Cog):
             if emoji.name == nombre:
                 await ctx.send('El emoji se agregó correctamente')
                 return
-        ctx.send('Algo falló')
+        await ctx.send('Algo falló')
+
+    @emojimaker.error
+    async def emojimaker_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.NoPrivateMessage):
+            await ctx.send('Este comando solo puede usarse en un server')
+            return
+        if isinstance(error, discord.ext.commands.MissingRequiredArgument):
+            await ctx.send('Me tenes que decir el nombre que queres para el emoji')
+            return
+        raise error
 
 
 def setup(client):

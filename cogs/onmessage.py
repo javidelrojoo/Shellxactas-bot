@@ -13,6 +13,8 @@ class Mensajes(commands.Cog):
         if isinstance(error, discord.ext.commands.errors.CommandNotFound):
             await ctx.send('¿Necesitas ayuda para escribir el comando?')
             return
+        if isinstance(error, discord.ext.commands.UnexpectedQuoteError):
+            await ctx.send('No uses comillas en el argumento')
 
     @commands.Cog.listener()
     async def on_message(self, message):
