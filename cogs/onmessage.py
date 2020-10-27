@@ -2,23 +2,24 @@ import discord
 from discord.ext import commands
 import random
 
+
 class Mensajes(commands.Cog):
 
-    def __init__(self,client):
-        self.client=client
+    def __init__(self, client):
+        self.client = client
 
     @commands.Cog.listener()
-    async def on_message(self,message):
+    async def on_message(self, message):
         if message.author.bot:
             return
 
-        if message.content.lower()=='f':
+        if message.content.lower() == 'f':
             await message.add_reaction('<:f_:768439683020488724>')
 
-        if message.content.lower()=='si':
+        if message.content.lower() == 'si':
             await message.add_reaction('<a:si:767567093896839179>')
 
-        if message.content.lower()=='no':
+        if message.content.lower() == 'no':
             await message.add_reaction('<a:no:767567093482520586>')
 
         if 'q onda' in message.content.lower():
@@ -35,24 +36,25 @@ class Mensajes(commands.Cog):
 
         if 'gracias' in message.content.lower() or 'garcias' in message.content.lower():
             await message.add_reaction('<:garcias:764579105542373387>')
-        
-        if random.choice(list(range(1000)))==0:
+
+        if random.choice(list(range(1000))) == 0:
             await message.add_reaction(random.choice(message.guild.emojis))
-        
-        if len(message.content)>500:
+
+        if len(message.content) > 500:
             await message.add_reaction('<:mucho_texto:743541235637026818>')
-        
-        if 'uwu' in message.content.lower() and message.content.lower()!='<:uwu:768614592699957278>':
+
+        if 'uwu' in message.content.lower() and message.content.lower() != '<:uwu:768614592699957278>':
             await message.add_reaction('<:uwu:768614592699957278>')
-        
-        pedido=[]
+
+        pedido = []
         if 'medialuna' in message.content.lower():
             pedido.append('🥐')
 
         if 'cafe' in message.content.lower():
             pedido.append(':coffee:')
-        if len(pedido)!=0:
+        if len(pedido) != 0:
             await message.channel.send("".join(pedido))
+
 
 def setup(client):
     client.add_cog(Mensajes(client))
