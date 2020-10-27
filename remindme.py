@@ -32,3 +32,4 @@ def tiempo(tiempo):
     else:
         return
     return show,wait,frmt
+
