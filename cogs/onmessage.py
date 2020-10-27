@@ -13,8 +13,7 @@ class Mensajes(commands.Cog):
         if isinstance(error, discord.ext.commands.errors.CommandNotFound):
             await ctx.send('¿Necesitas ayuda para escribir el comando?')
             return
-        raise error
-    
+
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot:
