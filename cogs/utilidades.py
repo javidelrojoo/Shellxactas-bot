@@ -45,7 +45,7 @@ class Utilidades(commands.Cog):
 
             authorid = ctx.message.author.id
             channel = ctx.channel.id
-            date = ctx.message.created_at
+            date = datetime.utcnow()
             waitdb = date + timedelta(seconds=wait)
             recor = recordatorio
             datos = {'authorid': authorid, 'channelid': channel, 'wait': waitdb,
@@ -66,8 +66,9 @@ class Utilidades(commands.Cog):
         try:
             r.raise_for_status()
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-        except:
+        except Exception as e:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+            print(e)
 
     @commands.command(brief='Fijate el estado de steam',
                       help='Este comando sirve para fijarse si steam está activo o caido')
@@ -77,8 +78,9 @@ class Utilidades(commands.Cog):
         try:
             r.raise_for_status()
             await men.edit(content='Steam parece estar funcionando.<a:tick:767588474840154173>')
-        except:
+        except Exception as e:
             await men.edit(content='Steam está caido.<a:cross:767588477231038475>')
+            print(e)
 
     @commands.command(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
@@ -134,13 +136,14 @@ class Utilidades(commands.Cog):
                 await ctx.send('Formato inválido, tiene que ser GIF, JPG o PNG.')
                 return
             await file.save(f'temp.{ext}')
-        with open(f"temp.{ext}", "rb") as img:
-            img_byte = img.read()
-            try:
-                await ctx.message.guild.create_custom_emoji(name=f"{nombre}", image=img_byte)
-            except:
-                await ctx.send('El archivo no puede pesar mas de 256 kb.')
-                return
+            with open(f"temp.{ext}", "rb") as img:
+                img_byte = img.read()
+                try:
+                    await ctx.message.guild.create_custom_emoji(name=f"{nombre}", image=img_byte)
+                except Exception as e:
+                    await ctx.send('El archivo no puede pesar mas de 256 kb.')
+                    print(e)
+                    return
         for emoji in ctx.message.guild.emojis:
             if emoji.name == nombre:
                 await ctx.send('El emoji se agregó correctamente')
