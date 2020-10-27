@@ -138,32 +138,26 @@ class Utilidades(commands.Cog):
             return
         for file in ctx.message.attachments:
             ext = file.filename.split('.')[-1]
-            if ext.lower() != ('gif' and 'jpg' and 'png'):
-                await ctx.send('Formato inválido, tiene que ser GIF, JPG o PNG.')
-                return
             await file.save(f'temp.{ext}')
             with open(f"temp.{ext}", "rb") as img:
                 img_byte = img.read()
-                try:
-                    await ctx.message.guild.create_custom_emoji(name=f"{nombre}", image=img_byte)
-                except Exception as e:
-                    await ctx.send('El archivo no puede pesar mas de 256 kb.')
-                    print(e)
-                    return
-        for emoji in ctx.message.guild.emojis:
-            if emoji.name == nombre:
-                await ctx.send('El emoji se agregó correctamente')
-                return
-        await ctx.send('Algo falló')
+                emoji = await ctx.message.guild.create_custom_emoji(name=nombre, image=img_byte)
+                await ctx.send(f'El emoji se agregó correctamente {emoji}')
+        os.remove(f"temp.{ext}")
 
     @emojimaker.error
     async def emojimaker_error(self, ctx, error):
+        error = getattr(error, "original", error)
         if isinstance(error, discord.ext.commands.NoPrivateMessage):
             await ctx.send('Este comando solo puede usarse en un server')
             return
         if isinstance(error, discord.ext.commands.MissingRequiredArgument):
             await ctx.send('Me tenes que decir el nombre que queres para el emoji')
             return
+        if isinstance(error, discord.HTTPException):
+            await ctx.send('El archivo tiene que pesar menos de 256 kb')
+            return
+        await ctx.send('Ocurrió un error, probablemente sea porque el archivo no es ni gif, ni jpg ni png')
         raise error
 
 
