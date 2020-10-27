@@ -42,7 +42,7 @@ class Utilidades(commands.Cog):
             return
         else:
             show, wait, frmt = rmdm.tiempo(tiempo)
-            
+
             authorid = ctx.message.author.id
             channel = ctx.channel.id
             date = ctx.message.created_at
@@ -57,7 +57,6 @@ class Utilidades(commands.Cog):
             await asyncio.sleep(wait)
             await ctx.send(f'{ctx.author.mention} ya pasó el tiempo. {recordatorio} {link}')
             mongoremindme.delete_one(datos)
-
 
     @commands.command(brief='Fijate el estado del campus',
                       help='Este comando sirve para fijarse si el campus está activo o caido')
@@ -138,7 +137,7 @@ class Utilidades(commands.Cog):
         with open(f"temp.{ext}", "rb") as img:
             img_byte = img.read()
             try:
-                await ctx.message.guild.create_custom_emoji(name=(f"{nombre}"), image=img_byte)
+                await ctx.message.guild.create_custom_emoji(name=f"{nombre}", image=img_byte)
             except:
                 await ctx.send('El archivo no puede pesar mas de 256 kb.')
                 return
