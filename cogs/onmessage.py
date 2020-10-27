@@ -43,7 +43,7 @@ class Mensajes(commands.Cog):
         if 'gracias' in message.content.lower() or 'garcias' in message.content.lower():
             await message.add_reaction('<:garcias:764579105542373387>')
 
-        if random.choice(list(range(1000))) == 0:
+        if random.randint(0, 1000) == 0:
             await message.add_reaction(random.choice(message.guild.emojis))
 
         if len(message.content) > 500:
