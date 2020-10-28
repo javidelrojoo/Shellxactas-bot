@@ -46,7 +46,7 @@ async def on_ready():
 @tasks.loop(hours=24.0)
 async def shame():
     print('Arrancó el loop de shame')
-    general = client.get_channel(734919493343641611)
+    general = client.get_channel(771116008861204513)
     await general.send('Shame <@&768612674304606279>', file=discord.File('img/shame.gif'))
 
 

@@ -1,11 +1,12 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import remindme as rmdm
 import asyncio
 import requests
 from datetime import datetime, time, timedelta
 import pymongo
 import os
+import campus
 
 mongo_url = os.getenv('MONGO_URL')
 
@@ -14,11 +15,32 @@ mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 
+c = 0
 
 class Utilidades(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.campus_loop.start()
+    
+
+    @tasks.loop(seconds=60.0)
+    async def campus_loop(self):
+        await self.client.wait_until_ready()
+        global c
+        canal = self.client.get_channel(771116008861204513)
+        if c == 0 and campus.estado_campus():
+            return
+        if c == 1 and not campus.estado_campus():
+            return
+        if campus.estado_campus():
+            await canal.send('El campus volvió.<a:tick:767588474840154173>')
+            c = 0
+            return
+        if not campus.estado_campus():
+            await canal.send('El campus se cayó.<a:cross:767588477231038475>')
+            c = 1
+            return
 
     @commands.command(brief='Te dice el ping del bot', help='Usando este comando podes averiguar el ping del bot.')
     async def ping(self, ctx):
@@ -65,24 +87,12 @@ class Utilidades(commands.Cog):
                       help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        try:
-            r = requests.get('https://campus.exactas.uba.ar/', timeout=5)
-        except requests.exceptions.ReadTimeout:
+        if not campus.estado_campus():
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
-            print('Se acabó el timeout')
             return
-        statuscode = str(r.status_code)
-        if statuscode.startswith('2'):
+        if campus.estado_campus():
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-            print(statuscode)
             return
-        if statuscode.startswith('4') or statuscode.startswith('5'):
-            await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
-            print(statuscode)
-            return
-        else:
-            await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
-                               f'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes')
 
 
     @commands.command(brief='Manda el emoji que elijas',
