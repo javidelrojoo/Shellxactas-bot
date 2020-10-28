@@ -101,6 +101,9 @@ class Cotizacion(commands.Cog):
         if isinstance(error, OverflowError):
             await ctx.send('¿Tantos dolares tenés? ¿O solo me estas boludeando?')
             return
+        if isinstance(error, discord.ext.commands.UnexpectedQuoteError):
+            await ctx.send('No uses comillas en el argumento')
+            return
         raise error
 
 
