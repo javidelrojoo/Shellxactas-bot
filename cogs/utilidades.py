@@ -66,7 +66,7 @@ class Utilidades(commands.Cog):
     async def campus(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
         try:
-            r = requests.get('https://campus.exactas.uba.ar/', timeout=1)
+            r = requests.get('https://campus.exactas.uba.ar/', timeout=5)
         except requests.exceptions.ReadTimeout:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
             return
