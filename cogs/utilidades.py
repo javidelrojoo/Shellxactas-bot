@@ -91,7 +91,7 @@ class Utilidades(commands.Cog):
         await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
                                f'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes')
 
-@commands.command(brief='Manda el emoji que elijas',
+    @commands.command(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
                            'los animados. Tenés que poner el nombre exacto del emoji, podes usar .emoji lista para '
                            'ver la lista de emojis.')
@@ -149,7 +149,7 @@ class Utilidades(commands.Cog):
                 img_byte = img.read()
                 emoji = await ctx.message.guild.create_custom_emoji(name=nombre, image=img_byte)
                 await ctx.send(f'El emoji se agregó correctamente {emoji}')
-        os.remove(f"temp.{ext}")
+            os.remove(f"temp.{ext}")
 
     @emojimaker.error
     async def emojimaker_error(self, ctx, error):
