@@ -73,7 +73,8 @@ class Utilidades(commands.Cog):
         if statuscode == 404:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
             return
-        await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
+        else:
+            await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
                                f'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes')
 
     @commands.command(brief='Fijate el estado de steam',
