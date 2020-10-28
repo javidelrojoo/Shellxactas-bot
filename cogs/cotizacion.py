@@ -32,7 +32,7 @@ class Cotizacion(commands.Cog):
             return
         compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-euro")
         embedVar = discord.Embed(title="Precio Euro", url="https://www.dolarhoy.com/cotizacion-euro",
-                                 color=0x0400ff)
+                                 color=0xe1ff00)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
         embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
         embedVar.set_footer(text=f"Última actualizacion: {act}")
@@ -47,7 +47,7 @@ class Cotizacion(commands.Cog):
             return
         compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-real-brasileno")
         embedVar = discord.Embed(title="Precio Real", url="https://www.dolarhoy.com/cotizacion-real-brasileno",
-                                 color=0x0400ff)
+                                 color=0x04ff00)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
         embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
         embedVar.set_footer(text=f"Última actualizacion: {act}")
@@ -62,7 +62,7 @@ class Cotizacion(commands.Cog):
             return
         compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-peso-uruguayo")
         embedVar = discord.Embed(title="Precio peso uruguayo", url="https://www.dolarhoy.com/cotizacion-peso-uruguayo",
-                                 color=0x0400ff)
+                                 color=0x00e1ff)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
         embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
         embedVar.set_footer(text=f"Última actualizacion: {act}")
@@ -77,7 +77,7 @@ class Cotizacion(commands.Cog):
             return
         compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-peso-chileno")
         embedVar = discord.Embed(title="Precio peso chileno", url="https://www.dolarhoy.com/cotizacion-peso-chileno",
-                                 color=0x0400ff)
+                                 color=0xff0000)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
         embedVar.add_field(name="Venta", value=f"${venta}", inline=False)
         embedVar.set_footer(text=f"Última actualizacion: {act}")

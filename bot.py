@@ -39,7 +39,15 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await check_for_bd.start()
+    check_for_bd.start()
+    shame.start()
+
+
+@tasks.loop(hours=24.0)
+async def shame():
+    print('Arrancó el loop de shame')
+    general = client.get_channel(734919493343641611)
+    await general.send('Shame', file=discord.File('img/shame.gif'))
 
 
 @tasks.loop(minutes=20.0)
