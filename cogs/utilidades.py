@@ -65,13 +65,19 @@ class Utilidades(commands.Cog):
                       help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        r = requests.get('https://campus.exactas.uba.ar/', timeout=3)
-        statuscode = r.status_code
-        if statuscode == 200:
-            await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-            return
-        if statuscode == 404:
+        try:
+            r = requests.get('https://campus.exactas.uba.ar/', timeout=1)
+        except requests.exceptions.ReadTimeout:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+            return
+        statuscode = str(r.status_code)
+        if statuscode.startswith('2'):
+            await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
+            print(statuscode)
+            return
+        if statuscode.startswith('4') or statuscode.startswith('5'):
+            await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+            print(statuscode)
             return
         else:
             await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
