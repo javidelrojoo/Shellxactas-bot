@@ -65,27 +65,33 @@ class Utilidades(commands.Cog):
                       help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        r = requests.get('https://campus.exactas.uba.ar/', timeout=5)
-        try:
-            r.raise_for_status()
+        r = requests.get('https://campus.exactas.uba.ar/', timeout=3)
+        statuscode = r.status_code
+        if statuscode == 200:
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-        except Exception as e:
+            return
+        if statuscode == 404:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
-            print(e)
+            return
+        await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
+                               f'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes')
 
     @commands.command(brief='Fijate el estado de steam',
                       help='Este comando sirve para fijarse si steam está activo o caido')
     async def steam(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        r = requests.get('https://store.steampowered.com/', timeout=5)
-        try:
-            r.raise_for_status()
-            await men.edit(content='Steam parece estar funcionando.<a:tick:767588474840154173>')
-        except Exception as e:
-            await men.edit(content='Steam está caido.<a:cross:767588477231038475>')
-            print(e)
+        r = requests.get('https://store.steampowered.com/', timeout=3)
+        statuscode = r.status_code
+        if statuscode == 200:
+            await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
+            return
+        if statuscode == 404:
+            await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+            return
+        await men.edit(content=f'Status Code:{statuscode}. Podés fijarte acá que significa '
+                               f'https://en.wikipedia.org/wiki/List_of_HTTP_status_codes')
 
-    @commands.command(brief='Manda el emoji que elijas',
+@commands.command(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
                            'los animados. Tenés que poner el nombre exacto del emoji, podes usar .emoji lista para '
                            'ver la lista de emojis.')
