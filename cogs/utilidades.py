@@ -69,6 +69,7 @@ class Utilidades(commands.Cog):
             r = requests.get('https://campus.exactas.uba.ar/', timeout=5)
         except requests.exceptions.ReadTimeout:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+            print('Se acabó el timeout')
             return
         statuscode = str(r.status_code)
         if statuscode.startswith('2'):
