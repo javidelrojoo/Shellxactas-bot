@@ -45,20 +45,17 @@ async def on_ready():
 
 @tasks.loop(hours=24.0)
 async def shame():
-    print('Arrancó el loop de shame')
     general = client.get_channel(771116008861204513)
     await general.send('Shame <@&768612674304606279>', file=discord.File('img/shame.gif'))
 
 
 @tasks.loop(minutes=20.0)
 async def change_status():
-    print('Arrancó el loop de change status')
     await client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
 
 @tasks.loop(hours=24.0)
 async def check_for_bd():
-    print('Arrancó el loop del bday')
     now = datetime.utcnow()-timedelta(hours=3)
     curmonth = now.month
     curday = now.day

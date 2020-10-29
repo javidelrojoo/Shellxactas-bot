@@ -17,27 +17,28 @@ mongoremindme = mongoprueba["remindme"]
 
 c = 0
 
+
 class Utilidades(commands.Cog):
 
     def __init__(self, client):
         self.client = client
         self.campus_loop.start()
-    
 
     @tasks.loop(seconds=60.0)
     async def campus_loop(self):
         await self.client.wait_until_ready()
         global c
         canal = self.client.get_channel(771116008861204513)
-        if c == 0 and campus.estado_campus():
+        estado = campus.estado_campus()
+        if c == 0 and estado:
             return
-        if c == 1 and not campus.estado_campus():
+        if c == 1 and not estado:
             return
-        if campus.estado_campus():
+        if estado:
             await canal.send('El campus volvió.<a:tick:767588474840154173>')
             c = 0
             return
-        if not campus.estado_campus():
+        if not estado:
             await canal.send('El campus se cayó.<a:cross:767588477231038475>')
             c = 1
             return
@@ -93,7 +94,6 @@ class Utilidades(commands.Cog):
         if campus.estado_campus():
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
             return
-
 
     @commands.command(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '

@@ -10,5 +10,4 @@ def estado_campus():
     if statuscode.startswith('4') or statuscode.startswith('5'):
         return False
     if statuscode.startswith('2'):
-            return True
-
+        return True
