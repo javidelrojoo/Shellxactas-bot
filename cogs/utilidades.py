@@ -171,6 +171,22 @@ class Utilidades(commands.Cog):
         await ctx.send('Ocurrió un error, probablemente sea porque el archivo no es ni gif, ni jpg ni png')
         raise error
 
+    @commands.command()
+    async def estado(self, ctx, url:str):
+        men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
+        ping = campus.ping(5, url)
+        if ping == 0:
+            await men.edit(content='La pagina está caida.<a:cross:767588477231038475>')
+            return
+        if ping == 1:
+            await men.edit(content='La pagina parece estar funcionando.<a:tick:767588474840154173>')
+            return
+        if ping == 2:
+            await men.edit(content='¿Eso es una pagina? Probá poniendo el link.')
+            return
+        if ping == 3:
+            await men.edit(content='¿Eso es una pagina? Probá sacando la parte de http.')
+            return
 
 def setup(client):
     client.add_cog(Utilidades(client))
