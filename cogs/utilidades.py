@@ -29,7 +29,7 @@ class Utilidades(commands.Cog):
         await self.client.wait_until_ready()
         global c
         canal = self.client.get_channel(771116008861204513)
-        estado = campus.estado_campus()
+        estado = campus.estado_campus(15)
         if c == 0 and estado:
             return
         if c == 1 and not estado:
@@ -88,10 +88,11 @@ class Utilidades(commands.Cog):
                       help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        if not campus.estado_campus():
+        estado = campus.estado_campus(5)
+        if not estado:
             await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
             return
-        if campus.estado_campus():
+        if estado:
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
             return
 
