@@ -22,7 +22,7 @@ def read_image(path):
 
 def picardia_overlay(img_path):
     img = read_image(img_path)
-    picardia = read_image('img\\picardia.png')
+    picardia = read_image('img/picardia.png')
 
     img = resize_image(img, get_image_size(picardia))
 
