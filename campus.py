@@ -3,7 +3,7 @@ import requests
 
 def estado_campus():
     try:
-        r = requests.get('https://campus.exactas.uba.ar/', timeout=5)
+        r = requests.get('https://campus.exactas.uba.ar/', timeout=10)
     except requests.exceptions.ReadTimeout:
         return False
     statuscode = str(r.status_code)

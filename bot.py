@@ -79,7 +79,6 @@ async def before_checkbd():
 
 async def upremindme():
     await client.wait_until_ready()
-    print('Arrancó el upremindme')
     for x in mongoremindme.find().sort('wait', pymongo.ASCENDING):
         nowtime = datetime.utcnow()
         authorid = int(x['authorid'])
