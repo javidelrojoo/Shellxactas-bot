@@ -15,8 +15,6 @@ mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 
-c = 0
-
 
 class Utilidades(commands.Cog):
 
@@ -24,10 +22,12 @@ class Utilidades(commands.Cog):
         self.client = client
         self.campus_loop.start()
 
+    c = 0
+
     @tasks.loop(seconds=60.0)
     async def campus_loop(self):
         await self.client.wait_until_ready()
-        global c
+        c = self.c
         canal = self.client.get_channel(771116008861204513)
         estado = campus.estado_campus(15)
         if c == 0 and estado:
