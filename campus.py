@@ -13,8 +13,8 @@ def estado_campus(timeout):
         return True
 
 def ping(timeout, url):
-    if not url.startswith('http://'):
-        url = 'http://' + url
+    if not url.startswith('https://'):
+        url = 'https://' + url
     try:
         r = requests.get(url, timeout=timeout)
     except requests.exceptions.ReadTimeout:
@@ -28,5 +28,3 @@ def ping(timeout, url):
         return 0
     if statuscode.startswith('2'):
         return 1
-
-print(ping(5, 'https:campus.exactas.uba.ar'))

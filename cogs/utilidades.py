@@ -185,7 +185,7 @@ class Utilidades(commands.Cog):
             await men.edit(content='¿Eso es una pagina? Probá poniendo el link.')
             return
         if ping == 3:
-            await men.edit(content='¿Eso es una pagina? Probá sacando la parte de http.')
+            await men.edit(content='¿Eso es una pagina? Probá sacando la parte de https://.')
             return
 
 def setup(client):
