@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 import asyncio
+import img_editor as img
 
 
 class Boludeces(commands.Cog):
@@ -47,7 +48,17 @@ class Boludeces(commands.Cog):
         for i in list(range(1, 5))[::-1]:
             await ctx.send('<:picardia:735101971001770055>' * i)
             await asyncio.sleep(1)
-
+    
+    @client.command()
+    async def picardia(self, ctx):
+        if not ctx.message.attachments:
+            await ctx.send('Adjunta la imagen a la que le queres agregar el picardia.')
+            return
+        for file in ctx.message.attachments:
+            ext = file.filename.split('.')[-1]
+            await file.save(f'temp.{ext}')
+            img.picardia_overlay(f'temp.{ext}')
+            await ctx.send(file=discord.File('edit.png'))
 
 def setup(client):
     client.add_cog(Boludeces(client))
