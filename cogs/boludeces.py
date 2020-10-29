@@ -49,7 +49,7 @@ class Boludeces(commands.Cog):
             await ctx.send('<:picardia:735101971001770055>' * i)
             await asyncio.sleep(1)
     
-    @client.command()
+    @commands.command()
     async def picardia(self, ctx):
         if not ctx.message.attachments:
             await ctx.send('Adjunta la imagen a la que le queres agregar el picardia.')
