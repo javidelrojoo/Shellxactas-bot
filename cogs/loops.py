@@ -26,7 +26,7 @@ class Loops(commands.Cog):
         self.client = client
         self.campus_loop.start()
         self.change_status.start()
-        await self.upremindme()
+        self.loop.create_task(self.upremindme())
 
     @tasks.loop(seconds=60.0)
     async def campus_loop(self):
