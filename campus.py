@@ -12,6 +12,7 @@ def estado_campus(timeout):
     if statuscode.startswith('2'):
         return True
 
+
 def ping(timeout, url):
     if not url.startswith('https://'):
         url = 'https://' + url

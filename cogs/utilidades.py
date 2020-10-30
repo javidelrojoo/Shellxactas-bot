@@ -15,33 +15,11 @@ mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 
-c = 0
-
 
 class Utilidades(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.campus_loop.start()
-
-    @tasks.loop(seconds=60.0)
-    async def campus_loop(self):
-        await self.client.wait_until_ready()
-        global c
-        canal = self.client.get_channel(771116008861204513)
-        estado = campus.estado_campus(15)
-        if c == 0 and estado:
-            return
-        if c == 1 and not estado:
-            return
-        if estado:
-            await canal.send('El campus volvió.<a:tick:767588474840154173>')
-            c = 0
-            return
-        if not estado:
-            await canal.send('El campus se cayó.<a:cross:767588477231038475>')
-            c = 1
-            return
 
     @commands.command(brief='Te dice el ping del bot', help='Usando este comando podes averiguar el ping del bot.')
     async def ping(self, ctx):
@@ -172,7 +150,7 @@ class Utilidades(commands.Cog):
         raise error
 
     @commands.command()
-    async def estado(self, ctx, url:str):
+    async def estado(self, ctx, url: str):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
         ping = campus.ping(5, url)
         if ping == 0:
@@ -187,6 +165,7 @@ class Utilidades(commands.Cog):
         if ping == 3:
             await men.edit(content='¿Eso es una pagina? Probá sacando la parte de https://.')
             return
+
 
 def setup(client):
     client.add_cog(Utilidades(client))
