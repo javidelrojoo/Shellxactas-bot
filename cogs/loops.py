@@ -14,6 +14,7 @@ mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 mongocumple = mongoprueba["cumpleaños"]
+mongocampus = mongoprueba['campus']
 
 c = 0
 
@@ -27,11 +28,22 @@ class Loops(commands.Cog):
         self.client = client
         self.campus_loop.start()
         self.change_status.start()
+        self.new_day.start()
         self.client.loop.create_task(self.upremindme())
 
     @tasks.loop(seconds=60.0)
+    async def new_day(self):
+        now = datetime.utcnow() - timedelta(hours=3)
+        hournow = now.hour
+        if hournow == 0:
+            await self.check_for_bd()
+
+    @new_day.before_loop
+    async def before_new_day(self):
+        await self.client.wait_until_ready()
+
+    @tasks.loop(seconds=60.0)
     async def campus_loop(self):
-        print('Arrancó campus_loop')
         global c
         canal = self.client.get_channel(771116008861204513)
         estado = campus.estado_campus(15)
@@ -54,7 +66,6 @@ class Loops(commands.Cog):
 
     @tasks.loop(minutes=20.0)
     async def change_status(self):
-        print('Arrancó change_status')
         await self.client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
     @change_status.before_loop
@@ -63,7 +74,6 @@ class Loops(commands.Cog):
 
     async def upremindme(self):
         await self.client.wait_until_ready()
-        print('Arrancó upremindme')
         for x in mongoremindme.find().sort('wait', pymongo.ASCENDING):
             nowtime = datetime.utcnow()
             authorid = int(x['authorid'])
