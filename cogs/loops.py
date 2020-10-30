@@ -129,7 +129,7 @@ class Loops(commands.Cog):
         canal = self.client.get_channel(771116008861204513)
         for x in mongocampus.find({'date': datenow}):
             times = x['times']
-        await canal.send(f'Hoy el campus se cayó {times} veces.')
+            await canal.send(f'Hoy el campus se cayó {times} veces.')
 
 
 def setup(client):
