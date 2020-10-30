@@ -5,6 +5,7 @@ import pymongo
 import asyncio
 import random
 import os
+import campus
 
 mongo_url = os.getenv('MONGO_URL')
 
