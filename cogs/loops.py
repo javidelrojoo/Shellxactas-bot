@@ -35,8 +35,14 @@ class Loops(commands.Cog):
     async def new_day(self):
         now = datetime.utcnow() - timedelta(hours=3)
         hournow = now.hour
+        nowday = now.day
+        nowmonth = now.month
+        nowyear = now.year
+        datenow = datetime(nowyear, nowmonth, nowday)
         if hournow == 0:
+            mongocampus.insert_one({'date': datenow, 'times': 0})
             await self.check_for_bd()
+            await self.campus_resumen(datenow)
 
     @new_day.before_loop
     async def before_new_day(self):
@@ -47,6 +53,11 @@ class Loops(commands.Cog):
         global c
         canal = self.client.get_channel(771116008861204513)
         estado = campus.estado_campus(15)
+        now = datetime.utcnow() - timedelta(hours=3)
+        nowday = now.day
+        nowmonth = now.month
+        nowyear = now.year
+        datenow = datetime(nowyear, nowmonth, nowday)
         if c == 0 and estado:
             return
         if c == 1 and not estado:
@@ -57,6 +68,8 @@ class Loops(commands.Cog):
             return
         if not estado:
             await canal.send('El campus se cayó.<a:cross:767588477231038475>')
+            for x in mongocampus.find({'date': datenow}):
+                mongocampus.update_one({'date': datenow}, {"$set": {'times': x['times'] + 1}})
             c = 1
             return
 
@@ -110,6 +123,13 @@ class Loops(commands.Cog):
                     await author.send(f'Feliz Cumpleaños {author.mention}!!!')
                 else:
                     await channel.send(f'Feliz Cumpleaños {author.mention}!!!')
+
+    async def campus_resumen(self, datenow):
+        datenow = datenow - timedelta(days=1)
+        canal = self.client.get_channel(771116008861204513)
+        for x in mongocampus.find({'date': datenow}):
+            times = x['times']
+        await canal.send(f'Hoy el campus se cayó {times} veces.')
 
 
 def setup(client):
