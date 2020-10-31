@@ -4,6 +4,8 @@ import requests
 def estado_campus(timeout):
     try:
         r = requests.get('https://campus.exactas.uba.ar/', timeout=timeout)
+    except requests.exceptions.ConnectTimeout:
+        return False
     except requests.exceptions.ReadTimeout:
         return False
     statuscode = str(r.status_code)
@@ -19,6 +21,8 @@ def ping(timeout, url):
     try:
         r = requests.get(url, timeout=timeout)
     except requests.exceptions.ReadTimeout:
+        return 0
+    except requests.exceptions.ConnectTimeout:
         return 0
     except requests.exceptions.ConnectionError:
         return 2
