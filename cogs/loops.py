@@ -35,11 +35,12 @@ class Loops(commands.Cog):
     async def new_day(self):
         now = datetime.utcnow() - timedelta(hours=3)
         hournow = now.hour
+        minnow = now.minute
         nowday = now.day
         nowmonth = now.month
         nowyear = now.year
         datenow = datetime(nowyear, nowmonth, nowday)
-        if hournow == 0:
+        if hournow == 0 and minnow == 0:
             mongocampus.insert_one({'date': datenow, 'times': 0})
             await self.check_for_bd()
             await self.campus_resumen(datenow)
