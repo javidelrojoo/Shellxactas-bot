@@ -31,7 +31,7 @@ class Loops(commands.Cog):
         self.new_day.start()
         self.client.loop.create_task(self.upremindme())
 
-    @tasks.loop(seconds=60.0)
+    @tasks.loop(seconds=61.0)
     async def new_day(self):
         now = datetime.utcnow() - timedelta(hours=3)
         hournow = now.hour
