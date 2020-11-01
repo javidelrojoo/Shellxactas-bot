@@ -2,6 +2,7 @@ import requests
 import matplotlib as plt
 import matplotlib.dates as mdates
 import pymongo
+import os
 
 mongo_url = os.getenv('MONGO_URL')
 mongoprueba = mongoclient['Shellxactas']
