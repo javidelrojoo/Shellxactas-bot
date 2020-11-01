@@ -1,10 +1,11 @@
 import requests
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pymongo
 import os
 
 mongo_url = os.getenv('MONGO_URL')
+mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongocampus = mongoprueba['campus']
 
