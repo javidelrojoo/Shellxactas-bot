@@ -5,3 +5,4 @@ pymongo
 dnspython
 pillow
 numpy
+matplotlib

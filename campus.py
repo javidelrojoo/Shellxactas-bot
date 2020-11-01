@@ -1,4 +1,11 @@
 import requests
+import matplotlib as plt
+import matplotlib.dates as mdates
+import pymongo
+
+mongo_url = os.getenv('MONGO_URL')
+mongoprueba = mongoclient['Shellxactas']
+mongocampus = mongoprueba['campus']
 
 
 def estado_campus(timeout):
@@ -33,3 +40,21 @@ def ping(timeout, url):
         return 0
     if statuscode.startswith('2'):
         return 1
+
+
+def plot():
+    date = []
+    times = []
+
+    for x in mongocampus.find():
+        date.append(x['date'])
+        times.append(x['times'])
+
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots()
+    fig.autofmt_xdate()
+    myFmt = mdates.DateFormatter('%Y-%m-%d')
+    ax.xaxis.set_major_formatter(myFmt)
+    ax.plot(date, times)
+    plt.title('Historico de caidas del campus')
+    plt.savefig('campus.png')
