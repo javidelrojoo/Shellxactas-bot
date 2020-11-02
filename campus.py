@@ -57,6 +57,6 @@ def plot():
     fig.autofmt_xdate()
     myFmt = mdates.DateFormatter('%Y-%m-%d')
     ax.xaxis.set_major_formatter(myFmt)
-    ax.plot(date, times)
+    ax.plot(date[:-1], times[:-1])
     plt.title('Historico de caidas del campus')
     plt.savefig('campus.png')
