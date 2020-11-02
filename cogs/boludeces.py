@@ -60,5 +60,15 @@ class Boludeces(commands.Cog):
             img.picardia_overlay(f'temp.{ext}')
             await ctx.send(file=discord.File('edit.png'))
 
+    @commands.command(aliases=['traductorjose'])
+    async def josetraductor(self, ctx, palabra: str):
+        await ctx.send(f'https://www.urbandictionary.com/define.php?term={palabra}')
+
+    @josetraductor.error
+    async def josetraductor_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.MissingRequiredArgument):
+            await ctx.send('Me tenes que decir algo que quieras traducir')
+
+
 def setup(client):
     client.add_cog(Boludeces(client))
