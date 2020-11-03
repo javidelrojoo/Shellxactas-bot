@@ -62,7 +62,7 @@ class Boludeces(commands.Cog):
 
     @commands.command(aliases=['traductorjose'])
     async def josetraductor(self, ctx, *, palabra: str):
-        palabra.replace(' ', '+')
+        palabra = palabra.replace(' ', '+')
         await ctx.send(f'https://www.urbandictionary.com/define.php?term={palabra}')
 
     @josetraductor.error
