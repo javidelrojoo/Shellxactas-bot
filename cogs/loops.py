@@ -17,6 +17,7 @@ mongocumple = mongoprueba["cumpleaños"]
 mongocampus = mongoprueba['campus']
 
 c = 0
+new = True
 
 status = ['Viendo al coscu', 'Estudiando', 'Preparando un golpe de estado', 'Leyendo el Don Quijote',
           'Haciendome una paja', 'Analizando el mercado', 'Comiendome a tu vieja']
@@ -31,8 +32,9 @@ class Loops(commands.Cog):
         self.new_day.start()
         self.client.loop.create_task(self.upremindme())
 
-    @tasks.loop(seconds=60.0)
+    @tasks.loop(seconds=30.0)
     async def new_day(self):
+        global new
         now = datetime.utcnow() - timedelta(hours=3)
         hournow = now.hour
         minnow = now.minute
@@ -40,10 +42,17 @@ class Loops(commands.Cog):
         nowmonth = now.month
         nowyear = now.year
         datenow = datetime(nowyear, nowmonth, nowday)
-        if hournow == 0 and minnow == 0:
+        if hournow == 0 and minnow == 0 and new:
             mongocampus.insert_one({'date': datenow, 'times': 0})
             await self.check_for_bd()
             await self.campus_resumen(datenow)
+            new = False
+            return
+        elif hournow == 0 and minnow == 0:
+            return
+        else:
+            new = True
+            return
 
     @new_day.before_loop
     async def before_new_day(self):
