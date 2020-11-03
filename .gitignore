@@ -1,20 +1,11 @@
 
 mongotest.py
-__pycache__/dolar.cpython-38.pyc
-__pycache__/remindme.cpython-38.pyc
-.vscode/settings.json
-cogs/__pycache__/boludeces.cpython-38.pyc
-cogs/__pycache__/utilidades.cpython-38.pyc
-cogs/__pycache__/prueba.cpython-38.pyc
-cogs/__pycache__/onmessage.cpython-38.pyc
-cogs/__pycache__/cotizacion.cpython-38.pyc
+__pycache__
+.vscode
+cogs/__pycache__
 cogs/prueba.py
 counting.py
 dolar2.py
-cogs/__pycache__/birthday.cpython-38.pyc
 actualizar ids de mongo.py
-img/prueba.jpeg
+img
 resize.py
-__pycache__/campus.cpython-38.pyc
-__pycache__/img_editor.cpython-38.pyc
-img/768px-Python-logo-notext.svg.png
