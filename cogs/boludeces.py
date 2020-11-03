@@ -61,7 +61,8 @@ class Boludeces(commands.Cog):
             await ctx.send(file=discord.File('edit.png'))
 
     @commands.command(aliases=['traductorjose'])
-    async def josetraductor(self, ctx, palabra: str):
+    async def josetraductor(self, ctx, *, palabra: str):
+        palabra.replace(' ', '+')
         await ctx.send(f'https://www.urbandictionary.com/define.php?term={palabra}')
 
     @josetraductor.error
