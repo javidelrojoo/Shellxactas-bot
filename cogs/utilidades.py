@@ -80,15 +80,8 @@ class Utilidades(commands.Cog):
                            'ver la lista de emojis.')
     @commands.guild_only()
     async def emoji(self, ctx, nombre: str):
-        if nombre == 'lista':
-            lista = []
-            for emoji in ctx.message.guild.emojis:
-                lista.append(f'**{emoji.name}**:{emoji}\n')
-                if len(''.join(lista)) > 1900:
-                    await ctx.author.send(''.join(lista))
-                    lista = []
-            await ctx.author.send(''.join(lista))
-            await ctx.message.add_reaction('<a:tick:767588474840154173>')
+        if nombre == 'lista' or nombre == 'list':
+            await self.paginas_emoji(ctx)
             return
         for emoji in ctx.message.guild.emojis:
             name = emoji.name
@@ -96,6 +89,47 @@ class Utilidades(commands.Cog):
                 await ctx.send(emoji)
                 return
         await ctx.send('No encontré ese emoji en el server. Poné .emoji lista para ver la lista')
+
+    async def paginas_emoji(self, ctx):
+        contents = []
+        embed = discord.Embed()
+        for emoji in ctx.message.guild.emojis:
+            embed.add_field(name=emoji.name, value=emoji, inline=True)
+            if len(embed.fields) == 24:
+                contents.append(embed)
+                embed = discord.Embed()
+
+        pages = len(contents)
+        cur_page = 1
+        contents[0].set_footer(text=f'Pagina {cur_page}/{pages}')
+        message = await ctx.send(embed=contents[0])
+
+        await message.add_reaction("◀️")
+        await message.add_reaction("▶️")
+
+        def check(reaction, user):
+            return user == ctx.author and str(reaction.emoji) in ["◀️", "▶️"]
+
+        while True:
+            try:
+                reaction, user = await self.client.wait_for("reaction_add", timeout=15, check=check)
+                if str(reaction.emoji) == "▶️" and cur_page != pages:
+                    cur_page += 1
+                    contents[cur_page-1].set_footer(text=f'Pagina {cur_page}/{pages}')
+                    await message.edit(embed=contents[cur_page-1])
+                    await message.remove_reaction(reaction, user)
+
+                elif str(reaction.emoji) == "◀️" and cur_page > 1:
+                    cur_page -= 1
+                    contents[cur_page - 1].set_footer(text=f'Pagina {cur_page}/{pages}')
+                    await message.edit(embed=contents[cur_page-1])
+                    await message.remove_reaction(reaction, user)
+                else:
+                    await message.remove_reaction(reaction, user)
+            except asyncio.TimeoutError:
+                await message.remove_reaction("◀️", self.client.user)
+                await message.remove_reaction("▶️", self.client.user)
+                break
 
     @emoji.error
     async def emoji_error(self, ctx, error):
