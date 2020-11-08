@@ -15,6 +15,26 @@ class Mensajes(commands.Cog):
             return
 
     @commands.Cog.listener()
+    async def on_member_remove(self, member):
+        if member.guild.id != 734914669667418214:
+            return
+        chatdeadmins = member.guild.get_channel(734917753693274224)
+        await chatdeadmins.send(f'Se fué {member.mention}')
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        if member.guild.id != 734914669667418214:
+            return
+        chatdeadmins = member.guild.get_channel(734917753693274224)
+        botrole = member.guild.get_role(756934683790671873)
+        onlinerole = member.guild.get_role(756934020343922719)
+        if member.bot:
+            await member.add_roles(botrole)
+        else:
+            await member.add_roles(onlinerole)
+        await chatdeadmins.send(f'Se unió {member.mention}')
+
+    @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot:
             return
