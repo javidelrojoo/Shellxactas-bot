@@ -73,11 +73,11 @@ class Loops(commands.Cog):
         if c == 1 and not estado:
             return
         if estado:
-            await canal.send('El campus volvió.<a:tick:767588474840154173>')
+            await canal.send('El campus volvió.<a:tick:767588474840154173> <@&778645823503466546>')
             c = 0
             return
         if not estado:
-            await canal.send('El campus se cayó.<a:cross:767588477231038475>')
+            await canal.send('El campus se cayó.<a:cross:767588477231038475> <@&778645823503466546>')
             x = mongocampus.find_one({'date': datenow})
             if x is None:
                 mongocampus.insert_one({'date': datenow, 'times': 1})
