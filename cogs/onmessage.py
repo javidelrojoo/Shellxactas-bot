@@ -42,7 +42,7 @@ class Mensajes(commands.Cog):
         if message.content.lower() == 'f':
             await message.add_reaction('<:f_:768439683020488724>')
 
-        if message.content.lower() == 'si':
+        if message.content.lower() == 'si' or message.content.lower() == 'sí':
             await message.add_reaction('<a:si:767567093896839179>')
 
         if message.content.lower() == 'no':
