@@ -144,6 +144,7 @@ class Loops(commands.Cog):
         for x in mongocampus.find({'date': datenow}):
             times = x['times']
             await canal.send(f'Hoy el campus se cayó {times} veces.', file=discord.File('campus.png'))
+            await canal.send("<@699664841127755807> VOLVÉ!!!!")
 
 
 def setup(client):
