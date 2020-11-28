@@ -46,6 +46,7 @@ class Loops(commands.Cog):
             mongocampus.insert_one({'date': datenow, 'times': 0})
             await self.check_for_bd()
             await self.campus_resumen(datenow)
+            await self.volve_eze()
             new = False
             return
         elif hournow == 0 and minnow == 0:
@@ -144,7 +145,10 @@ class Loops(commands.Cog):
         for x in mongocampus.find({'date': datenow}):
             times = x['times']
             await canal.send(f'Hoy el campus se cayó {times} veces.', file=discord.File('campus.png'))
-            await canal.send("<@699664841127755807> VOLVÉ!!!!")
+    
+    async def volve_eze(self):
+        canal = self.client.get_channel(734919493343641611)
+        await canal.send("<@699664841127755807> VOLVÉ!!!!")
 
 
 def setup(client):
