@@ -153,9 +153,12 @@ class Loops(commands.Cog):
     
     @tasks.loop(hours=1.0)
     async def tinchox_toma_agua(self):
-        await self.client.wait_until_ready()
         canal = self.client.get_channel(734919493343641611)
         await canal.send("<@229087114954801152> tomá agua, no seas gil")
+    
+    @tinchox_toma_agua.before_loop
+    async def before_new_day(self):
+        await self.client.wait_until_ready()
 
 
 def setup(client):
