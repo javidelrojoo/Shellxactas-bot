@@ -30,6 +30,7 @@ class Loops(commands.Cog):
         self.campus_loop.start()
         self.change_status.start()
         self.new_day.start()
+        self.tinchox_toma_agua.start()
         self.client.loop.create_task(self.upremindme())
 
     @tasks.loop(seconds=30.0)
@@ -149,6 +150,11 @@ class Loops(commands.Cog):
     async def volve_eze(self):
         canal = self.client.get_channel(734919493343641611)
         await canal.send("<@699664841127755807> VOLVÉ!!!!")
+    
+    @tasks.loop(hours=1.0)
+    async def tinchox_toma_agua(self):
+        canal = self.client.get_channel(734919493343641611)
+        await canal.send("<@229087114954801152> tomá agua, no seas gil")
 
 
 def setup(client):
