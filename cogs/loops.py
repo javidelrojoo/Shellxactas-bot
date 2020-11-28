@@ -157,7 +157,7 @@ class Loops(commands.Cog):
         await canal.send("<@229087114954801152> tomá agua, no seas gil")
     
     @tinchox_toma_agua.before_loop
-    async def before_new_day(self):
+    async def before_tinchox_toma_agua(self):
         await self.client.wait_until_ready()
 
 
