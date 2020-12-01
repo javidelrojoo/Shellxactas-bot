@@ -2,6 +2,7 @@ import requests
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import pymongo
+from datetime import datetime
 import os
 
 mongo_url = os.getenv('MONGO_URL')
@@ -43,6 +44,15 @@ def ping(timeout, url):
     if statuscode.startswith('2'):
         return 1
 
+def count(date=""):
+    if date == "":
+        count = 0
+        for x in mongocampus.find():
+            count += x['times']
+        return count
+    else:
+        date = datetime(date.year, date.month, date.day)
+        return mongocampus.find({'date': date})[0]['times']
 
 def plot():
     date = []
@@ -67,5 +77,3 @@ def plot():
         ax.plot(date[:-1], times[:-1], color='red')
         plt.title('Historico de caidas del campus', color='black')
         plt.savefig('campus.png')
-
-plot()
