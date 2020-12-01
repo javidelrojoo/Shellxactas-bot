@@ -64,7 +64,13 @@ class Utilidades(commands.Cog):
 
     @commands.command(brief='Fijate el estado del campus',
                       help='Este comando sirve para fijarse si el campus está activo o caido')
-    async def campus(self, ctx):
+    async def campus(self, ctx, subcommand=""):
+        if subcommand == "historico":
+            ctx.send(f'El campus se cayó {campus.count()} veces.')
+            return
+        if subcommand == "hoy":
+            ctx.send(f'El campus se cayó {campus.count(datetime.utcnow())} veces hoy.')
+            return
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
         estado = campus.estado_campus(5)
         if not estado:
