@@ -69,6 +69,12 @@ class Boludeces(commands.Cog):
     async def josetraductor_error(self, ctx, error):
         if isinstance(error, discord.ext.commands.MissingRequiredArgument):
             await ctx.send('Me tenes que decir algo que quieras traducir')
+    
+    @commands.command()
+    async def F(self, ctx):
+        for i in [5, 1, 3, 1, 1]:
+            await ctx.send('<:picardiant:748344255906447432>' * i)
+            await asyncio.sleep(1)
 
 
 def setup(client):
