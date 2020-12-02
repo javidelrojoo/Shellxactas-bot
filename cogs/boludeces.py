@@ -72,7 +72,7 @@ class Boludeces(commands.Cog):
     
     @commands.command()
     async def F(self, ctx):
-        for i in [5, 1, 3, 1, 1]:
+        for i in [5, 1, 3, 1, 1, 1]:
             await ctx.send('<:picardiant:748344255906447432>' * i)
             await asyncio.sleep(1)
 
