@@ -29,9 +29,7 @@ class Boludeces(commands.Cog):
     @commands.command(brief='Que picardia', help='Picardias')
     @commands.has_permissions(administrator=True)
     async def picardy(self, ctx):
-        for i in range(15):
-            await ctx.send('<:picardia:735101971001770055>')
-            await asyncio.sleep(1)
+        await ctx.send('<:picardia:735101971001770055>\n'*15)
 
     @picardy.error
     async def picardy_error(self, ctx, error):
