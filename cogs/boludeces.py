@@ -40,12 +40,11 @@ class Boludeces(commands.Cog):
 
     @commands.command(brief='Una piramide', help='Picardias')
     async def piramide(self, ctx):
-        for i in range(1, 6):
-            await ctx.send('<:picardia:735101971001770055>' * i)
-            await asyncio.sleep(1)
-        for i in list(range(1, 5))[::-1]:
-            await ctx.send('<:picardia:735101971001770055>' * i)
-            await asyncio.sleep(1)
+        message = ""
+        for i in [1, 2, 3, 4, 5, 4, 3, 2, 1]:
+            message += '<:picardia:735101971001770055>' * i
+            message += '\n'
+        await ctx.send(message)
     
     @commands.command()
     async def picardia(self, ctx):
@@ -70,9 +69,11 @@ class Boludeces(commands.Cog):
     
     @commands.command()
     async def F(self, ctx):
+        message = ""
         for i in [5, 1, 3, 1, 1, 1]:
-            await ctx.send('<:picardiant:748344255906447432>' * i)
-            await asyncio.sleep(1)
+            message += '<:picardiant:748344255906447432>' * i
+            message += '\n'
+        await ctx.send(message)
 
 
 def setup(client):
