@@ -30,7 +30,6 @@ class Loops(commands.Cog):
         self.campus_loop.start()
         self.change_status.start()
         self.new_day.start()
-        self.tinchox_toma_agua.start()
         self.client.loop.create_task(self.upremindme())
 
     @tasks.loop(seconds=30.0)
