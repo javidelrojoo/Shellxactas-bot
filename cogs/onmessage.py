@@ -71,6 +71,9 @@ class Mensajes(commands.Cog):
 
         if 'uwu' in message.content.lower() and message.content.lower() != '<:uwu:768614592699957278>':
             await message.add_reaction('<:uwu:768614592699957278>')
+        
+        if 'jaja' in message.content.lower():
+            await message.add_reaction('<:joaco:788188614328713217>')
 
         pedido = []
         if 'medialuna' in message.content.lower():
