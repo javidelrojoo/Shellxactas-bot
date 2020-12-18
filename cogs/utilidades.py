@@ -92,6 +92,8 @@ class Utilidades(commands.Cog):
         for emoji in ctx.message.guild.emojis:
             name = emoji.name
             if nombre == name:
+                await ctx.message.delete()
+                await ctx.send(f'**{ctx.author.name}**')
                 await ctx.send(emoji)
                 return
         await ctx.send('No encontré ese emoji en el server. Poné .emoji lista para ver la lista')
