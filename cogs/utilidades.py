@@ -83,23 +83,25 @@ class Utilidades(commands.Cog):
     async def hoy(self, ctx):
         await ctx.send(f'El campus se cayó {campus.count(datetime.utcnow())} veces hoy.')
 
-    @commands.command(brief='Manda el emoji que elijas',
+    @commands.group(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
                            'los animados. Tenés que poner el nombre exacto del emoji, podes usar .emoji lista para '
                            'ver la lista de emojis.')
     @commands.guild_only()
     async def emoji(self, ctx, nombre: str):
-        if nombre == 'lista' or nombre == 'list':
-            await self.paginas_emoji(ctx)
-            return
-        for emoji in ctx.message.guild.emojis:
-            name = emoji.name
-            if nombre == name:
-                await ctx.message.delete()
-                await ctx.send(f'**{ctx.author.name}**')
-                await ctx.send(emoji)
-                return
-        await ctx.send('No encontré ese emoji en el server. Poné .emoji lista para ver la lista')
+        if ctx.invoked_subcommand is None:
+            for emoji in ctx.message.guild.emojis:
+                name = emoji.name
+                if nombre == name:
+                    await ctx.message.delete()
+                    await ctx.send(f'**{ctx.author.name}**')
+                    await ctx.send(emoji)
+                    return
+            await ctx.send('No encontré ese emoji en el server. Poné .emoji lista para ver la lista')
+    
+    @emoji.command(aliases=['list'])
+    async def lista(self, ctx):
+        await self.paginas_emoji(ctx)
 
     async def paginas_emoji(self, ctx):
         contents = []
