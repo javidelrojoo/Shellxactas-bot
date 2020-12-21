@@ -65,14 +65,15 @@ class Utilidades(commands.Cog):
     @commands.group(brief='Fijate el estado del campus',
                       help='Este comando sirve para fijarse si el campus está activo o caido')
     async def campus(self, ctx):
-        men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
-        estado = campus.estado_campus(5)
-        if not estado:
-            await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
-            return
-        if estado:
-            await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
-            return
+        if ctx.invoked_subcommand is None:
+            men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
+            estado = campus.estado_campus(5)
+            if not estado:
+                await men.edit(content='El campus está caido.<a:cross:767588477231038475>')
+                return
+            if estado:
+                await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
+                return
     
     @campus.command()
     async def historico(self, ctx):
