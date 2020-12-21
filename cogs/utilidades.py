@@ -62,15 +62,9 @@ class Utilidades(commands.Cog):
             await ctx.send('Poné un tiempo conchudo, no me hagas calentar')
             return
 
-    @commands.command(brief='Fijate el estado del campus',
+    @commands.group(brief='Fijate el estado del campus',
                       help='Este comando sirve para fijarse si el campus está activo o caido')
-    async def campus(self, ctx, subcommand=""):
-        if subcommand == "historico":
-            await ctx.send(f'El campus se cayó {campus.count()} veces.')
-            return
-        if subcommand == "hoy":
-            await ctx.send(f'El campus se cayó {campus.count(datetime.utcnow())} veces hoy.')
-            return
+    async def campus(self, ctx):
         men = await ctx.send('<a:loading:767587319833690123> A ver, bancame. <a:loading:767587319833690123>')
         estado = campus.estado_campus(5)
         if not estado:
@@ -79,6 +73,14 @@ class Utilidades(commands.Cog):
         if estado:
             await men.edit(content='El campus parece estar funcionando.<a:tick:767588474840154173>')
             return
+    
+    @campus.command()
+    async def historico(self, ctx):
+        await ctx.send(f'El campus se cayó {campus.count()} veces.')
+
+    @campus.command()
+    async def hoy(self, ctx):
+        await ctx.send(f'El campus se cayó {campus.count(datetime.utcnow())} veces hoy.')
 
     @commands.command(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
