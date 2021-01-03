@@ -19,8 +19,7 @@ mongocampus = mongoprueba['campus']
 c = 0
 new = True
 
-status = ['Viendo al coscu', 'Estudiando', 'Preparando un golpe de estado', 'Leyendo el Don Quijote',
-          'Haciendome una paja', 'Analizando el mercado', 'Comiendome a tu vieja']
+status = ['Preparando un golpe de estado', 'Haciendome una paja', 'Analizando el mercado', 'Comiendome a tu vieja', 'Cagando a piñas al dank memer', 'Meando en la esquina de tu casa', 'En la playa con tu vieja en tanga']
 
 
 class Loops(commands.Cog):
@@ -91,7 +90,7 @@ class Loops(commands.Cog):
     async def before_campus_loop(self):
         await self.client.wait_until_ready()
 
-    @tasks.loop(minutes=20.0)
+    @tasks.loop(hours=1.0)
     async def change_status(self):
         await self.client.change_presence(status=discord.Status.dnd, activity=discord.Game(random.choice(status)))
 
