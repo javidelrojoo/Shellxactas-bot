@@ -83,6 +83,10 @@ class Utilidades(commands.Cog):
     async def hoy(self, ctx):
         await ctx.send(f'El campus se cayó {campus.count(datetime.utcnow())} veces hoy.')
 
+    @campus.command()
+    async def promedio(self, ctx):
+        await ctx.send(f'El promedio de caidas del campus por día es de {round(campus.average(), 2)}.')
+
     @commands.command(brief='Manda el emoji que elijas',
                       help='Con este comando podes hacer que el bot mande el emoji del server que quieras, incluso '
                            'los animados. Tenés que poner el nombre exacto del emoji, podes usar .emoji lista para '

@@ -4,6 +4,7 @@ import matplotlib.dates as mdates
 import pymongo
 from datetime import datetime
 import os
+from statistics import mean
 
 mongo_url = os.getenv('MONGO_URL')
 mongoclient = pymongo.MongoClient(mongo_url)
@@ -77,3 +78,6 @@ def plot():
         ax.plot(date[:-1], times[:-1], color='red')
         plt.title('Historico de caidas del campus', color='black')
         plt.savefig('campus.png')
+
+def average():
+	return mean([i['times'] for i in mongocampus.find({},{'_id':0, 'times':1})])
