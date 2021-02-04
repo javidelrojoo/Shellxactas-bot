@@ -1,4 +1,4 @@
-discord.py
+discord.py>=1.6.0
 requests
 bs4
 pymongo
