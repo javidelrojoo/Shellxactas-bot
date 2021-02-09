@@ -75,11 +75,8 @@ class Mensajes(commands.Cog):
         if 'jaja' in message.content.lower() and message.author.id == 452285420609339402:
             await message.add_reaction('<:joaco:788188614328713217>')
 
-        if 'basado' in message.content.lower():
-            await message.reply("basado en que?")
-
-        if 'based' in message.content.lower():
-            await message.reply("based on what?")
+        if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
+            await message.add_reaction("<:BASED:783045382426722344>")
 
         pedido = []
         if 'medialuna' in message.content.lower():
