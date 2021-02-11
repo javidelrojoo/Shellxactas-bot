@@ -11,7 +11,7 @@ class Cotizacion(commands.Cog):
     @commands.command(brief='Cotización dolar',
                       help='Este comando te brinda informacion actualizada sobre el valor del dolar. No requiere de '
                            'ningún argumento.')
-    async def dolar(self, ctx, cant=0):
+    async def dolar(self, ctx, cant: float =0):
         if dlr.valor('https://www.dolarhoy.com/cotizaciondolarblue') == -1:
             await ctx.send('Ocurrió un error.')
             return
@@ -29,7 +29,7 @@ class Cotizacion(commands.Cog):
     @commands.command(brief='Cotización euro',
                       help='Este comando te brinda informacion actualizada sobre el valor del euro. No requiere de '
                            'ningún argumento.')
-    async def euro(self, ctx, cant=0):
+    async def euro(self, ctx, cant: float =0):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-euro") == -1:
             await ctx.send('Ocurrió un error.')
             return
@@ -47,7 +47,7 @@ class Cotizacion(commands.Cog):
     @commands.command(brief='Cotización real',
                       help='Este comando te brinda informacion actualizada sobre el valor del real. No requiere de '
                            'ningún argumento.')
-    async def real(self, ctx, cant=0):
+    async def real(self, ctx, cant: float =0):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-real-brasileno") == -1:
             await ctx.send('Ocurrió un error.')
             return
@@ -65,7 +65,7 @@ class Cotizacion(commands.Cog):
     @commands.command(brief='Cotización peso uruguayo',
                       help='Este comando te brinda informacion actualizada sobre el valor del peso uruguayo. No '
                            'requiere de ningún argumento.', aliases=['pesouruguayo', 'peso_uru', 'peso_uruguayo'])
-    async def pesouru(self, ctx, cant=0):
+    async def pesouru(self, ctx, cant: float =0):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-peso-uruguayo") == -1:
             await ctx.send('Ocurrió un error.')
             return
@@ -83,7 +83,7 @@ class Cotizacion(commands.Cog):
     @commands.command(brief='Cotización peso chileno',
                       help='Este comando te brinda informacion actualizada sobre el valor del peso chileno. No '
                            'requiere de ningún argumento.', aliases=['pesochileno', 'peso_chi', 'peso_chileno'])
-    async def pesochi(self, ctx, cant=0):
+    async def pesochi(self, ctx, cant: float =0):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-peso-chileno") == -1:
             await ctx.send('Ocurrió un error.')
             return
