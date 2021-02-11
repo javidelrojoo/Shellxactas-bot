@@ -15,10 +15,10 @@ class Cotizacion(commands.Cog):
         if dlr.valor('https://www.dolarhoy.com/cotizaciondolarblue') == -1:
             await ctx.send('Ocurrió un error.')
             return
+        compra, venta, act = dlr.valor('https://www.dolarhoy.com/cotizaciondolarblue')
         if cant > 0:
             await ctx.send(f'${round(venta *cant)}')
             return
-        compra, venta, act = dlr.valor('https://www.dolarhoy.com/cotizaciondolarblue')
         embedVar = discord.Embed(title="Precio Dolar", url="https://www.dolarhoy.com/cotizaciondolarblue",
                                  color=0x0400ff)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
@@ -33,10 +33,10 @@ class Cotizacion(commands.Cog):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-euro") == -1:
             await ctx.send('Ocurrió un error.')
             return
+        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-euro")
         if cant > 0:
             await ctx.send(f'${round(venta *cant)}')
             return
-        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-euro")
         embedVar = discord.Embed(title="Precio Euro", url="https://www.dolarhoy.com/cotizacion-euro",
                                  color=0xe1ff00)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
@@ -51,10 +51,10 @@ class Cotizacion(commands.Cog):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-real-brasileno") == -1:
             await ctx.send('Ocurrió un error.')
             return
+        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-real-brasileno")
         if cant > 0:
             await ctx.send(f'${round(venta *cant)}')
             return
-        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-real-brasileno")
         embedVar = discord.Embed(title="Precio Real", url="https://www.dolarhoy.com/cotizacion-real-brasileno",
                                  color=0x04ff00)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
@@ -69,10 +69,10 @@ class Cotizacion(commands.Cog):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-peso-uruguayo") == -1:
             await ctx.send('Ocurrió un error.')
             return
+        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-peso-uruguayo")
         if cant > 0:
             await ctx.send(f'${round(venta *cant)}')
             return
-        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-peso-uruguayo")
         embedVar = discord.Embed(title="Precio peso uruguayo", url="https://www.dolarhoy.com/cotizacion-peso-uruguayo",
                                  color=0x00e1ff)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
@@ -87,10 +87,10 @@ class Cotizacion(commands.Cog):
         if dlr.valor("https://www.dolarhoy.com/cotizacion-peso-chileno") == -1:
             await ctx.send('Ocurrió un error.')
             return
+        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-peso-chileno")
         if cant > 0:
             await ctx.send(f'${round(venta *cant)}')
             return
-        compra, venta, act = dlr.valor("https://www.dolarhoy.com/cotizacion-peso-chileno")
         embedVar = discord.Embed(title="Precio peso chileno", url="https://www.dolarhoy.com/cotizacion-peso-chileno",
                                  color=0xff0000)
         embedVar.add_field(name="Compra", value=f"${compra}", inline=False)
