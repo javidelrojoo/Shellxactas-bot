@@ -13,9 +13,9 @@ def get_float(text):
 def valor(url):
     req = requests.get(url).text
     soup = bs4.BeautifulSoup(req, 'html.parser')
-    valor_venta = soup.find('div', class_='venta')
-    valor_compra = soup.find('div', class_='compra')
-    act = soup.find('span', class_='update')
+    cotizacion_div = soup.find('div', class_='cotizacion_moneda')
+    valor_compra, valor_venta = cotizacion_div.select('div', class_='value')
+    act = cotizacion_div.find('span')
 
     if valor_venta is not None:
         valor_venta = get_float(valor_venta.text)
