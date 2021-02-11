@@ -14,7 +14,7 @@ def valor(url):
     req = requests.get(url).text
     soup = bs4.BeautifulSoup(req, 'html.parser')
     cotizacion_div = soup.find('div', class_='cotizacion_moneda')
-    valor_compra, valor_venta = cotizacion_div.select('div', class_='value')
+    valor_compra, valor_venta = cotizacion_div.find_all('div', class_='value')
     act = cotizacion_div.find('span')
 
     if valor_venta is not None:
