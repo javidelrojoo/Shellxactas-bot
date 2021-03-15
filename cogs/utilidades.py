@@ -193,11 +193,9 @@ class Utilidades(commands.Cog):
             await ctx.send('Me tenes que decir el nombre que queres para el emoji')
             return
         if isinstance(error, discord.HTTPException):
-            await ctx.send('El archivo tiene que pesar menos de 256 kb')
-            raise error
+            await ctx.send(f'No se pudo agregar el emoji, {error}')
             return
-        await ctx.send('Ocurrió un error, probablemente sea porque el archivo no es ni gif, ni jpg ni png')
-        raise error
+        await ctx.send(f'Ocurrió un error, probablemente sea porque el archivo no es ni gif, ni jpg ni png. {error}')
 
     @commands.command()
     async def estado(self, ctx, url: str):
