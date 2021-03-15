@@ -194,6 +194,7 @@ class Utilidades(commands.Cog):
             return
         if isinstance(error, discord.HTTPException):
             await ctx.send('El archivo tiene que pesar menos de 256 kb')
+            raise error
             return
         await ctx.send('Ocurrió un error, probablemente sea porque el archivo no es ni gif, ni jpg ni png')
         raise error
