@@ -10,10 +10,6 @@ class Boludeces(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(brief='Te dice el plan de la carrera que quieras', help='En realidad siempre responde lo mismo.')
-    async def plan(self, ctx):
-        await ctx.send('Para que queres saber? Salu2 <:picardia:735101971001770055>')
-
     @commands.command(brief='Es random', help='Manda un emoji random')
     async def rdm(self, ctx):
         await ctx.send(random.choice(ctx.message.guild.emojis))

@@ -214,6 +214,39 @@ class Utilidades(commands.Cog):
             await men.edit(content='¿Eso es una pagina? Probá sacando la parte de https://.')
             return
 
+    @commands.group(brief='Te dice el plan de la carrera que quieras')
+    async def plan(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send('Me tenes que decir alguna carrera de la que quieras el plan.')
+            return
+
+    @plan.command(aliases=['física', 'df'])
+    async def fisica(self, ctx):
+        await ctx.send('https://cdn.discordapp.com/attachments/697915316810022950/773713786262913104/Mapa_Lic_Fisica.png')
+
+    @plan.command(aliases=['computacion', 'computación', 'dc', 'cs'])
+    async def compu(self, ctx):
+        await ctx.send('https://cdn.discordapp.com/attachments/697915316810022950/758754732906512454/planCs2.png')
+
+    @plan.command(aliases=['mate pura', 'matematica pura', 'matemática pura'])
+    async def mate_pura(self, ctx):
+        await ctx.send('https://cdn.discordapp.com/attachments/746876013535035402/781131469325205534/planMatePura.png')
+    
+    @plan.command(aliases=['mate aplicada', 'matematica aplicada', 'matemática aplicada'])
+    async def mate_aplicada(self, ctx):
+        await ctx.send('https://cdn.discordapp.com/attachments/697915316810022950/762680026419167232/planMateAplicada.png')
+
+    @plan.command(aliases=['océano', 'oceanografia', 'oceanografía'])
+    async def oceano(self, ctx):
+        await ctx.send('https://media.discordapp.net/attachments/697915316810022950/762859492702158866/planOceanografia.png')
+
+    @plan.command(aliases=['química'])
+    async def quimica(self, ctx):
+        await ctx.send('https://media.discordapp.net/attachments/750169342666211408/818513992531574814/planQuimica.png')
+
+    @plan.command(aliases=['ciencia de datos'])
+    async def cdd(self, ctx):
+        await ctx.send('https://media.discordapp.net/attachments/767479713953742938/821216994677227580/correlatividadesLCD.png')
 
 def setup(client):
     client.add_cog(Utilidades(client))
