@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 from statistics import mean
 
-mongo_url = os.getenv('MONGO_URL')
+mongo_url = "mongodb+srv://javitau:UkQqHDSmyscRVl6C@cluster0.38tql.mongodb.net/shellxactas?retryWrites=true&w=majority" #os.getenv('MONGO_URL')
 mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongocampus = mongoprueba['campus']
@@ -63,20 +63,17 @@ def plot():
         date.append(x['date'])
         times.append(x['times'])
 
+    times_mean = [mean(times[:i]) for i in range(1, len(times))]
+
     with plt.xkcd():
-        plt.style.use('dark_background')
         fig, ax = plt.subplots()
         fig.autofmt_xdate()
         myFmt = mdates.DateFormatter('%Y-%m-%d')
         ax.xaxis.set_major_formatter(myFmt)
-        ax.spines['top'].set_color('black')
-        ax.spines['bottom'].set_color('black')
-        ax.spines['left'].set_color('black')
-        ax.spines['right'].set_color('black')
-        ax.tick_params(axis='x', colors='black')
-        ax.tick_params(axis='y', colors='black')
-        ax.plot(date[:-1], times[:-1], color='red')
+        ax.plot(date[:-1], times_mean, label='Promedio')
+        ax.plot(date[:-1], times[:-1], color='red', label='Cant. de caidas')
         plt.title('Historico de caidas del campus', color='black')
+        plt.legend()
         plt.savefig('campus.png')
 
 def average():
