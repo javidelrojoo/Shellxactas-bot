@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 from statistics import mean
 
-mongo_url = "mongodb+srv://javitau:UkQqHDSmyscRVl6C@cluster0.38tql.mongodb.net/shellxactas?retryWrites=true&w=majority" #os.getenv('MONGO_URL')
+mongo_url = os.getenv('MONGO_URL')
 mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongocampus = mongoprueba['campus']
