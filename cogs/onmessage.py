@@ -61,7 +61,7 @@ class Mensajes(commands.Cog):
             await message.add_reaction('<:picardiant:748344255906447432>')
 
         if 'gracias' in message.content.lower() or 'garcias' in message.content.lower():
-            await message.add_reaction('<:garcias:764579105542373387>')
+            await message.add_reaction('<:garcias:829475233920057394>')
 
         if random.randint(0, 1000) == 0:
             await message.add_reaction(random.choice(message.guild.emojis))
