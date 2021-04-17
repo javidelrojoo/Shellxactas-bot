@@ -113,7 +113,11 @@ class Utilidades(commands.Cog):
             if len(embed.fields) == 24:
                 contents.append(embed)
                 embed = discord.Embed()
-
+        
+        contents.append(embed)
+        if contents == []:
+            await ctx.send('No hay ningún emoji en este server')
+            return
         pages = len(contents)
         cur_page = 1
         contents[0].set_footer(text=f'Pagina {cur_page}/{pages}')
