@@ -21,6 +21,11 @@ class Utilidades(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @commands.command()
+    async def prueba_campus(self, ctx):
+        campus.plot()
+        await ctx.send(file=discord.File('.\\media\\videos\\scene\\480p15\\CampusPlot_ManimCE_v0.5.0.gif'))
+
     @commands.command(brief='Te dice el ping del bot', help='Usando este comando podes averiguar el ping del bot.')
     async def ping(self, ctx):
         await ctx.send(f'Pong! {round(self.client.latency * 1000, 2)} ms')

@@ -52,7 +52,7 @@ class Mensajes(commands.Cog):
             await message.add_reaction('<:degenerado:751791150364491966>')
 
         if 'cringe' in message.content.lower():
-            await message.add_reaction('<:cringe:735225671969669221>')
+            await message.add_reaction('<:cringe:832829654259859537>')
 
         if '<:picardia:735101971001770055>' in message.content:
             await message.add_reaction('<:picardia:735101971001770055>')
