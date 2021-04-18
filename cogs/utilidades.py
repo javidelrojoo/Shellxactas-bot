@@ -7,8 +7,12 @@ from datetime import datetime, time, timedelta
 import pymongo
 import os
 import campus
+import docker
+from pathlib import Path
 
 mongo_url = os.getenv('MONGO_URL')
+
+dockerclient = docker.from_env()
 
 mongoclient = pymongo.MongoClient(mongo_url)
 
@@ -23,8 +27,44 @@ class Utilidades(commands.Cog):
 
     @commands.command()
     async def prueba_campus(self, ctx):
-        campus.plot()
-        await ctx.send(file=discord.File('.\\media\\videos\\scene\\480p15\\CampusPlot_ManimCE_v0.5.0.gif'))
+            try: # now it's getting serious: get docker involved
+                container_stderr = dockerclient.containers.run(
+                    image="manimcommunity/manim:stable",
+                    volumes={tmpdirname: {'bind': '/manim/', 'mode': 'rw'}},
+                    command=f"timeout 120 manim scene.py -qm --disable_caching -o scriptoutput -i",
+                    user=os.getuid(),
+                    stderr=True,
+                    stdout=False,
+                    remove=True
+                )
+                if container_stderr:
+                    if len(container_stderr.decode('utf-8')) <= 1200:
+                        await ctx.reply(
+                            "Something went wrong, here is "
+                            "what Manim reports:\n"
+                            f"```\n{container_stderr.decode('utf-8')}\n```"
+                        )
+                    else:
+                        await ctx.reply(
+                            "Something went wrong, here is "
+                            "what Manim reports:\n",
+                            file=discord.File(
+                                fp=io.BytesIO(container_stderr),
+                                filename="Error.log",
+                            ),
+                        )
+                    return
+
+            except Exception as e:
+                await ctx.reply(f"Something went wrong: ```{e}```")
+                raise e
+            try:
+                [outfilepath] = Path('.').rglob('scriptoutput.*')
+            except Exception as e:
+                await ctx.reply("Something went wrong: no (unique) output file was produced. :cry:")
+                raise e
+            else:
+                reply = await ctx.reply("Here you go:", file=discord.File(outfilepath))
 
     @commands.command(brief='Te dice el ping del bot', help='Usando este comando podes averiguar el ping del bot.')
     async def ping(self, ctx):
