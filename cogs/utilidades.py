@@ -10,8 +10,6 @@ import campus
 
 mongo_url = os.getenv('MONGO_URL')
 
-dockerclient = docker.from_env()
-
 mongoclient = pymongo.MongoClient(mongo_url)
 
 mongoprueba = mongoclient['Shellxactas']
