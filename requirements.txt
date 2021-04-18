@@ -6,8 +6,3 @@ dnspython
 pillow
 numpy
 matplotlib
-manim
-docker
-pathlib
-Cairo
-Pango

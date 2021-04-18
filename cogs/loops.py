@@ -143,7 +143,7 @@ class Loops(commands.Cog):
         campus.plot()
         for x in mongocampus.find({'date': datenow}):
             times = x['times']
-            await canal.send(f'Hoy el campus se cayó {times} veces.', file=discord.File('.\\media\\videos\\scene\\480p15\\CampusPlot_ManimCE_v0.5.0.gif'))
+            await canal.send(f'Hoy el campus se cayó {times} veces.', file=discord.File('campus.png'))
     
     async def volve_eze(self):
         canal = self.client.get_channel(734919493343641611)

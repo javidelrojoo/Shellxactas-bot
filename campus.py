@@ -55,11 +55,11 @@ def count(date=""):
         date = datetime(date.year, date.month, date.day)
         return mongocampus.find({'date': date})[0]['times']
 
-def plot():
+def plot_2():
     os.system('cmd /c "manim scene.py -iql"')
     return
 
-def plot_old():
+def plot():
     date = []
     times = []
 
