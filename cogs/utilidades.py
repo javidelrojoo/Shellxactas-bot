@@ -7,8 +7,6 @@ from datetime import datetime, time, timedelta
 import pymongo
 import os
 import campus
-import docker
-from pathlib import Path
 
 mongo_url = os.getenv('MONGO_URL')
 
