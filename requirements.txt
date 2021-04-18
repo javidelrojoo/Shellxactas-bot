@@ -9,3 +9,4 @@ matplotlib
 manim
 docker
 pathlib
+pangocairo >= 1.30.0
