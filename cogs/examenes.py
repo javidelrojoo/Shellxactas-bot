@@ -19,7 +19,7 @@ class Examenes(commands.Cog):
     @commands.group(invoke_without_command=True)
     async def examenes(self, ctx):
         embed=discord.Embed(title="Próximos Exámenes")
-        for x in mongoexamenes.find():
+        for x in mongoexamenes.find().sort([('mes', pymongo.ASCENDING), ('dia', pymongo.ASCENDING)]):
             embed.add_field(name=f"{x['title']} ({x['dia']}/{x['mes']})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
         await ctx.send(embed=embed)
 
