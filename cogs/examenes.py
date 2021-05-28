@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import pymongo
+import asyncio
 
 mongo_url = os.getenv('MONGO_URL')
 
