@@ -87,9 +87,10 @@ class Examenes(commands.Cog):
         except asyncio.TimeoutError:
             return await clear_all()
         
-        print(dia,mes,title,names)
         result = mongoexamenes.insert_one({'dia': dia, 'mes': mes, 'title': title, 'names': names})
-        await ctx.send(f'Se agregó el examén {result.inserted_id}')
+        embed=discord.Embed(title="Se agregó el examen")
+        embed.add_field(name=f"{title} ({dia}/{mes})", value='\n'.join([self.client.get_user(i).mention for i in names]), inline=False)
+        embed.set_footer(text= result.inserted_id)
         await asyncio.sleep(5.)
         return await clear_all()
 
