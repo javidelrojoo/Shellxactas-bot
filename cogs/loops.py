@@ -15,6 +15,7 @@ mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 mongocumple = mongoprueba["cumpleaños"]
 mongocampus = mongoprueba['campus']
+mongoexamenes = mongoprueba['Examenes']
 
 c = 0
 new = True
@@ -148,6 +149,16 @@ class Loops(commands.Cog):
     async def volve_eze(self):
         canal = self.client.get_channel(734919493343641611)
         await canal.send("<@699664841127755807> VOLVÉ!!!!")
+    
+    async def check_examenes(self):
+        await self.client.wait_until_ready()
+        now = datetime.utcnow() - timedelta(hours=3)
+        curmonth = now.month
+        curday = now.day
+        for x in mongoexamenes.find():
+            if (x['mes'] < curmonth) or (x['mes'] == curmonth and x['dia'] < curday):
+                mongoexamenes.delete_one(x)
+
     
 
 def setup(client):
