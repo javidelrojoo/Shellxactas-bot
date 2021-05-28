@@ -19,9 +19,15 @@ class Examenes(commands.Cog):
     @commands.group(invoke_without_command=True)
     async def examenes(self, ctx):
         embed=discord.Embed(title="Próximos Exámenes")
-        nl = '\n'
         for x in mongoexamenes.find().sort([('mes', pymongo.ASCENDING), ('dia', pymongo.ASCENDING)]):
-            embed.add_field(name=f"{x['title']} ({x['dia']}/{x['mes']})", value=f"{nl.join([self.client.get_user(i).mention for i in x['names']])}{nl}{x['_id']}", inline=False)
+            embed.add_field(name=f"{x['title']} ({x['dia']}/{x['mes']})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
+        await ctx.send(embed=embed)
+
+    @examenes.command()
+    async def ids(self, ctx):
+        embed=discord.Embed(title="Próximos Exámenes")
+        for x in mongoexamenes.find().sort([('mes', pymongo.ASCENDING), ('dia', pymongo.ASCENDING)]):
+            embed.add_field(name=f"{x['title']} ({x['dia']}/{x['mes']})", value=x['_id'], inline=False)
         await ctx.send(embed=embed)
 
     @examenes.command(aliases=['add'])
