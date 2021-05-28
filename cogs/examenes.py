@@ -122,6 +122,7 @@ class Examenes(commands.Cog):
         msg_sent.append(msg0)
         try:
             res_ids = await self.client.wait_for("message", check=check_author, timeout=30.)
+            msg_sent.append(res_ids)
             result = mongoexamenes.find_one({'_id': ObjectId(res_ids.content)})
             if result is None:
                 raise bson.errors.InvalidId
@@ -200,7 +201,7 @@ class Examenes(commands.Cog):
         except bson.errors.InvalidId:
             await ctx.send('ID invalida')
             return
-        if del_res != 1:
+        if del_res.deleted_count != 1:
             await ctx.send('ID invalida')
             return
         await ctx.send('Se borró correctamente')
