@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+from discord.ext.commands import errors
 import pymongo
 import asyncio
 from bson.objectid import ObjectId
@@ -189,6 +190,21 @@ class Examenes(commands.Cog):
         await ctx.send(embed=embed)
         await asyncio.sleep(5.)
         return await clear_all()
+    
+    @examenes.command(aliases=['delete', 'del'])
+    async def eliminar(self, ctx, id=''):
+        if id == '':
+            await ctx.send('Me tenes que dar un ID, las podes ver con .examenes ids')
+        try:
+            del_res = mongoexamenes.delete_one({'_id': ObjectId(id)})
+        except bson.errors.InvalidId:
+            await ctx.send('ID invalida')
+            return
+        if del_res != 1:
+            await ctx.send('ID invalida')
+            return
+        await ctx.send('Se borró correctamente')
+    
 
 
 def setup(client):
