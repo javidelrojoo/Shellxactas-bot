@@ -91,6 +91,7 @@ class Examenes(commands.Cog):
         embed=discord.Embed(title="Se agregó el examen")
         embed.add_field(name=f"{title} ({dia}/{mes})", value='\n'.join([self.client.get_user(i).mention for i in names]), inline=False)
         embed.set_footer(text= result.inserted_id)
+        await ctx.send(embed=embed)
         await asyncio.sleep(5.)
         return await clear_all()
 
