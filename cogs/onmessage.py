@@ -79,19 +79,19 @@ class Mensajes(commands.Cog):
             await message.add_reaction('<:joaco:788188614328713217>')
         
         if ('ya lo pasé' in message.content.lower() or 'ya lo pase' in message.content.lower() or 'ya lo pasaron' in message.content.lower()) and message.author.id == 697124888879693895:
-            await message.send('Callate puta')
+            await message.channel.send('Callate puta')
 
         if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
             await message.add_reaction("<:BASED:783045382426722344>")
 
-        pedido = []
-        if 'medialuna' in message.content.lower():
-            pedido.append('🥐')
+        # pedido = []
+        # if 'medialuna' in message.content.lower():
+        #     pedido.append('🥐')
 
-        if 'cafe' in message.content.lower():
-            pedido.append(':coffee:')
-        if len(pedido) != 0:
-            await message.channel.send("".join(pedido))
+        # if 'cafe' in message.content.lower():
+        #     pedido.append(':coffee:')
+        # if len(pedido) != 0:
+        #     await message.channel.send("".join(pedido))
 
 
 def setup(client):
