@@ -24,14 +24,14 @@ class Examenes(commands.Cog):
     async def examenes(self, ctx):
         embed=discord.Embed(title="Próximos Exámenes")
         for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
-            embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['mes'].month})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
+            embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['date'].month})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
         await ctx.send(embed=embed)
 
     @examenes.command()
     async def ids(self, ctx):
         embed=discord.Embed(title="Próximos Exámenes")
         for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
-            embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['mes'].month})", value=x['_id'], inline=False)
+            embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['date'].month})", value=x['_id'], inline=False)
         await ctx.send(embed=embed)
 
     @examenes.command(aliases=['add'])
