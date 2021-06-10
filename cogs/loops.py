@@ -47,6 +47,7 @@ class Loops(commands.Cog):
             await self.check_for_bd()
             await self.campus_resumen(datenow)
             await self.volve_eze()
+            await self.check_examenes()
             new = False
             return
         elif hournow == 0 and minnow == 0:
@@ -153,10 +154,8 @@ class Loops(commands.Cog):
     async def check_examenes(self):
         await self.client.wait_until_ready()
         now = datetime.utcnow() - timedelta(hours=3)
-        curmonth = now.month
-        curday = now.day
         for x in mongoexamenes.find():
-            if (x['mes'] < curmonth) or (x['mes'] == curmonth and x['dia'] < curday):
+            if x['date'] < now:
                 mongoexamenes.delete_one(x)
 
     

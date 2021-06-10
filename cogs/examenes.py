@@ -4,6 +4,7 @@ import os
 from discord.ext.commands import errors
 import pymongo
 import asyncio
+from datetime import datetime, time, timedelta
 from bson.objectid import ObjectId
 import bson
 
@@ -22,19 +23,20 @@ class Examenes(commands.Cog):
     @commands.group(invoke_without_command=True)
     async def examenes(self, ctx):
         embed=discord.Embed(title="Próximos Exámenes")
-        for x in mongoexamenes.find().sort([('mes', pymongo.ASCENDING), ('dia', pymongo.ASCENDING)]):
-            embed.add_field(name=f"{x['title']} ({x['dia']}/{x['mes']})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
+        for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
+            embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['mes'].month})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
         await ctx.send(embed=embed)
 
     @examenes.command()
     async def ids(self, ctx):
         embed=discord.Embed(title="Próximos Exámenes")
-        for x in mongoexamenes.find().sort([('mes', pymongo.ASCENDING), ('dia', pymongo.ASCENDING)]):
-            embed.add_field(name=f"{x['title']} ({x['dia']}/{x['mes']})", value=x['_id'], inline=False)
+        for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
+            embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['mes'].month})", value=x['_id'], inline=False)
         await ctx.send(embed=embed)
 
     @examenes.command(aliases=['add'])
     async def agregar(self, ctx):
+        datenow = datetime.utcnow() - timedelta(hours=3)
 
         def check_author(m):
             return m.author == ctx.message.author
@@ -53,8 +55,7 @@ class Examenes(commands.Cog):
             res_fecha = await self.client.wait_for("message", check=check_author, timeout=30.)
             msg_sent.append(res_fecha)
             dia, mes = res_fecha.content.split('/')
-            dia = int(dia)
-            mes = int(mes)
+            date = datetime(datenow.year, int(mes), int(dia))
         except ValueError:
             error_msg1 = await ctx.send('Formato Inválido, tiene que ser de la forma \'DD/MM\'')
             msg_sent.append(error_msg1)
@@ -63,17 +64,12 @@ class Examenes(commands.Cog):
         except asyncio.TimeoutError:
             return await clear_all()
         
-        if dia > 31 or dia < 0:
-            error_msg2 = await ctx.send('Día Inválido')
+        if datenow > date:
+            error_msg2 = await ctx.send('Esa fecha ya pasó')
             msg_sent.append(error_msg2)
             await asyncio.sleep(5.)
             return await clear_all()
-        if mes > 12 or mes < 0:
-            error_msg3 = await ctx.send('Mes Inválido')
-            msg_sent.append(error_msg3)
-            await asyncio.sleep(5.)
-            return await clear_all()
-        
+
         msg2 = await ctx.send('¿Que examén es?')
         msg_sent.append(msg2)
         try:
@@ -97,9 +93,9 @@ class Examenes(commands.Cog):
         except asyncio.TimeoutError:
             return await clear_all()
         
-        result = mongoexamenes.insert_one({'dia': dia, 'mes': mes, 'title': title, 'names': names})
+        result = mongoexamenes.insert_one({'date': date, 'title': title, 'names': names})
         embed=discord.Embed(title="Se agregó el examen")
-        embed.add_field(name=f"{title} ({dia}/{mes})", value='\n'.join([self.client.get_user(i).mention for i in names]), inline=False)
+        embed.add_field(name=f"{title} ({date.day}/{date.month})", value='\n'.join([self.client.get_user(i).mention for i in names]), inline=False)
         embed.set_footer(text= result.inserted_id)
         await ctx.send(embed=embed)
         await asyncio.sleep(5.)
@@ -140,8 +136,7 @@ class Examenes(commands.Cog):
             res_fecha = await self.client.wait_for("message", check=check_author, timeout=30.)
             msg_sent.append(res_fecha)
             dia, mes = res_fecha.content.split('/')
-            dia = int(dia)
-            mes = int(mes)
+            date = datetime(datenow.year, int(mes), int(dia))
         except ValueError:
             error_msg1 = await ctx.send('Formato Inválido, tiene que ser de la forma \'DD/MM\'')
             msg_sent.append(error_msg1)
@@ -150,14 +145,9 @@ class Examenes(commands.Cog):
         except asyncio.TimeoutError:
             return await clear_all()
         
-        if dia > 31 or dia < 0:
-            error_msg2 = await ctx.send('Día Inválido')
+        if datenow > date:
+            error_msg2 = await ctx.send('Esa fecha ya pasó')
             msg_sent.append(error_msg2)
-            await asyncio.sleep(5.)
-            return await clear_all()
-        if mes > 12 or mes < 0:
-            error_msg3 = await ctx.send('Mes Inválido')
-            msg_sent.append(error_msg3)
             await asyncio.sleep(5.)
             return await clear_all()
         
@@ -184,9 +174,9 @@ class Examenes(commands.Cog):
         except asyncio.TimeoutError:
             return await clear_all()
         
-        mongoexamenes.find_one_and_replace({'_id': ObjectId(res_ids.content)}, {'dia': dia, 'mes': mes, 'title': title, 'names': names})
+        mongoexamenes.find_one_and_replace({'_id': ObjectId(res_ids.content)}, {'date': date, 'title': title, 'names': names})
         embed=discord.Embed(title="Se editó el examen")
-        embed.add_field(name=f"{title} ({dia}/{mes})", value='\n'.join([self.client.get_user(i).mention for i in names]), inline=False)
+        embed.add_field(name=f"{title} ({date.day}/{date.month})", value='\n'.join([self.client.get_user(i).mention for i in names]), inline=False)
         embed.set_footer(text= res_ids.content)
         await ctx.send(embed=embed)
         await asyncio.sleep(5.)
