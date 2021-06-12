@@ -18,6 +18,18 @@ class Boludeces(commands.Cog):
     async def sensu(self, ctx):
         await ctx.send('<@219301336544444416> <https://www.twitch.tv/sensuky>')
 
+    @commands.command(brief='Link del twitch de gravo', aliases=["gravo", "gravitypapa"])
+    async def gravity(self, ctx):
+        await ctx.send('<@366047462655262730> <https://www.twitch.tv/gravitypapa>')
+
+    @commands.command(brief='Link del twitch de javi', aliases=["javidelrojo", "javidelrojoo"])
+    async def javi(self, ctx):
+        await ctx.send('<@697124888879693895> <https://www.twitch.tv/javidelrojoo>')
+
+    @commands.command(brief='Link del twitch de tinchox', aliases=["tincho", "tincho175"])
+    async def tinchox(self, ctx):
+        await ctx.send('<@229087114954801152> <https://www.twitch.tv/tincho175>')
+
     @commands.command(brief='Lo que le gusta a markz', help='Es un link a pornhub gay', aliases=["marcos", "MDG"])
     async def markz(self, ctx):
         await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
