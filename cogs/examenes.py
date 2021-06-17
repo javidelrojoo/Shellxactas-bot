@@ -103,7 +103,7 @@ class Examenes(commands.Cog):
     
     @examenes.command(aliases=['edit'])
     async def editar(self, ctx):
-        datenow = datetime.utcnow() - timedelta(hours=3)
+        #datenow = datetime.utcnow() - timedelta(hours=3)
         def check_author(m):
             return m.author == ctx.message.author
         
@@ -145,7 +145,7 @@ class Examenes(commands.Cog):
         except asyncio.TimeoutError:
             return await clear_all()
         except Exception as e:
-        	print(e.message, e.args)
+        	print(e)
         
         if datenow > date:
             error_msg2 = await ctx.send('Esa fecha ya pasó')
