@@ -144,6 +144,8 @@ class Examenes(commands.Cog):
             return await clear_all()
         except asyncio.TimeoutError:
             return await clear_all()
+        except Exception as e:
+        	print(e.message, e.args)
         
         if datenow > date:
             error_msg2 = await ctx.send('Esa fecha ya pasó')
