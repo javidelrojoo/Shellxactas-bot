@@ -150,7 +150,7 @@ class Examenes(commands.Cog):
             msg_sent.append(error_msg2)
             await asyncio.sleep(5.)
             return await clear_all()
-        
+
         msg2 = await ctx.send('¿Que examén es?')
         msg_sent.append(msg2)
         try:
