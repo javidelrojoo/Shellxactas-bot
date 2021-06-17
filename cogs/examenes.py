@@ -103,7 +103,7 @@ class Examenes(commands.Cog):
     
     @examenes.command(aliases=['edit'])
     async def editar(self, ctx):
-    	datenow = datetime.utcnow() - timedelta(hours=3)
+        datenow = datetime.utcnow() - timedelta(hours=3)
         def check_author(m):
             return m.author == ctx.message.author
         
