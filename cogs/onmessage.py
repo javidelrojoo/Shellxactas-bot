@@ -78,7 +78,7 @@ class Mensajes(commands.Cog):
         if 'jaja' in message.content.lower() and message.author.id == 452285420609339402:
             await message.add_reaction('<:joaco:788188614328713217>')
         
-        if ('nene daun' in message.content.lower() or 'ya lo pasé' in message.content.lower() or 'ya lo pase' in message.content.lower() or 'ya lo pasaron' in message.content.lower() or 'inb4' in message.content.lower() or 'viejazo' in message.content.lower()) and message.author.id == 470723884166021120:
+        if ('ubi' in message.content.lower() or 'nene daun' in message.content.lower() or 'ya lo pasé' in message.content.lower() or 'ya lo pase' in message.content.lower() or 'ya lo pasaron' in message.content.lower() or 'inb4' in message.content.lower() or 'viejazo' in message.content.lower()) and message.author.id == 470723884166021120:
             await message.channel.send('Callate puta')
 
         if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
