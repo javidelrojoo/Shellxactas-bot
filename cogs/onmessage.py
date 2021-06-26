@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import random
-
+import asyncio
 
 class Mensajes(commands.Cog):
 
@@ -28,11 +28,12 @@ class Mensajes(commands.Cog):
             await member.add_roles(botrole)
         else:
             await member.add_roles(onlinerole)
-            if mutedrole in member.roles:
-                await member.remove_roles(mutedrole)
             if member.id == 470723884166021120:
                 await member.add_roles(joserole)
         await chatdeadmins.send(f'Se unió {member.mention}')
+        await asyncio.sleep(5.)
+        if mutedrole in member.roles:
+            await member.remove_roles(mutedrole)
 
     @commands.Cog.listener()
     async def on_message(self, message):
