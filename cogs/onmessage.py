@@ -9,12 +9,6 @@ class Mensajes(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
-        if isinstance(error, discord.ext.commands.errors.CommandNotFound):
-            await ctx.send('¿Necesitas ayuda para escribir el comando?')
-            return
-
-    @commands.Cog.listener()
     async def on_member_remove(self, member):
         if member.guild.id != 734914669667418214:
             return
