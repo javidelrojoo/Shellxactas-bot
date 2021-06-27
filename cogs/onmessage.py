@@ -85,6 +85,9 @@ class Mensajes(commands.Cog):
         if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
             await message.add_reaction("<:BASED:783045382426722344>")
 
+        josewords = ['ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
+        if message.author.id == 697124888879693895 and (sum([i in message.content.lower() for i in josewords]) > 0):
+            await message.channel.send('Callate puta')
         # pedido = []
         # if 'medialuna' in message.content.lower():
         #     pedido.append('🥐')
