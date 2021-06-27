@@ -83,7 +83,7 @@ class Mensajes(commands.Cog):
             await message.add_reaction("<:BASED:783045382426722344>")
 
         josewords = ['ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
-        if message.author.id == 470723884166021120 and (sum([i in message.content.lower() for i in josewords]) >= 0):
+        if message.author.id == 470723884166021120 and (sum([i in message.content.lower() for i in josewords]) > 0):
             await message.channel.send('Callate puta')
         # pedido = []
         # if 'medialuna' in message.content.lower():
