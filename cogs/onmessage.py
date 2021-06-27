@@ -78,15 +78,12 @@ class Mensajes(commands.Cog):
         
         if 'jaja' in message.content.lower() and message.author.id == 452285420609339402:
             await message.add_reaction('<:joaco:788188614328713217>')
-        
-        if ('ubi' in message.content.lower() or 'nene daun' in message.content.lower() or 'ya lo pasé' in message.content.lower() or 'ya lo pase' in message.content.lower() or 'ya lo pasaron' in message.content.lower() or 'inb4' in message.content.lower() or 'viejazo' in message.content.lower()) and message.author.id == 470723884166021120:
-            await message.channel.send('Callate puta')
 
         if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
             await message.add_reaction("<:BASED:783045382426722344>")
 
         josewords = ['ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
-        if message.author.id == 697124888879693895 and (sum([i in message.content.lower() for i in josewords]) > 0):
+        if message.author.id == 470723884166021120 and (sum([i in message.content.lower() for i in josewords]) > 0):
             await message.channel.send('Callate puta')
         # pedido = []
         # if 'medialuna' in message.content.lower():
