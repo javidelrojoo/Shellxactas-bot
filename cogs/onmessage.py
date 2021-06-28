@@ -67,6 +67,9 @@ class Mensajes(commands.Cog):
         if 'sape' in message.content.lower():
             await message.add_reaction('<:sape:735262152675295343>')
 
+        if 'god' in message.content.lower() or 'good' in message.content.lower() or 'goood' in message.content.lower():
+            await message.add_reaction('<a:goood:854860074555408394>')
+
         if random.randint(0, 1000) == 0:
             await message.add_reaction(random.choice(message.guild.emojis))
 
