@@ -15,9 +15,7 @@ mongocampus = mongoprueba['campus']
 def estado_campus(timeout):
     try:
         r = requests.get('https://campus.exactas.uba.ar/', timeout=timeout)
-    except requests.exceptions.ConnectTimeout:
-        return False
-    except requests.exceptions.ReadTimeout:
+    except (requests.exceptions.ConnectTimeout, requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError):
         return False
     statuscode = str(r.status_code)
     if statuscode.startswith('4') or statuscode.startswith('5'):
