@@ -218,6 +218,11 @@ class Utilidades(commands.Cog):
             await men.edit(content='¿Eso es una pagina? Probá sacando la parte de https://.')
             return
 
+    @estado.error
+    async def estado_error(self, ctx, error):
+        if isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
+            await ctx.send('Me tenes que dar una página para que me fije el estado')
+
     @commands.command(brief='Te dice el plan de la carrera que quieras')
     async def plan(self, ctx, *,carrera):
         if carrera in ['fisica', 'física', 'df']:
