@@ -25,6 +25,9 @@ class Examenes(commands.Cog):
         embed=discord.Embed(title="Próximos Exámenes")
         for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
             embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['date'].month})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
+        if len(embed.fields) == 0:
+            await ctx.send('No hay ningún examen cargado')
+            return
         await ctx.send(embed=embed)
 
     @examenes.command()
@@ -32,7 +35,23 @@ class Examenes(commands.Cog):
         embed=discord.Embed(title="Próximos Exámenes")
         for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
             embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['date'].month})", value=x['_id'], inline=False)
+        if len(embed.fields) == 0:
+            await ctx.send('No hay ningún examen cargado')
+            return
         await ctx.send(embed=embed)
+
+    @examenes.command(aliases=['me', 'yo'])
+    async def examenes_me(self, ctx):
+        author = ctx.message.author
+        embed=discord.Embed(title="Próximos Exámenes")
+        for x in mongoexamenes.find().sort([('date', pymongo.ASCENDING)]):
+            if author.id in x['names']:
+                embed.add_field(name=f"{x['title']} ({x['date'].day}/{x['date'].month})", value='\n'.join([self.client.get_user(i).mention for i in x['names']]), inline=False)
+        if len(embed.fields) == 0:
+            await ctx.send('No hay ningún proximo examen tuyo')
+            return
+        await ctx.send(embed=embed)
+    
 
     @examenes.command(aliases=['add'])
     async def agregar(self, ctx):
@@ -197,7 +216,7 @@ class Examenes(commands.Cog):
             await ctx.send('ID invalida')
             return
         await ctx.send('Se borró correctamente')
-    
+
 
 
 def setup(client):
