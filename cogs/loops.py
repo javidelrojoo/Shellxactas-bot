@@ -155,7 +155,7 @@ class Loops(commands.Cog):
         await self.client.wait_until_ready()
         now = datetime.utcnow() - timedelta(hours=3)
         for x in mongoexamenes.find():
-            if x['date'] < now:
+            if x['date'] + timedelta(hours=24) < now:
                 mongoexamenes.delete_one(x)
 
     
