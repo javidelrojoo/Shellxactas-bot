@@ -68,10 +68,10 @@ class Mensajes(commands.Cog):
             await message.add_reaction('<:sape:735262152675295343>')
 
         if 'god' in message.content.lower() or 'good' in message.content.lower() or 'goood' in message.content.lower():
-            await message.add_reaction('<a:gooood:862346932696645664>')
+            await message.add_reaction('<a:gooood:861332255904759808>')
 
         if 'messi' in message.content.lower():
-            await message.add_reaction('<a:messsi:862347301917032449>')
+            await message.add_reaction('<a:messsi:861332725247508490>')
 
         if random.randint(0, 1000) == 0:
             await message.add_reaction(random.choice(message.guild.emojis))
