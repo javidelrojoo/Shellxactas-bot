@@ -68,12 +68,17 @@ class Mensajes(commands.Cog):
             await message.add_reaction('<:sape:735262152675295343>')
 
         if 'god' in message.content.lower() or 'good' in message.content.lower() or 'goood' in message.content.lower():
-            await message.add_reaction('<a:goood:854860074555408394>')
+            await message.add_reaction('<a:gooood:862346932696645664>')
+
+        if 'messi' in message.content.lower():
+            await message.add_reaction('<a:messsi:862347301917032449>')
 
         if random.randint(0, 1000) == 0:
             await message.add_reaction(random.choice(message.guild.emojis))
 
         if len(message.content) > 500:
+            if message.author.id == 470723884166021120:
+                await message.channel.send('Callate puta')
             await message.add_reaction('<:mucho_texto:743541235637026818>')
 
         if 'uwu' in message.content.lower() and message.content.lower() != '<:uwu:768614592699957278>':
@@ -85,7 +90,7 @@ class Mensajes(commands.Cog):
         if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
             await message.add_reaction("<:BASED:783045382426722344>")
 
-        josewords = ['ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
+        josewords = ['tfw', 'kys', 'finna', 'kms', 'ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
         if message.author.id == 470723884166021120 and (sum([i in message.content.lower() for i in josewords]) > 0):
             await message.channel.send('Callate puta')
         # pedido = []
