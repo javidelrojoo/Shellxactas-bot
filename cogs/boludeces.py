@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 import asyncio
 import img_editor as img
-
+import download_video
 
 class Boludeces(commands.Cog):
 
@@ -83,6 +83,10 @@ class Boludeces(commands.Cog):
             message += '\n'
         await ctx.send(message)
 
+    @commands.command()
+    async def Prueba(self, ctx):
+        download_video.download_file("https://www.saludameesta.com/site/site/videosgratis/GENERICO_CUMPLE.mp4")
+        await ctx.send(f'Feliz Cumpleaños!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
 
 def setup(client):
     client.add_cog(Boludeces(client))
