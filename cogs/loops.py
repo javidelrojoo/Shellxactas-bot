@@ -6,6 +6,7 @@ import asyncio
 import random
 import os
 import campus
+import download_video
 
 mongo_url = os.getenv('MONGO_URL')
 
@@ -134,10 +135,11 @@ class Loops(commands.Cog):
             dia = int(bday['dia'])
             mes = int(bday['mes'])
             if dia == curday and mes == curmonth:
+                download_video.download_file("https://www.saludameesta.com/site/site/videosgratis/GENERICO_CUMPLE.mp4")
                 if channel is None:
-                    await author.send(f'Feliz Cumpleaños {author.mention}!!!')
+                    await author.send(f'Feliz Cumpleaños {author.mention}!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
                 else:
-                    await channel.send(f'Feliz Cumpleaños {author.mention}!!!')
+                    await channel.send(f'Feliz Cumpleaños {author.mention}!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
 
     async def campus_resumen(self, datenow):
         datenow = datenow - timedelta(days=1)
