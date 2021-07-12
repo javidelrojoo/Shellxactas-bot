@@ -83,10 +83,5 @@ class Boludeces(commands.Cog):
             message += '\n'
         await ctx.send(message)
 
-    @commands.command()
-    async def Prueba(self, ctx):
-        await ctx.send(f'Feliz Cumpleaños!!!')
-        await ctx.send('https://cdn.discordapp.com/attachments/734846058613440643/863963836515876894/cumple.mp4')
-
 def setup(client):
     client.add_cog(Boludeces(client))
