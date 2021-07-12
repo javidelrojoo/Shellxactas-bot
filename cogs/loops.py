@@ -135,12 +135,12 @@ class Loops(commands.Cog):
             dia = int(bday['dia'])
             mes = int(bday['mes'])
             if dia == curday and mes == curmonth:
-                download_video.download_file("https://www.saludameesta.com/site/site/videosgratis/GENERICO_CUMPLE.mp4")
-                await asyncio.sleep(5.)
                 if channel is None:
-                    await author.send(f'Feliz Cumpleaños {author.mention}!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
+                    await author.send(f'Feliz Cumpleaños {author.mention}!!!')
+                    await author.send('https://cdn.discordapp.com/attachments/734846058613440643/863963836515876894/cumple.mp4')
                 else:
                     await channel.send(f'Feliz Cumpleaños {author.mention}!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
+                    await channel.send('https://cdn.discordapp.com/attachments/734846058613440643/863963836515876894/cumple.mp4')
 
     async def campus_resumen(self, datenow):
         datenow = datenow - timedelta(days=1)

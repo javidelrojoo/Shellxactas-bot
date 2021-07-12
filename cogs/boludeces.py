@@ -85,9 +85,8 @@ class Boludeces(commands.Cog):
 
     @commands.command()
     async def Prueba(self, ctx):
-        download_video.download_file("https://www.saludameesta.com/site/site/videosgratis/GENERICO_CUMPLE.mp4")
-        await asyncio.sleep(5.)
-        await ctx.send(f'Feliz Cumpleaños!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
+        await ctx.send(f'Feliz Cumpleaños!!!')
+        await ctx.send('https://cdn.discordapp.com/attachments/734846058613440643/863963836515876894/cumple.mp4')
 
 def setup(client):
     client.add_cog(Boludeces(client))
