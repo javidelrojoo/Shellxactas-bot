@@ -136,6 +136,7 @@ class Loops(commands.Cog):
             mes = int(bday['mes'])
             if dia == curday and mes == curmonth:
                 download_video.download_file("https://www.saludameesta.com/site/site/videosgratis/GENERICO_CUMPLE.mp4")
+                await asyncio.sleep(5.)
                 if channel is None:
                     await author.send(f'Feliz Cumpleaños {author.mention}!!!', file=discord.File('GENERICO_CUMPLE.mp4'))
                 else:
