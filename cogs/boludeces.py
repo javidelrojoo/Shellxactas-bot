@@ -34,6 +34,10 @@ class Boludeces(commands.Cog):
     async def markz(self, ctx):
         await ctx.send('<@710666266972651531> <https://es.pornhub.com/gayporn>')
 
+    @commands.command(aliases=["pedro", 'pedrito', "keinpm"])
+    async def kein(self, ctx):
+        await ctx.send('<@745458896659021864> https://ar.skokka.com/escorts/capitalfederal/')
+
     @commands.command(brief='Que picardia', help='Picardias')
     @commands.has_permissions(administrator=True)
     async def picardy(self, ctx):
