@@ -36,7 +36,7 @@ class Boludeces(commands.Cog):
 
     @commands.command(aliases=["pedro", 'pedrito', "keinpm"])
     async def kein(self, ctx):
-        await ctx.send('<@745458896659021864> https://ar.skokka.com/escorts/capitalfederal/')
+        await ctx.send('<@250611707943190529> https://ar.skokka.com/escorts/capitalfederal/')
 
     @commands.command(brief='Que picardia', help='Picardias')
     @commands.has_permissions(administrator=True)
