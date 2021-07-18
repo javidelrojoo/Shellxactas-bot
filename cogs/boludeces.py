@@ -28,7 +28,7 @@ class Boludeces(commands.Cog):
 
     @commands.command(brief='Link del twitch de tinchox', aliases=["tincho", "tincho175"])
     async def tinchox(self, ctx):
-        await ctx.send('<@229087114954801152> <https://www.twitch.tv/tincho175>')
+        await ctx.send('<@229087114954801152> <https://www.twitch.tv/tinchox175>')
 
     @commands.command(brief='Lo que le gusta a markz', help='Es un link a pornhub gay', aliases=["marcos", "MDG"])
     async def markz(self, ctx):
