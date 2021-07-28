@@ -90,6 +90,9 @@ class Mensajes(commands.Cog):
         if 'basado' in message.content.lower() or 'based' in message.content.lower(): 
             await message.add_reaction("<:BASED:783045382426722344>")
 
+        if 'cuervo' in message.content.lower(): 
+            await message.add_reaction("<:rojo:855269121561329704>")
+
         josewords = ['sussy', 'tfw', 'kys', 'finna', 'kms', 'ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
         if message.author.id == 470723884166021120 and (sum([i in message.content.lower() for i in josewords]) > 0):
             await message.channel.send('Callate puta')
