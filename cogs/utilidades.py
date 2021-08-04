@@ -238,7 +238,7 @@ class Utilidades(commands.Cog):
             await ctx.send('https://cdn.discordapp.com/attachments/697915316810022950/762680026419167232/planMateAplicada.png')
             return
         if carrera in ['oceano', 'océano', 'oceanografia', 'oceanografía']:
-            await ctx.send('https://media.discordapp.net/attachments/697915316810022950/762859492702158866/planOceanografia.png')
+            await ctx.send('https://cdn.discordapp.com/attachments/734919493343641611/872598511231860776/Plan_de_Estudios_Oceano_2.0-Copy_of_Page-1.png')
             return
         if carrera in ['quimica', 'química']:
             await ctx.send('https://media.discordapp.net/attachments/750169342666211408/818513992531574814/planQuimica.png')
