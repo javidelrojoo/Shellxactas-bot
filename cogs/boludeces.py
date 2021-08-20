@@ -94,6 +94,7 @@ class Boludeces(commands.Cog):
             await msg.edit(content='<:picardia:735101971001770055>')
             await asyncio.sleep(1.)
             await msg.edit(content='<:picardiant:748344255906447432>')
+            await asyncio.sleep(1.)
 
 def setup(client):
     client.add_cog(Boludeces(client))
