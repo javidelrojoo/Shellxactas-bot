@@ -90,11 +90,13 @@ class Boludeces(commands.Cog):
     @commands.command(aliases=['nosi'])
     async def sino(self, ctx):
         msg = await ctx.send('<:picardia:735101971001770055>')
-        for i in range(10):
+        for i in range(15):
             await msg.edit(content='<:picardia:735101971001770055>')
-            await asyncio.sleep(1.)
+            await asyncio.sleep(.5)
             await msg.edit(content='<:picardiant:748344255906447432>')
-            await asyncio.sleep(1.)
+            await asyncio.sleep(.5)
+        if bool(random.getrandbits(1)):
+            await msg.edit(content='<:picardia:735101971001770055>')
 
 def setup(client):
     client.add_cog(Boludeces(client))
