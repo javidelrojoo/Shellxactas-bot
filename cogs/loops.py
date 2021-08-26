@@ -65,9 +65,6 @@ class Loops(commands.Cog):
     async def campus_loop(self):
         global c
         canal = self.client.get_channel(771116008861204513)
-        
-        await canal.send('puta')
-        
         estado = campus.estado_campus(15)
         now = datetime.utcnow() - timedelta(hours=3)
         nowday = now.day
