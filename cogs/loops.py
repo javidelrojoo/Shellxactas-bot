@@ -5,7 +5,7 @@ import pymongo
 import asyncio
 import random
 import os
-import campus
+# import campus
 import download_video
 
 mongo_url = os.getenv('MONGO_URL')
@@ -15,7 +15,7 @@ mongoclient = pymongo.MongoClient(mongo_url)
 mongoprueba = mongoclient['Shellxactas']
 mongoremindme = mongoprueba["remindme"]
 mongocumple = mongoprueba["cumpleaños"]
-mongocampus = mongoprueba['campus']
+# mongocampus = mongoprueba['campus']
 mongoexamenes = mongoprueba['Examenes']
 
 c = 0
@@ -28,7 +28,7 @@ class Loops(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.campus_loop.start()
+        # self.campus_loop.start()
         self.change_status.start()
         self.new_day.start()
         self.client.loop.create_task(self.upremindme())
@@ -44,9 +44,9 @@ class Loops(commands.Cog):
         nowyear = now.year
         datenow = datetime(nowyear, nowmonth, nowday)
         if hournow == 0 and minnow == 0 and new:
-            mongocampus.insert_one({'date': datenow, 'times': 0})
+            # mongocampus.insert_one({'date': datenow, 'times': 0})
             await self.check_for_bd()
-            await self.campus_resumen(datenow)
+            # await self.campus_resumen(datenow)
             await self.volve_eze()
             await self.check_examenes()
             new = False
@@ -61,37 +61,37 @@ class Loops(commands.Cog):
     async def before_new_day(self):
         await self.client.wait_until_ready()
 
-    @tasks.loop(seconds=60.0)
-    async def campus_loop(self):
-        global c
-        canal = self.client.get_channel(771116008861204513)
-        estado = campus.estado_campus(15)
-        now = datetime.utcnow() - timedelta(hours=3)
-        nowday = now.day
-        nowmonth = now.month
-        nowyear = now.year
-        datenow = datetime(nowyear, nowmonth, nowday)
-        if c == 0 and estado:
-            return
-        if c == 1 and not estado:
-            return
-        if estado:
-            await canal.send('El campus volvió.<a:tick:767588474840154173> <@&778645823503466546>')
-            c = 0
-            return
-        if not estado:
-            await canal.send('El campus se cayó.<a:cross:767588477231038475> <@&778645823503466546>')
-            x = mongocampus.find_one({'date': datenow})
-            if x is None:
-                mongocampus.insert_one({'date': datenow, 'times': 1})
-            else:
-                mongocampus.update_one({'date': datenow}, {"$set": {'times': x['times'] + 1}})
-            c = 1
-            return
+    # @tasks.loop(seconds=60.0)
+    # async def campus_loop(self):
+    #     global c
+    #     canal = self.client.get_channel(771116008861204513)
+    #     estado = campus.estado_campus(15)
+    #     now = datetime.utcnow() - timedelta(hours=3)
+    #     nowday = now.day
+    #     nowmonth = now.month
+    #     nowyear = now.year
+    #     datenow = datetime(nowyear, nowmonth, nowday)
+    #     if c == 0 and estado:
+    #         return
+    #     if c == 1 and not estado:
+    #         return
+    #     if estado:
+    #         await canal.send('El campus volvió.<a:tick:767588474840154173> <@&778645823503466546>')
+    #         c = 0
+    #         return
+    #     if not estado:
+    #         await canal.send('El campus se cayó.<a:cross:767588477231038475> <@&778645823503466546>')
+    #         x = mongocampus.find_one({'date': datenow})
+    #         if x is None:
+    #             mongocampus.insert_one({'date': datenow, 'times': 1})
+    #         else:
+    #             mongocampus.update_one({'date': datenow}, {"$set": {'times': x['times'] + 1}})
+    #         c = 1
+    #         return
 
-    @campus_loop.before_loop
-    async def before_campus_loop(self):
-        await self.client.wait_until_ready()
+    # @campus_loop.before_loop
+    # async def before_campus_loop(self):
+    #     await self.client.wait_until_ready()
 
     @tasks.loop(hours=1.0)
     async def change_status(self):
@@ -140,13 +140,13 @@ class Loops(commands.Cog):
                 else:
                     await channel.send(f'Feliz Cumpleaños {author.mention}!!!')
 
-    async def campus_resumen(self, datenow):
-        datenow = datenow - timedelta(days=1)
-        canal = self.client.get_channel(771116008861204513)
-        campus.plot()
-        for x in mongocampus.find({'date': datenow}):
-            times = x['times']
-            await canal.send(f'Hoy el campus se cayó {times} veces.', file=discord.File('campus.png'))
+    # async def campus_resumen(self, datenow):
+    #     datenow = datenow - timedelta(days=1)
+    #     canal = self.client.get_channel(771116008861204513)
+    #     campus.plot()
+    #     for x in mongocampus.find({'date': datenow}):
+    #         times = x['times']
+    #         await canal.send(f'Hoy el campus se cayó {times} veces.', file=discord.File('campus.png'))
     
     async def volve_eze(self):
         canal = self.client.get_channel(734919493343641611)
