@@ -93,7 +93,7 @@ class Mensajes(commands.Cog):
         if 'cuervo' in message.content.lower(): 
             await message.add_reaction("<:rojo:855269121561329704>")
 
-        josewords = ['sussy', 'tfw', 'kys', 'finna', 'kms', 'ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
+        josewords = ['https://cdn.discordapp.com/attachments/734921776882122762/887134902544375860/static-assets-upload17303428989518158196.webp', 'sussy', 'tfw', 'kys', 'finna', 'kms', 'ubi', 'nene daun', 'nene down', 'ya lo pasé', 'ya lo pase', 'ya lo pasaron', 'inb4', 'viejazo', 'kino']
         if message.author.id == 470723884166021120 and (sum([i in message.content.lower() for i in josewords]) > 0):
             await message.channel.send('Callate puta')
         # pedido = []
